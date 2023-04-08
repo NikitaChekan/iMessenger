@@ -16,6 +16,7 @@ extension UIButton {
         font: UIFont? = .avenir20(),
         isShadow: Bool = false,
         cornerRadius: CGFloat = 4
+//        image: UIImage = UIImage(named: "googleLogo")!
     ) {
         self.init(type: .system)
         
