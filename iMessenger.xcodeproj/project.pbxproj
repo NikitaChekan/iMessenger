@@ -9,19 +9,27 @@
 /* Begin PBXBuildFile section */
 		DA3A7C0B29E1B87500662330 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA3A7C0A29E1B87500662330 /* AppDelegate.swift */; };
 		DA3A7C0D29E1B87500662330 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA3A7C0C29E1B87500662330 /* SceneDelegate.swift */; };
-		DA3A7C0F29E1B87500662330 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA3A7C0E29E1B87500662330 /* ViewController.swift */; };
+		DA3A7C0F29E1B87500662330 /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA3A7C0E29E1B87500662330 /* AuthViewController.swift */; };
 		DA3A7C1429E1B87700662330 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DA3A7C1329E1B87700662330 /* Assets.xcassets */; };
 		DA3A7C1729E1B87700662330 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DA3A7C1529E1B87700662330 /* LaunchScreen.storyboard */; };
+		DA3A7C1F29E1C4B300662330 /* UIButton + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA3A7C1E29E1C4B300662330 /* UIButton + Extension.swift */; };
+		DA3A7C2129E1C79F00662330 /* UIFont + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA3A7C2029E1C79F00662330 /* UIFont + Extension.swift */; };
+		DA3A7C2529E1CCBD00662330 /* UILabel + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA3A7C2429E1CCBD00662330 /* UILabel + Extension.swift */; };
+		DA3A7C2729E1CDE400662330 /* UIImageView + Exyension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA3A7C2629E1CDE400662330 /* UIImageView + Exyension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		DA3A7C0729E1B87500662330 /* iMessenger.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iMessenger.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA3A7C0A29E1B87500662330 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DA3A7C0C29E1B87500662330 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		DA3A7C0E29E1B87500662330 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		DA3A7C0E29E1B87500662330 /* AuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewController.swift; sourceTree = "<group>"; };
 		DA3A7C1329E1B87700662330 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DA3A7C1629E1B87700662330 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		DA3A7C1829E1B87700662330 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DA3A7C1E29E1C4B300662330 /* UIButton + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton + Extension.swift"; sourceTree = "<group>"; };
+		DA3A7C2029E1C79F00662330 /* UIFont + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont + Extension.swift"; sourceTree = "<group>"; };
+		DA3A7C2429E1CCBD00662330 /* UILabel + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel + Extension.swift"; sourceTree = "<group>"; };
+		DA3A7C2629E1CDE400662330 /* UIImageView + Exyension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView + Exyension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,7 +64,11 @@
 			children = (
 				DA3A7C0A29E1B87500662330 /* AppDelegate.swift */,
 				DA3A7C0C29E1B87500662330 /* SceneDelegate.swift */,
-				DA3A7C0E29E1B87500662330 /* ViewController.swift */,
+				DA3A7C0E29E1B87500662330 /* AuthViewController.swift */,
+				DA3A7C2629E1CDE400662330 /* UIImageView + Exyension.swift */,
+				DA3A7C2429E1CCBD00662330 /* UILabel + Extension.swift */,
+				DA3A7C2029E1C79F00662330 /* UIFont + Extension.swift */,
+				DA3A7C1E29E1C4B300662330 /* UIButton + Extension.swift */,
 				DA3A7C1329E1B87700662330 /* Assets.xcassets */,
 				DA3A7C1529E1B87700662330 /* LaunchScreen.storyboard */,
 				DA3A7C1829E1B87700662330 /* Info.plist */,
@@ -134,9 +146,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DA3A7C0F29E1B87500662330 /* ViewController.swift in Sources */,
+				DA3A7C2529E1CCBD00662330 /* UILabel + Extension.swift in Sources */,
+				DA3A7C2129E1C79F00662330 /* UIFont + Extension.swift in Sources */,
+				DA3A7C0F29E1B87500662330 /* AuthViewController.swift in Sources */,
 				DA3A7C0B29E1B87500662330 /* AppDelegate.swift in Sources */,
 				DA3A7C0D29E1B87500662330 /* SceneDelegate.swift in Sources */,
+				DA3A7C2729E1CDE400662330 /* UIImageView + Exyension.swift in Sources */,
+				DA3A7C1F29E1C4B300662330 /* UIButton + Extension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
