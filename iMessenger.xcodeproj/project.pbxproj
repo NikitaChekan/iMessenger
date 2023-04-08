@@ -21,6 +21,8 @@
 		DA3A7C3029E1FCB000662330 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA3A7C2F29E1FCB000662330 /* SignUpViewController.swift */; };
 		DA3A7C3229E2006D00662330 /* OneLineTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA3A7C3129E2006D00662330 /* OneLineTextField.swift */; };
 		DA3A7C3429E21ADC00662330 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA3A7C3329E21ADC00662330 /* LoginViewController.swift */; };
+		DA3A7C3629E225FE00662330 /* SetupProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA3A7C3529E225FE00662330 /* SetupProfileViewController.swift */; };
+		DA3A7C3829E228C900662330 /* AddPhotoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA3A7C3729E228C900662330 /* AddPhotoView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +42,8 @@
 		DA3A7C2F29E1FCB000662330 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		DA3A7C3129E2006D00662330 /* OneLineTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OneLineTextField.swift; sourceTree = "<group>"; };
 		DA3A7C3329E21ADC00662330 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		DA3A7C3529E225FE00662330 /* SetupProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupProfileViewController.swift; sourceTree = "<group>"; };
+		DA3A7C3729E228C900662330 /* AddPhotoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPhotoView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,6 +80,7 @@
 				DA3A7C0E29E1B87500662330 /* AuthViewController.swift */,
 				DA3A7C2F29E1FCB000662330 /* SignUpViewController.swift */,
 				DA3A7C3329E21ADC00662330 /* LoginViewController.swift */,
+				DA3A7C3529E225FE00662330 /* SetupProfileViewController.swift */,
 				DA3A7C2929E1D17100662330 /* Extensions */,
 				DA3A7C1329E1B87700662330 /* Assets.xcassets */,
 				DA3A7C1529E1B87700662330 /* LaunchScreen.storyboard */,
@@ -98,6 +103,7 @@
 		DA3A7C2929E1D17100662330 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				DA3A7C3729E228C900662330 /* AddPhotoView.swift */,
 				DA3A7C2B29E1D33000662330 /* ButtonFormView.swift */,
 				DA3A7C3129E2006D00662330 /* OneLineTextField.swift */,
 				DA3A7C2829E1D15900662330 /* UIKit */,
@@ -193,6 +199,8 @@
 				DA3A7C3029E1FCB000662330 /* SignUpViewController.swift in Sources */,
 				DA3A7C0F29E1B87500662330 /* AuthViewController.swift in Sources */,
 				DA3A7C3229E2006D00662330 /* OneLineTextField.swift in Sources */,
+				DA3A7C3629E225FE00662330 /* SetupProfileViewController.swift in Sources */,
+				DA3A7C3829E228C900662330 /* AddPhotoView.swift in Sources */,
 				DA3A7C0B29E1B87500662330 /* AppDelegate.swift in Sources */,
 				DA3A7C0D29E1B87500662330 /* SceneDelegate.swift in Sources */,
 				DA3A7C2729E1CDE400662330 /* UIImageView + Extension.swift in Sources */,
