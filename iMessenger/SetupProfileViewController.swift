@@ -85,7 +85,7 @@ extension SetupProfileViewController {
         ])
         
         NSLayoutConstraint.activate([
-            stackView.topAnchor.constraint(equalTo: fullImageView.bottomAnchor, constant: 60),
+            stackView.topAnchor.constraint(equalTo: fullImageView.bottomAnchor, constant: 40),
             stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 40),
             stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -40)
         ])
