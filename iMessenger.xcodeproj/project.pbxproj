@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DA0AEA2B29E338C8005834F5 /* SegmentedControl + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA0AEA2A29E338C8005834F5 /* SegmentedControl + Extension.swift */; };
 		DA3A7C0B29E1B87500662330 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA3A7C0A29E1B87500662330 /* AppDelegate.swift */; };
 		DA3A7C0D29E1B87500662330 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA3A7C0C29E1B87500662330 /* SceneDelegate.swift */; };
 		DA3A7C0F29E1B87500662330 /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA3A7C0E29E1B87500662330 /* AuthViewController.swift */; };
@@ -26,6 +27,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		DA0AEA2A29E338C8005834F5 /* SegmentedControl + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SegmentedControl + Extension.swift"; sourceTree = "<group>"; };
 		DA3A7C0729E1B87500662330 /* iMessenger.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iMessenger.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA3A7C0A29E1B87500662330 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DA3A7C0C29E1B87500662330 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -96,6 +98,7 @@
 				DA3A7C2029E1C79F00662330 /* UIFont + Extension.swift */,
 				DA3A7C1E29E1C4B300662330 /* UIButton + Extension.swift */,
 				DA3A7C2D29E1D80200662330 /* UIStackView + Extension.swift */,
+				DA0AEA2A29E338C8005834F5 /* SegmentedControl + Extension.swift */,
 			);
 			path = UIKit;
 			sourceTree = "<group>";
@@ -191,6 +194,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DA0AEA2B29E338C8005834F5 /* SegmentedControl + Extension.swift in Sources */,
 				DA3A7C3429E21ADC00662330 /* LoginViewController.swift in Sources */,
 				DA3A7C2E29E1D80200662330 /* UIStackView + Extension.swift in Sources */,
 				DA3A7C2529E1CCBD00662330 /* UILabel + Extension.swift in Sources */,
