@@ -12,7 +12,7 @@ class ListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        view.backgroundColor = .black
+        view.backgroundColor = .white
     }
 
 }
@@ -42,10 +42,10 @@ struct ListVCProvider: PreviewProvider {
     
     struct ConteinerView: UIViewControllerRepresentable {
         
-        let viewController = ListViewController()
+        let tabBarVC = MainTabBarController()
         
-        func makeUIViewController(context: UIViewControllerRepresentableContext<ListVCProvider.ConteinerView>) -> ListViewController {
-            return viewController
+        func makeUIViewController(context: UIViewControllerRepresentableContext<ListVCProvider.ConteinerView>) -> MainTabBarController {
+            return tabBarVC
         }
         
         func updateUIViewController(_ uiViewController: ListVCProvider.ConteinerView.UIViewControllerType, context: UIViewControllerRepresentableContext<ListVCProvider.ConteinerView>) {

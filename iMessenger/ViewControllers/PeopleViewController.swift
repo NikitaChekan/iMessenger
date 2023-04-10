@@ -17,3 +17,27 @@ class PeopleViewController: UIViewController {
     }
 
 }
+
+// MARK: - SwiftUI
+
+import SwiftUI
+
+struct PeopleVCProvider: PreviewProvider {
+    static var previews: some View {
+        ConteinerView()
+            .ignoresSafeArea()
+    }
+    
+    struct ConteinerView: UIViewControllerRepresentable {
+        
+        let tabBarVC = MainTabBarController()
+        
+        func makeUIViewController(context: UIViewControllerRepresentableContext<PeopleVCProvider.ConteinerView>) -> MainTabBarController {
+            return tabBarVC
+        }
+        
+        func updateUIViewController(_ uiViewController: PeopleVCProvider.ConteinerView.UIViewControllerType, context: UIViewControllerRepresentableContext<PeopleVCProvider.ConteinerView>) {
+            
+        }
+    }
+}
