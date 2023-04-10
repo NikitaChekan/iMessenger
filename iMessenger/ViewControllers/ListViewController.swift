@@ -11,8 +11,22 @@ class ListViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+//        view.backgroundColor = .orange
 
-        view.backgroundColor = .white
+        setupSearchBar()
+
+    }
+    
+    private func setupSearchBar() {
+        navigationController?.navigationBar.barTintColor = UIColor(named: "mainWhiteColor")
+        navigationController?.navigationBar.shadowImage = UIImage()
+        
+        let searchController = UISearchController(searchResultsController: nil)
+        navigationItem.searchController = searchController
+        navigationItem.hidesSearchBarWhenScrolling = false
+        searchController.hidesNavigationBarDuringPresentation = false
+        searchController.obscuresBackgroundDuringPresentation = false
+        searchController.searchBar.delegate = self
     }
 
 }
@@ -29,6 +43,13 @@ class ListViewController: UIViewController {
 //
 //
 //}
+
+// MARK: - UISearchBarDelegate
+extension ListViewController: UISearchBarDelegate {
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        print(searchText)
+    }
+}
 
 // MARK: - SwiftUI
 
