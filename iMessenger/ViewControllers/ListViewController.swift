@@ -8,13 +8,15 @@
 import UIKit
 
 class ListViewController: UIViewController {
+    
+    var collectionView: UICollectionView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-//        view.backgroundColor = .orange
+//        view.backgroundColor = UIColor(named: "mainWhiteColor")
 
         setupSearchBar()
-
+        setupCollectionView()
     }
     
     private func setupSearchBar() {
@@ -28,21 +30,35 @@ class ListViewController: UIViewController {
         searchController.obscuresBackgroundDuringPresentation = false
         searchController.searchBar.delegate = self
     }
-
+    
+    private func setupCollectionView() {
+        collectionView = UICollectionView(
+            frame: view.bounds,
+            collectionViewLayout: UICollectionViewFlowLayout()
+        )
+        collectionView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        collectionView.backgroundColor = UIColor(named: "mainWhiteColor")
+        view.addSubview(collectionView)
+        collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "cellid")
+        collectionView.delegate = self
+        collectionView.dataSource = self
+    }
+    
 }
 
 // MARK: - UICollectionViewDelegate, UICollectionViewDataSource
-//extension ListViewController: UICollectionViewDelegate, UICollectionViewDataSource {
-//    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-//
-//    }
-//
-//    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-//        <#code#>
-//    }
-//
-//
-//}
+extension ListViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 5
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cellid", for: indexPath)
+        cell.backgroundColor = .red
+        return cell
+    }
+    
+}
 
 // MARK: - UISearchBarDelegate
 extension ListViewController: UISearchBarDelegate {
