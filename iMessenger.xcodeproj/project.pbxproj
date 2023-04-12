@@ -27,6 +27,9 @@
 		DA3A7C3429E21ADC00662330 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA3A7C3329E21ADC00662330 /* LoginViewController.swift */; };
 		DA3A7C3629E225FE00662330 /* SetupProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA3A7C3529E225FE00662330 /* SetupProfileViewController.swift */; };
 		DA3A7C3829E228C900662330 /* AddPhotoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA3A7C3729E228C900662330 /* AddPhotoView.swift */; };
+		DADB7A0629E7399F00EAD05E /* activeChats.json in Resources */ = {isa = PBXBuildFile; fileRef = DADB7A0429E7399E00EAD05E /* activeChats.json */; };
+		DADB7A0729E7399F00EAD05E /* waitingChats.json in Resources */ = {isa = PBXBuildFile; fileRef = DADB7A0529E7399F00EAD05E /* waitingChats.json */; };
+		DADB7A0929E739F700EAD05E /* Bundle-Decodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = DADB7A0829E739F700EAD05E /* Bundle-Decodable.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -52,6 +55,9 @@
 		DA3A7C3329E21ADC00662330 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		DA3A7C3529E225FE00662330 /* SetupProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupProfileViewController.swift; sourceTree = "<group>"; };
 		DA3A7C3729E228C900662330 /* AddPhotoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPhotoView.swift; sourceTree = "<group>"; };
+		DADB7A0429E7399E00EAD05E /* activeChats.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = activeChats.json; sourceTree = "<group>"; };
+		DADB7A0529E7399F00EAD05E /* waitingChats.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = waitingChats.json; sourceTree = "<group>"; };
+		DADB7A0829E739F700EAD05E /* Bundle-Decodable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Bundle-Decodable.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -124,6 +130,8 @@
 				DA3A7C1E29E1C4B300662330 /* UIButton + Extension.swift */,
 				DA3A7C2D29E1D80200662330 /* UIStackView + Extension.swift */,
 				DA0AEA2A29E338C8005834F5 /* SegmentedControl + Extension.swift */,
+				DADB7A0429E7399E00EAD05E /* activeChats.json */,
+				DADB7A0529E7399F00EAD05E /* waitingChats.json */,
 			);
 			path = UIKit;
 			sourceTree = "<group>";
@@ -134,6 +142,7 @@
 				DA3A7C3729E228C900662330 /* AddPhotoView.swift */,
 				DA3A7C2B29E1D33000662330 /* ButtonFormView.swift */,
 				DA3A7C3129E2006D00662330 /* OneLineTextField.swift */,
+				DADB7A0829E739F700EAD05E /* Bundle-Decodable.swift */,
 				DA3A7C2829E1D15900662330 /* UIKit */,
 			);
 			path = Extensions;
@@ -208,7 +217,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				DA3A7C1729E1B87700662330 /* LaunchScreen.storyboard in Resources */,
+				DADB7A0629E7399F00EAD05E /* activeChats.json in Resources */,
 				DA3A7C1429E1B87700662330 /* Assets.xcassets in Resources */,
+				DADB7A0729E7399F00EAD05E /* waitingChats.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -237,6 +248,7 @@
 				DA0AEA2D29E344DF005834F5 /* ListViewController.swift in Sources */,
 				DA3A7C1F29E1C4B300662330 /* UIButton + Extension.swift in Sources */,
 				DA0AEA3129E346B0005834F5 /* MainTabBarController.swift in Sources */,
+				DADB7A0929E739F700EAD05E /* Bundle-Decodable.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
