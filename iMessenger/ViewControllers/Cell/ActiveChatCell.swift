@@ -44,7 +44,7 @@ class ActiveChatCell: UICollectionViewCell, SelfConfiguringCell {
     }
 }
 
-//MARK: - Setup Constraints
+// MARK: - Setup Constraints
 extension ActiveChatCell {
     
     private func setupConstraints() {
