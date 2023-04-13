@@ -19,7 +19,12 @@ class ActiveChatCell: UICollectionViewCell, SelfConfiguringCell {
     let friendImageView = UIImageView()
     let friendName = UILabel(text: "User name", font: .laoSangamMN20())
     let lastMessage = UILabel(text: "How are you Nick?", font: .laoSangamMN18())
-    let gradientView = UIView()
+    let gradientView = GradientView(
+        from: .topTrailing,
+        to: .bottomLeading,
+        startColor: UIColor(named: "firstGradientColor"),
+        endColor: UIColor(named: "secondGradientColor")
+    )
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -84,7 +89,7 @@ extension ActiveChatCell {
             gradientView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
             gradientView.centerYAnchor.constraint(equalTo: self.centerYAnchor),
             gradientView.heightAnchor.constraint(equalToConstant: 78),
-            gradientView.widthAnchor.constraint(equalToConstant: 8)
+            gradientView.widthAnchor.constraint(equalToConstant: 10)
         ])
         
     }
