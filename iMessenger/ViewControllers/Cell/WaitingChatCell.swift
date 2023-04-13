@@ -36,18 +36,15 @@ extension WaitingChatCell {
     
     private func setupConstraints() {
         friendImageView.translatesAutoresizingMaskIntoConstraints = false
-        
-        friendImageView.backgroundColor = .orange
-        
+                
         addSubview(friendImageView)
 
         NSLayoutConstraint.activate([
             friendImageView.topAnchor.constraint(equalTo: self.topAnchor),
-            friendImageView.bottomAnchor.constraint(equalTo: self.bottomAnchor),
             friendImageView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
             friendImageView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
+            friendImageView.bottomAnchor.constraint(equalTo: self.bottomAnchor),
         ])
-        
     }
 }
 
