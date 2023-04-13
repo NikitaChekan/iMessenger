@@ -30,6 +30,7 @@
 		DA73AB4C29E8722A00E81FC3 /* ActiveChatCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA73AB4B29E8722A00E81FC3 /* ActiveChatCell.swift */; };
 		DA73AB4E29E8723C00E81FC3 /* WaitingChatCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA73AB4D29E8723C00E81FC3 /* WaitingChatCell.swift */; };
 		DA73AB5029E8917400E81FC3 /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA73AB4F29E8917400E81FC3 /* GradientView.swift */; };
+		DA73AB5229E8998F00E81FC3 /* SelfConfiguringCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA73AB5129E8998F00E81FC3 /* SelfConfiguringCell.swift */; };
 		DADB7A0629E7399F00EAD05E /* activeChats.json in Resources */ = {isa = PBXBuildFile; fileRef = DADB7A0429E7399E00EAD05E /* activeChats.json */; };
 		DADB7A0729E7399F00EAD05E /* waitingChats.json in Resources */ = {isa = PBXBuildFile; fileRef = DADB7A0529E7399F00EAD05E /* waitingChats.json */; };
 		DADB7A0929E739F700EAD05E /* Bundle-Decodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = DADB7A0829E739F700EAD05E /* Bundle-Decodable.swift */; };
@@ -61,6 +62,7 @@
 		DA73AB4B29E8722A00E81FC3 /* ActiveChatCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActiveChatCell.swift; sourceTree = "<group>"; };
 		DA73AB4D29E8723C00E81FC3 /* WaitingChatCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaitingChatCell.swift; sourceTree = "<group>"; };
 		DA73AB4F29E8917400E81FC3 /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
+		DA73AB5129E8998F00E81FC3 /* SelfConfiguringCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelfConfiguringCell.swift; sourceTree = "<group>"; };
 		DADB7A0429E7399E00EAD05E /* activeChats.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = activeChats.json; sourceTree = "<group>"; };
 		DADB7A0529E7399F00EAD05E /* waitingChats.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = waitingChats.json; sourceTree = "<group>"; };
 		DADB7A0829E739F700EAD05E /* Bundle-Decodable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Bundle-Decodable.swift"; sourceTree = "<group>"; };
@@ -91,10 +93,10 @@
 		DA0AEA2F29E34672005834F5 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				DA73AB4A29E871D600E81FC3 /* Cell */,
 				DA0AEA3029E346B0005834F5 /* MainTabBarController.swift */,
 				DA0AEA2C29E344DF005834F5 /* ListViewController.swift */,
 				DA0AEA3229E346F4005834F5 /* PeopleViewController.swift */,
+				DA73AB4A29E871D600E81FC3 /* Cell */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -121,6 +123,7 @@
 				DA3A7C2A29E1D1A500662330 /* App */,
 				DA0AEA2E29E34644005834F5 /* SignIn&Auth */,
 				DA0AEA2F29E34672005834F5 /* ViewControllers */,
+				DA73AB5329E899BE00E81FC3 /* Protocols */,
 				DA3A7C2929E1D17100662330 /* Extensions */,
 				DA3A7C1329E1B87700662330 /* Assets.xcassets */,
 				DA3A7C1529E1B87700662330 /* LaunchScreen.storyboard */,
@@ -173,6 +176,14 @@
 				DA73AB4D29E8723C00E81FC3 /* WaitingChatCell.swift */,
 			);
 			path = Cell;
+			sourceTree = "<group>";
+		};
+		DA73AB5329E899BE00E81FC3 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				DA73AB5129E8998F00E81FC3 /* SelfConfiguringCell.swift */,
+			);
+			path = Protocols;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -258,6 +269,7 @@
 				DA3A7C2C29E1D33000662330 /* ButtonFormView.swift in Sources */,
 				DA3A7C3029E1FCB000662330 /* SignUpViewController.swift in Sources */,
 				DA3A7C0F29E1B87500662330 /* AuthViewController.swift in Sources */,
+				DA73AB5229E8998F00E81FC3 /* SelfConfiguringCell.swift in Sources */,
 				DA3A7C3229E2006D00662330 /* OneLineTextField.swift in Sources */,
 				DA3A7C3629E225FE00662330 /* SetupProfileViewController.swift in Sources */,
 				DA3A7C3829E228C900662330 /* AddPhotoView.swift in Sources */,

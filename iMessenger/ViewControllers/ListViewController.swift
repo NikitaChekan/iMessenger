@@ -38,7 +38,6 @@ class ListViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-//        view.backgroundColor = UIColor(named: "mainWhiteColor")
 
         setupSearchBar()
         setupCollectionView()
@@ -70,7 +69,6 @@ class ListViewController: UIViewController {
         
         collectionView.register(WaitingChatCell.self, forCellWithReuseIdentifier: WaitingChatCell.reuseId)
         collectionView.register(ActiveChatCell.self, forCellWithReuseIdentifier: ActiveChatCell.reuseId)
-//        collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "cellId")
     }
     
     private func reloadData() {
@@ -101,9 +99,6 @@ extension ListViewController {
             
             switch section {
             case .waitingChats:
-//                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cellId", for: indexPath)
-//                cell.backgroundColor = .systemBlue
-//                return cell
                 return self.configure(
                     cellType: WaitingChatCell.self,
                     with: chat,
