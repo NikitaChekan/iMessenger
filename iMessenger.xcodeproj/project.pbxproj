@@ -27,6 +27,8 @@
 		DA3A7C3429E21ADC00662330 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA3A7C3329E21ADC00662330 /* LoginViewController.swift */; };
 		DA3A7C3629E225FE00662330 /* SetupProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA3A7C3529E225FE00662330 /* SetupProfileViewController.swift */; };
 		DA3A7C3829E228C900662330 /* AddPhotoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA3A7C3729E228C900662330 /* AddPhotoView.swift */; };
+		DA73AB4C29E8722A00E81FC3 /* ActiveChatCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA73AB4B29E8722A00E81FC3 /* ActiveChatCell.swift */; };
+		DA73AB4E29E8723C00E81FC3 /* WaitingChatCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA73AB4D29E8723C00E81FC3 /* WaitingChatCell.swift */; };
 		DADB7A0629E7399F00EAD05E /* activeChats.json in Resources */ = {isa = PBXBuildFile; fileRef = DADB7A0429E7399E00EAD05E /* activeChats.json */; };
 		DADB7A0729E7399F00EAD05E /* waitingChats.json in Resources */ = {isa = PBXBuildFile; fileRef = DADB7A0529E7399F00EAD05E /* waitingChats.json */; };
 		DADB7A0929E739F700EAD05E /* Bundle-Decodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = DADB7A0829E739F700EAD05E /* Bundle-Decodable.swift */; };
@@ -55,6 +57,8 @@
 		DA3A7C3329E21ADC00662330 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		DA3A7C3529E225FE00662330 /* SetupProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupProfileViewController.swift; sourceTree = "<group>"; };
 		DA3A7C3729E228C900662330 /* AddPhotoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPhotoView.swift; sourceTree = "<group>"; };
+		DA73AB4B29E8722A00E81FC3 /* ActiveChatCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActiveChatCell.swift; sourceTree = "<group>"; };
+		DA73AB4D29E8723C00E81FC3 /* WaitingChatCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaitingChatCell.swift; sourceTree = "<group>"; };
 		DADB7A0429E7399E00EAD05E /* activeChats.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = activeChats.json; sourceTree = "<group>"; };
 		DADB7A0529E7399F00EAD05E /* waitingChats.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = waitingChats.json; sourceTree = "<group>"; };
 		DADB7A0829E739F700EAD05E /* Bundle-Decodable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Bundle-Decodable.swift"; sourceTree = "<group>"; };
@@ -85,6 +89,7 @@
 		DA0AEA2F29E34672005834F5 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				DA73AB4A29E871D600E81FC3 /* Cell */,
 				DA0AEA3029E346B0005834F5 /* MainTabBarController.swift */,
 				DA0AEA2C29E344DF005834F5 /* ListViewController.swift */,
 				DA0AEA3229E346F4005834F5 /* PeopleViewController.swift */,
@@ -156,6 +161,15 @@
 				DA3A7C1829E1B87700662330 /* Info.plist */,
 			);
 			path = App;
+			sourceTree = "<group>";
+		};
+		DA73AB4A29E871D600E81FC3 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				DA73AB4B29E8722A00E81FC3 /* ActiveChatCell.swift */,
+				DA73AB4D29E8723C00E81FC3 /* WaitingChatCell.swift */,
+			);
+			path = Cell;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -233,6 +247,7 @@
 				DA0AEA2B29E338C8005834F5 /* SegmentedControl + Extension.swift in Sources */,
 				DA3A7C3429E21ADC00662330 /* LoginViewController.swift in Sources */,
 				DA3A7C2E29E1D80200662330 /* UIStackView + Extension.swift in Sources */,
+				DA73AB4C29E8722A00E81FC3 /* ActiveChatCell.swift in Sources */,
 				DA3A7C2529E1CCBD00662330 /* UILabel + Extension.swift in Sources */,
 				DA3A7C2129E1C79F00662330 /* UIFont + Extension.swift in Sources */,
 				DA0AEA3329E346F4005834F5 /* PeopleViewController.swift in Sources */,
@@ -243,6 +258,7 @@
 				DA3A7C3629E225FE00662330 /* SetupProfileViewController.swift in Sources */,
 				DA3A7C3829E228C900662330 /* AddPhotoView.swift in Sources */,
 				DA3A7C0B29E1B87500662330 /* AppDelegate.swift in Sources */,
+				DA73AB4E29E8723C00E81FC3 /* WaitingChatCell.swift in Sources */,
 				DA3A7C0D29E1B87500662330 /* SceneDelegate.swift in Sources */,
 				DA3A7C2729E1CDE400662330 /* UIImageView + Extension.swift in Sources */,
 				DA0AEA2D29E344DF005834F5 /* ListViewController.swift in Sources */,
