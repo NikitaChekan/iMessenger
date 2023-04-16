@@ -36,6 +36,8 @@
 		DADB7A0729E7399F00EAD05E /* waitingChats.json in Resources */ = {isa = PBXBuildFile; fileRef = DADB7A0529E7399F00EAD05E /* waitingChats.json */; };
 		DADB7A0929E739F700EAD05E /* Bundle-Decodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = DADB7A0829E739F700EAD05E /* Bundle-Decodable.swift */; };
 		DAF7853829EC74D90057712C /* users.json in Resources */ = {isa = PBXBuildFile; fileRef = DAF7853729EC74D80057712C /* users.json */; };
+		DAF7853C29EC76F10057712C /* MChat.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAF7853B29EC76F10057712C /* MChat.swift */; };
+		DAF7853E29EC76FC0057712C /* MUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAF7853D29EC76FC0057712C /* MUser.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -70,6 +72,8 @@
 		DADB7A0529E7399F00EAD05E /* waitingChats.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = waitingChats.json; sourceTree = "<group>"; };
 		DADB7A0829E739F700EAD05E /* Bundle-Decodable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Bundle-Decodable.swift"; sourceTree = "<group>"; };
 		DAF7853729EC74D80057712C /* users.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = users.json; sourceTree = "<group>"; };
+		DAF7853B29EC76F10057712C /* MChat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MChat.swift; sourceTree = "<group>"; };
+		DAF7853D29EC76FC0057712C /* MUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MUser.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -127,6 +131,7 @@
 			children = (
 				DA3A7C2A29E1D1A500662330 /* App */,
 				DA0AEA2E29E34644005834F5 /* SignIn&Auth */,
+				DAF7853A29EC76DC0057712C /* Models */,
 				DA0AEA2F29E34672005834F5 /* ViewControllers */,
 				DA73AB5329E899BE00E81FC3 /* Protocols */,
 				DA3A7C2929E1D17100662330 /* Extensions */,
@@ -198,6 +203,15 @@
 				DAB4654829E9DDE100DC15EE /* SectionHeader.swift */,
 			);
 			path = Header;
+			sourceTree = "<group>";
+		};
+		DAF7853A29EC76DC0057712C /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				DAF7853B29EC76F10057712C /* MChat.swift */,
+				DAF7853D29EC76FC0057712C /* MUser.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -279,6 +293,7 @@
 				DA3A7C2E29E1D80200662330 /* UIStackView + Extension.swift in Sources */,
 				DA73AB4C29E8722A00E81FC3 /* ActiveChatCell.swift in Sources */,
 				DA3A7C2529E1CCBD00662330 /* UILabel + Extension.swift in Sources */,
+				DAF7853E29EC76FC0057712C /* MUser.swift in Sources */,
 				DA3A7C2129E1C79F00662330 /* UIFont + Extension.swift in Sources */,
 				DA0AEA3329E346F4005834F5 /* PeopleViewController.swift in Sources */,
 				DA3A7C2C29E1D33000662330 /* ButtonFormView.swift in Sources */,
@@ -294,6 +309,7 @@
 				DA3A7C2729E1CDE400662330 /* UIImageView + Extension.swift in Sources */,
 				DA0AEA2D29E344DF005834F5 /* ListViewController.swift in Sources */,
 				DAB4654929E9DDE100DC15EE /* SectionHeader.swift in Sources */,
+				DAF7853C29EC76F10057712C /* MChat.swift in Sources */,
 				DA3A7C1F29E1C4B300662330 /* UIButton + Extension.swift in Sources */,
 				DA0AEA3129E346B0005834F5 /* MainTabBarController.swift in Sources */,
 				DADB7A0929E739F700EAD05E /* Bundle-Decodable.swift in Sources */,

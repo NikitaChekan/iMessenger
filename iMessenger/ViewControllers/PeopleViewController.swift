@@ -8,6 +8,8 @@
 import UIKit
 
 class PeopleViewController: UIViewController {
+    
+    let users = Bundle.main.decode([MUser].self, from: "users.json")
 
     override func viewDidLoad() {
         super.viewDidLoad()
