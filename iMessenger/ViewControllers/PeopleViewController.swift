@@ -85,7 +85,7 @@ extension PeopleViewController {
             
             switch section {
             case .users:
-                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cellID", for: indexPath)
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cellId", for: indexPath)
                 cell.backgroundColor = .systemBlue
                 
                 return cell
@@ -122,6 +122,7 @@ extension PeopleViewController {
             guard let section = Section(rawValue: sectionIndex) else {
                 fatalError("Unknown section kind")
             }
+            
             switch section {
             case .users:
                 return self.createUsersSection()
