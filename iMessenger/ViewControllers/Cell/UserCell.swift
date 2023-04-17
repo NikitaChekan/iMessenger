@@ -10,7 +10,7 @@ import UIKit
 class UserCell: UICollectionViewCell, SelfConfiguringCell {
     
     let userImageView = UIImageView()
-    let userName = UILabel(text: "Vasya Pupkin", font: .laoSangamMN20())
+    let userName = UILabel(text: "text", font: .laoSangamMN20())
     let containerView = UIView()
     
     static var reuseId = "UserCell"
@@ -19,12 +19,12 @@ class UserCell: UICollectionViewCell, SelfConfiguringCell {
         super.init(frame: frame)
         
         backgroundColor = .white
-        self.layer.cornerRadius = 4
+        layer.cornerRadius = 4
         
-        self.layer.shadowColor = CGColor(red: 189, green: 189, blue: 189, alpha: 1)
-        self.layer.shadowRadius = 3
-        self.layer.shadowOpacity = 0.5
-        self.layer.shadowOffset = CGSize(width: 0, height: 4)
+        layer.shadowColor = #colorLiteral(red: 0.7411764706, green: 0.7411764706, blue: 0.7411764706, alpha: 1)
+        layer.shadowRadius = 3
+        layer.shadowOpacity = 0.5
+        layer.shadowOffset = CGSize(width: 0, height: 4)
 
         setupConstraints()
     }
@@ -75,9 +75,9 @@ extension UserCell {
         
         NSLayoutConstraint.activate([
             userName.topAnchor.constraint(equalTo: userImageView.bottomAnchor),
-            userName.leadingAnchor.constraint(equalTo: userImageView.leadingAnchor, constant: 8),
-            userName.trailingAnchor.constraint(equalTo: userImageView.trailingAnchor,constant: -8),
-            userName.bottomAnchor.constraint(equalTo: userImageView.bottomAnchor)
+            userName.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 8),
+            userName.trailingAnchor.constraint(equalTo: containerView.trailingAnchor,constant: -8),
+            userName.bottomAnchor.constraint(equalTo: containerView.bottomAnchor)
         ])
     }
 }
