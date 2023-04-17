@@ -22,8 +22,9 @@ class WaitingChatCell: UICollectionViewCell, SelfConfiguringCell {
         setupConstraints()
     }
     
-    func configure(with value: MChat) {
-        friendImageView.image = UIImage(named: value.userImageString)
+    func configure<U>(with value: U) where U : Hashable {
+        guard let user: MChat = value as? MChat else { return }
+        friendImageView.image = UIImage(named: user.userImageString)
     }
     
     required init?(coder: NSCoder) {
@@ -43,7 +44,7 @@ extension WaitingChatCell {
             friendImageView.topAnchor.constraint(equalTo: self.topAnchor),
             friendImageView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
             friendImageView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
-            friendImageView.bottomAnchor.constraint(equalTo: self.bottomAnchor),
+            friendImageView.bottomAnchor.constraint(equalTo: self.bottomAnchor)
         ])
     }
 }
