@@ -19,12 +19,11 @@ class ProfileViewController: UIViewController {
         text: "You have the opportunity to chat with the best girl in the world!",
         font: .systemFont(ofSize: 16, weight: .light)
     )
-    let myTextField = UITextField()
+    let myTextField = InsertableTextField()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        view.backgroundColor = UIColor(named: "mainWhiteColor")
         customiseElements()
         setupConstraints()
     }
@@ -41,8 +40,13 @@ class ProfileViewController: UIViewController {
         containerView.backgroundColor = UIColor(named: "mainWhiteColor")
         containerView.layer.cornerRadius = 30
         
-        myTextField.borderStyle = .roundedRect
-        myTextField.placeholder = "Print you'r message"
+        if let button = myTextField.rightView as? UIButton {
+            button.addTarget(self, action: #selector(sendMessage), for: .touchUpInside)
+        }
+    }
+    
+    @objc private func sendMessage() {
+        print(#function)
     }
     
 }
