@@ -12,7 +12,7 @@ class ProfileViewController: UIViewController {
     let containerView = UIView()
     let imageView = UIImageView(image: UIImage(named: "human11"), contentMode: .scaleAspectFill)
     let nameLabel = UILabel(
-        text: "Dasha Login-Parol'",
+        text: "Dasha Logina",
         font: .systemFont(ofSize: 20, weight: .light)
     )
     let aboutMeLabel = UILabel(
