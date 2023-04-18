@@ -16,20 +16,24 @@ class ChatRequestViewController: UIViewController {
         font: .systemFont(ofSize: 20, weight: .bold)
     )
     let aboutMeLabel = UILabel(
-        text: "You have the opportunity to chat with the best girl in the world!",
+        text: "You have the opportunity to start a new chat!",
         font: .systemFont(ofSize: 16, weight: .light)
     )
     let acceptButton = UIButton(
         title: "ACCEPT",
         titleColor: .white,
         backgroundColor: .black,
-        isShadow: true
+        font: .laoSangamMN20(),
+        isShadow: false,
+        cornerRadius: 10
     )
     let denyButton = UIButton(
         title: "Deny",
-        titleColor: .red,
-        backgroundColor: .white,
-        isShadow: true
+        titleColor: UIColor(named: "buttonRed") ?? .red,
+        backgroundColor: UIColor(named: "mainWhiteColor") ?? .white,
+        font: .laoSangamMN20(),
+        isShadow: false,
+        cornerRadius: 10
     )
     
     override func viewDidLoad() {
@@ -44,13 +48,19 @@ class ChatRequestViewController: UIViewController {
         containerView.translatesAutoresizingMaskIntoConstraints = false
         nameLabel.translatesAutoresizingMaskIntoConstraints = false
         aboutMeLabel.translatesAutoresizingMaskIntoConstraints = false
-        acceptButton.translatesAutoresizingMaskIntoConstraints = false
-        denyButton.translatesAutoresizingMaskIntoConstraints = false
         
         aboutMeLabel.numberOfLines = 0
+                
+        denyButton.layer.borderWidth = 1.2
+        denyButton.layer.borderColor = UIColor(named: "buttonRed")?.cgColor
         
         containerView.backgroundColor = UIColor(named: "mainWhiteColor")
         containerView.layer.cornerRadius = 30
+    }
+    
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        acceptButton.applyGradients(cornerRadius: 10)
     }
 }
 
@@ -62,9 +72,15 @@ extension ChatRequestViewController {
         view.addSubview(containerView)
         containerView.addSubview(nameLabel)
         containerView.addSubview(aboutMeLabel)
-        containerView.addSubview(acceptButton)
-        containerView.addSubview(denyButton)
-
+        
+        let buttonsStackView = UIStackView(
+            arrangedSubviews: [acceptButton, denyButton],
+            axis: .horizontal,
+            spacing: 7
+        )
+        buttonsStackView.translatesAutoresizingMaskIntoConstraints = false
+        buttonsStackView.distribution = .fillEqually
+        containerView.addSubview(buttonsStackView)
         
         NSLayoutConstraint.activate([
             imageView.topAnchor.constraint(equalTo: view.topAnchor),
@@ -93,17 +109,10 @@ extension ChatRequestViewController {
         ])
         
         NSLayoutConstraint.activate([
-            acceptButton.topAnchor.constraint(equalTo: aboutMeLabel.bottomAnchor, constant: 8),
-            acceptButton.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 24),
-            acceptButton.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -200),
-            acceptButton.heightAnchor.constraint(equalToConstant: 48)
-        ])
-        
-        NSLayoutConstraint.activate([
-            denyButton.topAnchor.constraint(equalTo: aboutMeLabel.bottomAnchor, constant: 8),
-            denyButton.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 200),
-            denyButton.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -24),
-            denyButton.heightAnchor.constraint(equalToConstant: 48)
+            buttonsStackView.topAnchor.constraint(equalTo: aboutMeLabel.bottomAnchor, constant: 24),
+            buttonsStackView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 24),
+            buttonsStackView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -24),
+            buttonsStackView.heightAnchor.constraint(equalToConstant: 56)
         ])
     }
 }
