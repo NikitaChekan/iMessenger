@@ -11,6 +11,7 @@
 		DA0AEA2D29E344DF005834F5 /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA0AEA2C29E344DF005834F5 /* ListViewController.swift */; };
 		DA0AEA3129E346B0005834F5 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA0AEA3029E346B0005834F5 /* MainTabBarController.swift */; };
 		DA0AEA3329E346F4005834F5 /* PeopleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA0AEA3229E346F4005834F5 /* PeopleViewController.swift */; };
+		DA299DE929EF1386001F5131 /* ChatRequestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA299DE829EF1386001F5131 /* ChatRequestViewController.swift */; };
 		DA3A7C0B29E1B87500662330 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA3A7C0A29E1B87500662330 /* AppDelegate.swift */; };
 		DA3A7C0D29E1B87500662330 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA3A7C0C29E1B87500662330 /* SceneDelegate.swift */; };
 		DA3A7C0F29E1B87500662330 /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA3A7C0E29E1B87500662330 /* AuthViewController.swift */; };
@@ -50,6 +51,7 @@
 		DA0AEA2C29E344DF005834F5 /* ListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewController.swift; sourceTree = "<group>"; };
 		DA0AEA3029E346B0005834F5 /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		DA0AEA3229E346F4005834F5 /* PeopleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeopleViewController.swift; sourceTree = "<group>"; };
+		DA299DE829EF1386001F5131 /* ChatRequestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRequestViewController.swift; sourceTree = "<group>"; };
 		DA3A7C0729E1B87500662330 /* iMessenger.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iMessenger.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA3A7C0A29E1B87500662330 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DA3A7C0C29E1B87500662330 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -115,6 +117,7 @@
 				DA0AEA2C29E344DF005834F5 /* ListViewController.swift */,
 				DA0AEA3229E346F4005834F5 /* PeopleViewController.swift */,
 				DA7326AD29EDC3F900D01C56 /* ProfileViewController.swift */,
+				DA299DE829EF1386001F5131 /* ChatRequestViewController.swift */,
 				DA73AB4A29E871D600E81FC3 /* Cell */,
 				DAF7853929EC753B0057712C /* Header */,
 			);
@@ -304,6 +307,7 @@
 			files = (
 				DA0AEA2B29E338C8005834F5 /* SegmentedControl + Extension.swift in Sources */,
 				DA3A7C3429E21ADC00662330 /* LoginViewController.swift in Sources */,
+				DA299DE929EF1386001F5131 /* ChatRequestViewController.swift in Sources */,
 				DA73AB5029E8917400E81FC3 /* GradientView.swift in Sources */,
 				DA3A7C2E29E1D80200662330 /* UIStackView + Extension.swift in Sources */,
 				DA7326B029EDCEBE00D01C56 /* InsertableTextField.swift in Sources */,

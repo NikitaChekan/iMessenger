@@ -1,13 +1,13 @@
 //
-//  ProfileViewController.swift
+//  ChatRequestViewController.swift
 //  iMessenger
 //
-//  Created by jopootrivatel on 17.04.2023.
+//  Created by jopootrivatel on 18.04.2023.
 //
 
 import UIKit
 
-class ProfileViewController: UIViewController {
+class ChatRequestViewController: UIViewController {
     
     let containerView = UIView()
     let imageView = UIImageView(image: UIImage(named: "human11"), contentMode: .scaleAspectFill)
@@ -19,8 +19,19 @@ class ProfileViewController: UIViewController {
         text: "You have the opportunity to chat with the best girl in the world!",
         font: .systemFont(ofSize: 16, weight: .light)
     )
-    let myTextField = InsertableTextField()
-
+    let acceptButton = UIButton(
+        title: "ACCEPT",
+        titleColor: .white,
+        backgroundColor: .black,
+        isShadow: true
+    )
+    let denyButton = UIButton(
+        title: "Deny",
+        titleColor: .red,
+        backgroundColor: .white,
+        isShadow: true
+    )
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -33,25 +44,17 @@ class ProfileViewController: UIViewController {
         containerView.translatesAutoresizingMaskIntoConstraints = false
         nameLabel.translatesAutoresizingMaskIntoConstraints = false
         aboutMeLabel.translatesAutoresizingMaskIntoConstraints = false
-        myTextField.translatesAutoresizingMaskIntoConstraints = false
+        acceptButton.translatesAutoresizingMaskIntoConstraints = false
+        denyButton.translatesAutoresizingMaskIntoConstraints = false
         
         aboutMeLabel.numberOfLines = 0
         
         containerView.backgroundColor = UIColor(named: "mainWhiteColor")
         containerView.layer.cornerRadius = 30
-        
-        if let button = myTextField.rightView as? UIButton {
-            button.addTarget(self, action: #selector(sendMessage), for: .touchUpInside)
-        }
     }
-    
-    @objc private func sendMessage() {
-        print(#function)
-    }
-    
 }
 
-extension ProfileViewController {
+extension ChatRequestViewController {
     
     private func setupConstraints() {
         
@@ -59,7 +62,9 @@ extension ProfileViewController {
         view.addSubview(containerView)
         containerView.addSubview(nameLabel)
         containerView.addSubview(aboutMeLabel)
-        containerView.addSubview(myTextField)
+        containerView.addSubview(acceptButton)
+        containerView.addSubview(denyButton)
+
         
         NSLayoutConstraint.activate([
             imageView.topAnchor.constraint(equalTo: view.topAnchor),
@@ -88,12 +93,18 @@ extension ProfileViewController {
         ])
         
         NSLayoutConstraint.activate([
-            myTextField.topAnchor.constraint(equalTo: aboutMeLabel.bottomAnchor, constant: 8),
-            myTextField.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 24),
-            myTextField.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -24),
-            myTextField.heightAnchor.constraint(equalToConstant: 48)
+            acceptButton.topAnchor.constraint(equalTo: aboutMeLabel.bottomAnchor, constant: 8),
+            acceptButton.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 24),
+            acceptButton.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -200),
+            acceptButton.heightAnchor.constraint(equalToConstant: 48)
         ])
         
+        NSLayoutConstraint.activate([
+            denyButton.topAnchor.constraint(equalTo: aboutMeLabel.bottomAnchor, constant: 8),
+            denyButton.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 200),
+            denyButton.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -24),
+            denyButton.heightAnchor.constraint(equalToConstant: 48)
+        ])
     }
 }
 
@@ -101,7 +112,7 @@ extension ProfileViewController {
 
 import SwiftUI
 
-struct ProfileVCProvider: PreviewProvider {
+struct ChatRequestVCProvider: PreviewProvider {
     static var previews: some View {
         ConteinerView()
             .ignoresSafeArea()
@@ -109,13 +120,13 @@ struct ProfileVCProvider: PreviewProvider {
     
     struct ConteinerView: UIViewControllerRepresentable {
         
-        let profileVC = ProfileViewController()
+        let chatRequestVC = ChatRequestViewController()
         
-        func makeUIViewController(context: UIViewControllerRepresentableContext<ProfileVCProvider.ConteinerView>) -> ProfileViewController {
-            return profileVC
+        func makeUIViewController(context: UIViewControllerRepresentableContext<ChatRequestVCProvider.ConteinerView>) -> ChatRequestViewController {
+            return chatRequestVC
         }
         
-        func updateUIViewController(_ uiViewController: ProfileVCProvider.ConteinerView.UIViewControllerType, context: UIViewControllerRepresentableContext<ProfileVCProvider.ConteinerView>) {
+        func updateUIViewController(_ uiViewController: ChatRequestVCProvider.ConteinerView.UIViewControllerType, context: UIViewControllerRepresentableContext<ChatRequestVCProvider.ConteinerView>) {
             
         }
     }
