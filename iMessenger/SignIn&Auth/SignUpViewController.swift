@@ -34,6 +34,8 @@ class SignUpViewController: UIViewController {
         button.titleLabel?.font = .avenir20()
         return button
     }()
+    
+    weak var delegate: AuthNavigationDelegate?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,6 +44,8 @@ class SignUpViewController: UIViewController {
         setupConstraints()
         
         signUpButton.addTarget(self, action: #selector(signUpButtonTapped), for: .touchUpInside)
+        loginButton.addTarget(self, action: #selector(loginButtonTapped), for: .touchUpInside)
+
     }
     
     @objc private func signUpButtonTapped() {
@@ -52,12 +56,21 @@ class SignUpViewController: UIViewController {
         ) { (result) in
             switch result {
             case .success(let user):
-                self.showAlert(with: "Успешно!", and: "Вы зарегистрированны!")
+                self.showAlert(with: "Успешно!", and: "Вы зарегистрированны!") {
+                    self.present(SetupProfileViewController(), animated: true)
+                }
             case .failure(let error):
                 self.showAlert(with: "Ошибка!", and: error.localizedDescription)
             }
         }
     }
+    
+    @objc private func loginButtonTapped() {
+        self.dismiss(animated: true) {
+            self.delegate?.toLoginVC()
+        }
+    }
+    
 }
 
 // MARK: - Setup Constraints
@@ -101,7 +114,7 @@ extension SignUpViewController {
         ])
         
         NSLayoutConstraint.activate([
-            bottomStackView.topAnchor.constraint(equalTo: stackView.bottomAnchor, constant: 60),
+            bottomStackView.topAnchor.constraint(equalTo: stackView.bottomAnchor, constant: 20),
             bottomStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 40),
             bottomStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -40)
         ])
@@ -134,9 +147,11 @@ struct SignUpVCProvider: PreviewProvider {
 }
 
 extension UIViewController {
-    func showAlert(with title: String, and message: String) {
+    func showAlert(with title: String, and message: String, completion: @escaping () -> Void = { }) {
         let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        let okAction = UIAlertAction(title: "OK", style: .default)
+        let okAction = UIAlertAction(title: "OK", style: .default) { (_) in
+            completion()
+        }
         alertController.addAction(okAction)
         present(alertController, animated: true)
     }

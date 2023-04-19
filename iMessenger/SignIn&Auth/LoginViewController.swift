@@ -7,6 +7,11 @@
 
 import UIKit
 
+protocol AuthNavigationDelegate: AnyObject {
+    func toLoginVC()
+    func toSignUpVC()
+}
+
 class LoginViewController: UIViewController {
     
     let welcomeLabel = UILabel(text: "Welcome back!", font: .avenir26())
@@ -40,6 +45,8 @@ class LoginViewController: UIViewController {
         return button
     }()
     
+    weak var delegate: AuthNavigationDelegate?
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -49,6 +56,7 @@ class LoginViewController: UIViewController {
         setupConstraints()
         
         loginButton.addTarget(self, action: #selector(loginButtonTapped), for: .touchUpInside)
+        signUpButton.addTarget(self, action: #selector(signUpButtonTapped), for: .touchUpInside)
         
     }
     
@@ -59,12 +67,22 @@ class LoginViewController: UIViewController {
         ) { (result) in
             switch result {
             case .success(let user):
-                self.showAlert(with: "Успешно!", and: "Вы авторизованны!")
+                self.showAlert(with: "Успешно!", and: "Вы авторизованны!") {
+                    self.present(MainTabBarController(), animated: true)
+                }
             case .failure(let error):
                 self.showAlert(with: "Ошибка!", and: error.localizedDescription)
             }
         }
     }
+    
+    @objc private func signUpButtonTapped() {
+        dismiss(animated: true) {
+            self.delegate?.toSignUpVC()
+        }
+        present(SignUpViewController(), animated: true)
+    }
+    
 }
 
 // MARK: - Setup Constraints
