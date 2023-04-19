@@ -18,6 +18,8 @@
 		DA299DF229F0105D001F5131 /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = DA299DF129F0105D001F5131 /* FirebaseDatabase */; };
 		DA299DF429F0105D001F5131 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = DA299DF329F0105D001F5131 /* FirebaseStorage */; };
 		DA299DF729F05EBB001F5131 /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA299DF629F05EBB001F5131 /* AuthService.swift */; };
+		DA299DF929F06723001F5131 /* Validators.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA299DF829F06723001F5131 /* Validators.swift */; };
+		DA299DFB29F069B7001F5131 /* AuthError.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA299DFA29F069B7001F5131 /* AuthError.swift */; };
 		DA3A7C0B29E1B87500662330 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA3A7C0A29E1B87500662330 /* AppDelegate.swift */; };
 		DA3A7C0D29E1B87500662330 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA3A7C0C29E1B87500662330 /* SceneDelegate.swift */; };
 		DA3A7C0F29E1B87500662330 /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA3A7C0E29E1B87500662330 /* AuthViewController.swift */; };
@@ -60,6 +62,8 @@
 		DA299DE829EF1386001F5131 /* ChatRequestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRequestViewController.swift; sourceTree = "<group>"; };
 		DA299DEA29F00E30001F5131 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		DA299DF629F05EBB001F5131 /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
+		DA299DF829F06723001F5131 /* Validators.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Validators.swift; sourceTree = "<group>"; };
+		DA299DFA29F069B7001F5131 /* AuthError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthError.swift; sourceTree = "<group>"; };
 		DA3A7C0729E1B87500662330 /* iMessenger.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iMessenger.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA3A7C0A29E1B87500662330 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DA3A7C0C29E1B87500662330 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -144,6 +148,15 @@
 			path = Services;
 			sourceTree = "<group>";
 		};
+		DA299DFC29F07719001F5131 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				DA299DF829F06723001F5131 /* Validators.swift */,
+				DA299DFA29F069B7001F5131 /* AuthError.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
 		DA3A7BFE29E1B87500662330 = {
 			isa = PBXGroup;
 			children = (
@@ -170,6 +183,7 @@
 				DA0AEA2F29E34672005834F5 /* ViewControllers */,
 				DA73AB5329E899BE00E81FC3 /* Protocols */,
 				DA3A7C2929E1D17100662330 /* Extensions */,
+				DA299DFC29F07719001F5131 /* Helpers */,
 				DADB7A0529E7399F00EAD05E /* waitingChats.json */,
 				DADB7A0429E7399E00EAD05E /* activeChats.json */,
 				DAF7853729EC74D80057712C /* users.json */,
@@ -363,6 +377,7 @@
 				DA73AB4E29E8723C00E81FC3 /* WaitingChatCell.swift in Sources */,
 				DA3A7C0D29E1B87500662330 /* SceneDelegate.swift in Sources */,
 				DA3A7C2729E1CDE400662330 /* UIImageView + Extension.swift in Sources */,
+				DA299DF929F06723001F5131 /* Validators.swift in Sources */,
 				DA0AEA2D29E344DF005834F5 /* ListViewController.swift in Sources */,
 				DA299DF729F05EBB001F5131 /* AuthService.swift in Sources */,
 				DAB4654929E9DDE100DC15EE /* SectionHeader.swift in Sources */,
@@ -370,6 +385,7 @@
 				DA3A7C1F29E1C4B300662330 /* UIButton + Extension.swift in Sources */,
 				DA0AEA3129E346B0005834F5 /* MainTabBarController.swift in Sources */,
 				DADB7A0929E739F700EAD05E /* Bundle-Decodable.swift in Sources */,
+				DA299DFB29F069B7001F5131 /* AuthError.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
