@@ -17,6 +17,7 @@
 		DA299DF029F0105D001F5131 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = DA299DEF29F0105D001F5131 /* FirebaseAuth */; };
 		DA299DF229F0105D001F5131 /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = DA299DF129F0105D001F5131 /* FirebaseDatabase */; };
 		DA299DF429F0105D001F5131 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = DA299DF329F0105D001F5131 /* FirebaseStorage */; };
+		DA299DF729F05EBB001F5131 /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA299DF629F05EBB001F5131 /* AuthService.swift */; };
 		DA3A7C0B29E1B87500662330 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA3A7C0A29E1B87500662330 /* AppDelegate.swift */; };
 		DA3A7C0D29E1B87500662330 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA3A7C0C29E1B87500662330 /* SceneDelegate.swift */; };
 		DA3A7C0F29E1B87500662330 /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA3A7C0E29E1B87500662330 /* AuthViewController.swift */; };
@@ -58,6 +59,7 @@
 		DA0AEA3229E346F4005834F5 /* PeopleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeopleViewController.swift; sourceTree = "<group>"; };
 		DA299DE829EF1386001F5131 /* ChatRequestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRequestViewController.swift; sourceTree = "<group>"; };
 		DA299DEA29F00E30001F5131 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		DA299DF629F05EBB001F5131 /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
 		DA3A7C0729E1B87500662330 /* iMessenger.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iMessenger.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA3A7C0A29E1B87500662330 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DA3A7C0C29E1B87500662330 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -134,6 +136,14 @@
 			path = ViewControllers;
 			sourceTree = "<group>";
 		};
+		DA299DF529F05E89001F5131 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				DA299DF629F05EBB001F5131 /* AuthService.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
 		DA3A7BFE29E1B87500662330 = {
 			isa = PBXGroup;
 			children = (
@@ -154,8 +164,9 @@
 			isa = PBXGroup;
 			children = (
 				DA3A7C2A29E1D1A500662330 /* App */,
-				DA0AEA2E29E34644005834F5 /* SignIn&Auth */,
+				DA299DF529F05E89001F5131 /* Services */,
 				DAF7853A29EC76DC0057712C /* Models */,
+				DA0AEA2E29E34644005834F5 /* SignIn&Auth */,
 				DA0AEA2F29E34672005834F5 /* ViewControllers */,
 				DA73AB5329E899BE00E81FC3 /* Protocols */,
 				DA3A7C2929E1D17100662330 /* Extensions */,
@@ -353,6 +364,7 @@
 				DA3A7C0D29E1B87500662330 /* SceneDelegate.swift in Sources */,
 				DA3A7C2729E1CDE400662330 /* UIImageView + Extension.swift in Sources */,
 				DA0AEA2D29E344DF005834F5 /* ListViewController.swift in Sources */,
+				DA299DF729F05EBB001F5131 /* AuthService.swift in Sources */,
 				DAB4654929E9DDE100DC15EE /* SectionHeader.swift in Sources */,
 				DAF7853C29EC76F10057712C /* MChat.swift in Sources */,
 				DA3A7C1F29E1C4B300662330 /* UIButton + Extension.swift in Sources */,
