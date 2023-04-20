@@ -1,9 +1,8 @@
 //
-//  Bundle-Decodable.swift
-//  Chats
+//  Bundle.swift
+//  iMessenger
 //
-//  Created by Алексей Пархоменко on 09.01.2020.
-//  Copyright © 2020 Алексей Пархоменко. All rights reserved.
+//  Created by jopootrivatel on 09.04.2023.
 //
 
 import Foundation

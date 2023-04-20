@@ -5,8 +5,6 @@
 //  Created by jopootrivatel on 19.04.2023.
 //
 
-import UIKit
-import Firebase
 import FirebaseAuth
 
 class AuthService {
