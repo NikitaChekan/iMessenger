@@ -12,4 +12,9 @@ chat
 - DiffableDataSource
 
 3. Profile&Chat Request Views
-- 
+4. Firebase Integration
+- Create a Firebase Account
+- Connect Auth view controllers together
+- Validate Email and Password
+- Create user model
+- Store users to Firestore
