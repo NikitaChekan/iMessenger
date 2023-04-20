@@ -18,3 +18,5 @@ chat
 - Validate Email and Password
 - Create user model
 - Store users to Firestore
+- Upload user avatar image
+- UIImagePickerController
