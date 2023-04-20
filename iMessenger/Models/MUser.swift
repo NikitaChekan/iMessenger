@@ -17,11 +17,11 @@ struct MUser: Hashable, Decodable {
     
     var representation: [String: Any] {
         var rep = ["userName": userName]
-        rep = ["email": email]
-        rep = ["avatarStringURL": avatarStringURL]
-        rep = ["description": description]
-        rep = ["sex": sex]
-        rep = ["uid": id]
+        rep["email"] = email
+        rep["avatarStringURL"] = avatarStringURL
+        rep["description"] = description
+        rep["sex"] = sex
+        rep["uid"] =  id
         return rep
     }
     
