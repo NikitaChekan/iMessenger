@@ -29,10 +29,12 @@ class SetupProfileViewController: UIViewController {
     )
     
     private let currentUser: User
+    
     init(currentUser: User) {
         self.currentUser = currentUser
         super.init(nibName: nil, bundle: nil)
     }
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

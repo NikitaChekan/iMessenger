@@ -10,7 +10,8 @@ import FirebaseAuth
 
 class PeopleViewController: UIViewController {
     
-    let users = Bundle.main.decode([MUser].self, from: "users.json")
+//    let users = Bundle.main.decode([MUser].self, from: "users.json")
+    let users = [MUser]()
     var collectionView: UICollectionView!
     var dataSource: UICollectionViewDiffableDataSource<Section, MUser>!
 
@@ -39,7 +40,7 @@ class PeopleViewController: UIViewController {
     }
 
     @objc private func signOut() {
-        let alertController = UIAlertController(title: "nil", message: "Are you sure you want to sign out?", preferredStyle: .alert)
+        let alertController = UIAlertController(title: nil, message: "Are you sure you want to sign out?", preferredStyle: .alert)
         alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel))
         alertController.addAction(UIAlertAction(title: "Sign Out", style: .destructive, handler: { (_) in
             do {
