@@ -59,7 +59,9 @@ class SetupProfileViewController: UIViewController {
                 switch result {
                 case .success(let mUser):
                     self.showAlert(with: "Успешно!", and: "Приятного общения!") {
-                        self.present(MainTabBarController(), animated: true)
+                        let mainTabBar = MainTabBarController(currentUser: mUser)
+                        mainTabBar.modalPresentationStyle = .fullScreen
+                        self.present(mainTabBar, animated: true)
                     }
                 case .failure(let error):
                     self.showAlert(with: "Ошибка!", and: error.localizedDescription)

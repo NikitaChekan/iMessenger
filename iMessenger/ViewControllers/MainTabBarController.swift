@@ -9,6 +9,24 @@ import UIKit
 
 class MainTabBarController: UITabBarController {
     
+    private let currentUser: MUser
+    
+    init(currentUser: MUser = MUser(
+        userName: "Nick",
+        email: "test999@mail.ru",
+        avatarStringURL: "nil",
+        description: "Hello",
+        sex: "Male",
+        id: "999"
+    )) {
+        self.currentUser = currentUser
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
