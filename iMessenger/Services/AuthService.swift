@@ -38,20 +38,21 @@ class AuthService {
         }
         
         let config = GIDConfiguration(clientID: clientID)
+        GIDSignIn.sharedInstance.configuration = config
         
-        GIDSignIn.sharedInstance.signIn(with: config, presenting: viewController) { [unowned self] user, error in
+        GIDSignIn.sharedInstance.signIn(withPresenting: viewController) { [unowned self] (result, error) in
             if let error = error {
                 completion(.failure(error))
                 return
             }
             
-            guard let authentication = user?.authentication,
+            guard let authentication = result?.user,
                   let idToken = authentication.idToken else {
                 completion(.failure(AuthError.tokenIdNotFound))
                 return
             }
             
-            let credential = GoogleAuthProvider.credential(withIDToken: idToken, accessToken: authentication.accessToken)
+            let credential = GoogleAuthProvider.credential(withIDToken: idToken.tokenString, accessToken: authentication.accessToken.tokenString)
             
             auth.signIn(with: credential) { result, error in
                 guard let result = result else {
