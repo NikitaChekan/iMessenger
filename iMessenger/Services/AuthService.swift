@@ -9,7 +9,6 @@ import UIKit
 import FirebaseCore
 import FirebaseAuth
 import GoogleSignIn
-import GoogleSignInSwift
 
 class AuthService {
     
@@ -32,61 +31,36 @@ class AuthService {
         }
     }
     
-//    func googleLogin(user: GIDGoogleUser!, error: Error!, completion: @escaping (Result<User, Error>) -> Void) {
-//
-//        if let error = error {
-//            completion(.failure(error))
-//            return
-//        }
-//
-//        guard let auth = user.authentication else { return }
-//        let credential = GoogleAuthProvider.credential(withIDToken: auth.idToken, accessToken: auth.accessToken)
-//
-//        Auth.auth().signIn(with: credential) { (result, error) in
-//            guard let result = result else {
-//                completion(.failure(error!))
-//                return
-//            }
-//            completion(.success(result.user))
-//        }
-//    }
-    
-    func googleLogin() async -> Bool {
+    func signInGoogle(_ viewController: UIViewController, completion: @escaping (Result<User, Error>) -> Void) {
         guard let clientID = FirebaseApp.app()?.options.clientID else {
-            fatalError("No client ID found in Firebase configuration")
+            completion(.failure(AuthError.clientIdNotFound))
+            return
         }
         
         let config = GIDConfiguration(clientID: clientID)
-        GIDSignIn.sharedInstance.configuration = config
         
-        guard let windowScene = await UIApplication.shared.connectedScenes.first as? UIWindowScene,
-              let window = await windowScene.windows.first,
-              let rootViewController = await window.rootViewController else {
-            print("There is no root view controller!")
-            return false
-        }
-        
-        do {
-            let userAuthentication = try await GIDSignIn.sharedInstance.signIn(withPresenting: rootViewController)
+        GIDSignIn.sharedInstance.signIn(with: config, presenting: viewController) { [unowned self] user, error in
+            if let error = error {
+                completion(.failure(error))
+                return
+            }
             
-            let user = userAuthentication.user
-            guard let idToken = user.idToken else { throw AuthError.unknownError }
-            let accessToken = user.accessToken
+            guard let authentication = user?.authentication,
+                  let idToken = authentication.idToken else {
+                completion(.failure(AuthError.tokenIdNotFound))
+                return
+            }
             
-            let credential = GoogleAuthProvider.credential(
-                withIDToken: idToken.tokenString,
-                accessToken: accessToken.tokenString
-            )
+            let credential = GoogleAuthProvider.credential(withIDToken: idToken, accessToken: authentication.accessToken)
             
-            let result = try await auth.signIn(with: credential)
-            let firebaseUser = result.user
-            print("User \(firebaseUser.uid) signed in with \(firebaseUser.email ?? "unknown")")
-            return true
-
-        } catch {
-            print(error.localizedDescription)
-//            self.errorMessage = error.localizedDescription
-            return false
+            auth.signIn(with: credential) { result, error in
+                guard let result = result else {
+                    completion(.failure(error!))
+                    return
+                }
+                
+                completion(.success(result.user))
+            }
         }
         
     }

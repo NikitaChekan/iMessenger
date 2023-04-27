@@ -14,7 +14,8 @@ enum AuthError {
     case passwordNotMatched
     case unknownError
     case serverError
-    case tokenError
+    case clientIdNotFound
+    case tokenIdNotFound
 }
 
 extension AuthError: LocalizedError {
@@ -30,8 +31,10 @@ extension AuthError: LocalizedError {
             return NSLocalizedString("Неизвестная ошибка!", comment: "")
         case .serverError:
             return NSLocalizedString("Ошибка сервера!", comment: "")
-        case .tokenError:
-            return NSLocalizedString("Ошибка ID-token!", comment: "")
+        case .clientIdNotFound:
+            return NSLocalizedString("Ошибка получения client-id!", comment: "")
+        case .tokenIdNotFound:
+            return NSLocalizedString("Ошибка получения token-id!", comment: "")
         }
     }
 }

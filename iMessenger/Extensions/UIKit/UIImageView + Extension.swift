@@ -1,5 +1,5 @@
 //
-//  UIImageView + Exyension.swift
+//  UIImageView + Extension.swift
 //  iMessenger
 //
 //  Created by jopootrivatel on 08.04.2023.
