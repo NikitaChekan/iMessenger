@@ -6,9 +6,6 @@
 //
 
 import UIKit
-//import FirebaseAuth
-//import GoogleSignIn
-//import GoogleSignInSwift
 
 class AuthViewController: UIViewController {
     
@@ -57,6 +54,7 @@ class AuthViewController: UIViewController {
         loginVC.delegate = self
     }
     
+    // MARK: Actions
     @objc private func emailButtonTapped() {
         present(signUpVC, animated: true)
     }

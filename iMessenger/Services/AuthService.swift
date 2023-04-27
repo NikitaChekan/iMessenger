@@ -52,7 +52,10 @@ class AuthService {
                 return
             }
             
-            let credential = GoogleAuthProvider.credential(withIDToken: idToken.tokenString, accessToken: authentication.accessToken.tokenString)
+            let credential = GoogleAuthProvider.credential(
+                withIDToken: idToken.tokenString,
+                accessToken: authentication.accessToken.tokenString
+            )
             
             auth.signIn(with: credential) { result, error in
                 guard let result = result else {
