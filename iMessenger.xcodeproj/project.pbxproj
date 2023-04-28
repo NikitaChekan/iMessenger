@@ -20,6 +20,8 @@
 		DA299DF729F05EBB001F5131 /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA299DF629F05EBB001F5131 /* AuthService.swift */; };
 		DA299DF929F06723001F5131 /* Validators.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA299DF829F06723001F5131 /* Validators.swift */; };
 		DA299DFB29F069B7001F5131 /* AuthError.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA299DFA29F069B7001F5131 /* AuthError.swift */; };
+		DA2E860B29FC5317009133F6 /* StorageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA2E860A29FC5316009133F6 /* StorageService.swift */; };
+		DA2E860D29FC55E7009133F6 /* UIImage + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA2E860C29FC55E7009133F6 /* UIImage + Extension.swift */; };
 		DA3193B329F13864008B03F8 /* AuthNavigationDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA3193B229F13864008B03F8 /* AuthNavigationDelegate.swift */; };
 		DA3193B529F13C7E008B03F8 /* FirestoreService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA3193B429F13C7E008B03F8 /* FirestoreService.swift */; };
 		DA3193B829F13D5A008B03F8 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = DA3193B729F13D5A008B03F8 /* FirebaseFirestore */; };
@@ -71,6 +73,8 @@
 		DA299DF629F05EBB001F5131 /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
 		DA299DF829F06723001F5131 /* Validators.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Validators.swift; sourceTree = "<group>"; };
 		DA299DFA29F069B7001F5131 /* AuthError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthError.swift; sourceTree = "<group>"; };
+		DA2E860A29FC5316009133F6 /* StorageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageService.swift; sourceTree = "<group>"; };
+		DA2E860C29FC55E7009133F6 /* UIImage + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage + Extension.swift"; sourceTree = "<group>"; };
 		DA3193B229F13864008B03F8 /* AuthNavigationDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthNavigationDelegate.swift; sourceTree = "<group>"; };
 		DA3193B429F13C7E008B03F8 /* FirestoreService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreService.swift; sourceTree = "<group>"; };
 		DA3193B929F13FC4008B03F8 /* UserError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserError.swift; sourceTree = "<group>"; };
@@ -159,6 +163,7 @@
 			children = (
 				DA299DF629F05EBB001F5131 /* AuthService.swift */,
 				DA3193B429F13C7E008B03F8 /* FirestoreService.swift */,
+				DA2E860A29FC5316009133F6 /* StorageService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -230,6 +235,7 @@
 				DA7326AB29ED6FED00D01C56 /* UIViewController + Extension.swift */,
 				DA7326AF29EDCEBE00D01C56 /* InsertableTextField.swift */,
 				DA7326B129EDD2A200D01C56 /* UIView + Extention.swift */,
+				DA2E860C29FC55E7009133F6 /* UIImage + Extension.swift */,
 			);
 			path = UIKit;
 			sourceTree = "<group>";
@@ -386,6 +392,7 @@
 				DA3A7C3429E21ADC00662330 /* LoginViewController.swift in Sources */,
 				DA3193BA29F13FC4008B03F8 /* UserError.swift in Sources */,
 				DA299DE929EF1386001F5131 /* ChatRequestViewController.swift in Sources */,
+				DA2E860B29FC5317009133F6 /* StorageService.swift in Sources */,
 				DA73AB5029E8917400E81FC3 /* GradientView.swift in Sources */,
 				DA3A7C2E29E1D80200662330 /* UIStackView + Extension.swift in Sources */,
 				DA7326B029EDCEBE00D01C56 /* InsertableTextField.swift in Sources */,
@@ -412,6 +419,7 @@
 				DA3A7C2729E1CDE400662330 /* UIImageView + Extension.swift in Sources */,
 				DA299DF929F06723001F5131 /* Validators.swift in Sources */,
 				DA0AEA2D29E344DF005834F5 /* ListViewController.swift in Sources */,
+				DA2E860D29FC55E7009133F6 /* UIImage + Extension.swift in Sources */,
 				DABFF25E29FAFC9800FAD63A /* UIApplication + Extension.swift in Sources */,
 				DA299DF729F05EBB001F5131 /* AuthService.swift in Sources */,
 				DAB4654929E9DDE100DC15EE /* SectionHeader.swift in Sources */,
