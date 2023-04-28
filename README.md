@@ -12,6 +12,7 @@ chat
 - DiffableDataSource
 
 3. Profile&Chat Request Views
+
 4. Firebase Integration
 - Create a Firebase Account
 - Connect Auth view controllers together
@@ -20,3 +21,8 @@ chat
 - Store users to Firestore
 - Upload user avatar image
 - UIImagePickerController
+
+5. User chats Firebase data model
+- Waiting/Active user chats logic 
+- Chat request view logic
+- Create Chat and Message Models
