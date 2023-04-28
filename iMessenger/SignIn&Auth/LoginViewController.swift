@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import GoogleSignIn
 
 class LoginViewController: UIViewController {
     
@@ -52,7 +53,29 @@ class LoginViewController: UIViewController {
         
         loginButton.addTarget(self, action: #selector(loginButtonTapped), for: .touchUpInside)
         signUpButton.addTarget(self, action: #selector(signUpButtonTapped), for: .touchUpInside)
+        googleButton.addTarget(self, action: #selector(googleButtonTapped), for: .touchUpInside)
         
+    }
+    
+    @objc private func googleButtonTapped() {
+        AuthService.shared.signInGoogle(self) { result in
+            switch result {
+            case .success(let user):
+                FirestoreService.shared.getUserData(user: user) { result in
+                    switch result {
+                    case .success(let mUser):
+                        let mainTabBarController = MainTabBarController(currentUser: mUser)
+                        mainTabBarController.modalPresentationStyle = .fullScreen
+                        
+                        self.present(mainTabBarController, animated: true)
+                    case .failure(_):
+                        self.present(SetupProfileViewController(currentUser: user), animated: true)
+                    }
+                }
+            case .failure(let error):
+                self.showAlert(with: "Ошибка!", and: error.localizedDescription)
+            }
+        }
     }
     
     @objc private func loginButtonTapped() {
@@ -62,7 +85,7 @@ class LoginViewController: UIViewController {
         ) { (result) in
             switch result {
             case .success(let user):
-                self.showAlert(with: "Успешно!", and: "Вы авторизованны!") {
+                self.showAlert(with: "Успешно!", and: "Вы авторизованы!") {
                     FirestoreService.shared.getUserData(user: user) { (result) in
                         switch result {
                         case .success(let mUser):

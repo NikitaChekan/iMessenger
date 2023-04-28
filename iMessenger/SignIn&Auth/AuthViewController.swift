@@ -72,7 +72,6 @@ class AuthViewController: UIViewController {
                     case .success(let mUser):
                         let mainTabBarController = MainTabBarController(currentUser: mUser)
                         mainTabBarController.modalPresentationStyle = .fullScreen
-                        
                         self.present(mainTabBarController, animated: true)
                     case .failure(_):
                         self.present(SetupProfileViewController(currentUser: user), animated: true)
