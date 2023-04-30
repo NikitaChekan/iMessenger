@@ -299,8 +299,8 @@
 		DAF7853A29EC76DC0057712C /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				DAF7853B29EC76F10057712C /* MChat.swift */,
 				DAF7853D29EC76FC0057712C /* MUser.swift */,
+				DAF7853B29EC76F10057712C /* MChat.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";

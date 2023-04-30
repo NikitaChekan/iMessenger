@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SDWebImage
 
 class ProfileViewController: UIViewController {
     
@@ -20,7 +21,21 @@ class ProfileViewController: UIViewController {
         font: .systemFont(ofSize: 16, weight: .light)
     )
     let myTextField = InsertableTextField()
-
+    
+    private let user: MUser
+    
+    init(user: MUser) {
+        self.user = user
+        self.nameLabel.text = user.userName
+        self.aboutMeLabel.text = user.description
+        self.imageView.sd_setImage(with: URL(string: user.avatarStringURL))
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -46,7 +61,12 @@ class ProfileViewController: UIViewController {
     }
     
     @objc private func sendMessage() {
-        print(#function)
+        
+        guard let message = myTextField.text, message != "" else { return }
+        
+        self.dismiss(animated: true) {
+            UIApplication.getTopViewController()?.showAlert(with: "Успешно!", and: "Сообщение отправлено!")
+        }
     }
     
 }
@@ -99,25 +119,25 @@ extension ProfileViewController {
 
 // MARK: - SwiftUI
 
-import SwiftUI
-
-struct ProfileVCProvider: PreviewProvider {
-    static var previews: some View {
-        ConteinerView()
-            .ignoresSafeArea()
-    }
-    
-    struct ConteinerView: UIViewControllerRepresentable {
-        
-        let profileVC = ProfileViewController()
-        
-        func makeUIViewController(context: UIViewControllerRepresentableContext<ProfileVCProvider.ConteinerView>) -> ProfileViewController {
-            return profileVC
-        }
-        
-        func updateUIViewController(_ uiViewController: ProfileVCProvider.ConteinerView.UIViewControllerType, context: UIViewControllerRepresentableContext<ProfileVCProvider.ConteinerView>) {
-            
-        }
-    }
-}
+//import SwiftUI
+//
+//struct ProfileVCProvider: PreviewProvider {
+//    static var previews: some View {
+//        ConteinerView()
+//            .ignoresSafeArea()
+//    }
+//
+//    struct ConteinerView: UIViewControllerRepresentable {
+//
+//        let profileVC = ProfileViewController()
+//
+//        func makeUIViewController(context: UIViewControllerRepresentableContext<ProfileVCProvider.ConteinerView>) -> ProfileViewController {
+//            return profileVC
+//        }
+//
+//        func updateUIViewController(_ uiViewController: ProfileVCProvider.ConteinerView.UIViewControllerType, context: UIViewControllerRepresentableContext<ProfileVCProvider.ConteinerView>) {
+//
+//        }
+//    }
+//}
 

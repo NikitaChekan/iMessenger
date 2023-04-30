@@ -8,16 +8,16 @@
 import UIKit
 
 struct MChat: Hashable, Decodable {
-    var userName: String
-    var userImageString: String
-    var lastMessage: String
-    var id: Int
+    var friendUserName: String
+    var friendAvatarStringURL: String
+    var lastMessageContent: String
+    var friendId: Int
     
     func hash(into hasher: inout Hasher) {
-        hasher.combine(id)
+        hasher.combine(friendId)
     }
     
     static func == (lhs: MChat, rhs: MChat) -> Bool {
-        return lhs.id == rhs.id
+        return lhs.friendId == rhs.friendId
     }
 }

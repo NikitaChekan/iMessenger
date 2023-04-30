@@ -18,6 +18,8 @@ class FirestoreService {
         return db.collection("users")
     }
     
+    var currentUser: MUser!
+    
     func getUserData(user: User, completion: @escaping (Result<MUser, Error>) -> Void) {
         let docRef = usersRef.document(user.uid)
         docRef.getDocument { (document, error) in
@@ -26,6 +28,7 @@ class FirestoreService {
                     completion(.failure(UserError.cannotUnwrapToUser))
                     return
                 }
+                self.currentUser = mUser
                 completion(.success(mUser))
             } else {
                 completion(.failure(UserError.cannotGetUserInfo))
@@ -71,4 +74,18 @@ class FirestoreService {
             }
         } // StorageService
     } // saveProfileWith
+    
+    func createWaitingChat(message: String, receiver: MUser, completion: @escaping (Result<Void, Error>) -> Void) {
+        let reference = db.collection(["users", receiver.id, "waitingChats"].joined(separator: "/"))
+        let messageRef = reference.document(self.currentUser.id).collection("messages")
+        
+        let chat = MChat(
+            friendUserName: currentUser.userName,
+            friendAvatarStringURL: currentUser.avatarStringURL,
+            lastMessageContent: ,
+            friendId: currentUser.id
+        )
+        
+        reference.document(currentUser.id).setData(<#T##documentData: [String : Any]##[String : Any]#>)
+    }
 }
