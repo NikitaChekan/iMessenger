@@ -36,6 +36,19 @@ class ChatRequestViewController: UIViewController {
         cornerRadius: 10
     )
     
+    private var chat: MChat
+    
+    init(chat: MChat) {
+        self.chat = chat
+        nameLabel.text = chat.friendUserName
+        imageView.sd_setImage(with: URL(string: chat.friendAvatarStringURL))
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -119,25 +132,25 @@ extension ChatRequestViewController {
 
 // MARK: - SwiftUI
 
-import SwiftUI
-
-struct ChatRequestVCProvider: PreviewProvider {
-    static var previews: some View {
-        ConteinerView()
-            .ignoresSafeArea()
-    }
-    
-    struct ConteinerView: UIViewControllerRepresentable {
-        
-        let chatRequestVC = ChatRequestViewController()
-        
-        func makeUIViewController(context: UIViewControllerRepresentableContext<ChatRequestVCProvider.ConteinerView>) -> ChatRequestViewController {
-            return chatRequestVC
-        }
-        
-        func updateUIViewController(_ uiViewController: ChatRequestVCProvider.ConteinerView.UIViewControllerType, context: UIViewControllerRepresentableContext<ChatRequestVCProvider.ConteinerView>) {
-            
-        }
-    }
-}
+//import SwiftUI
+//
+//struct ChatRequestVCProvider: PreviewProvider {
+//    static var previews: some View {
+//        ConteinerView()
+//            .ignoresSafeArea()
+//    }
+//    
+//    struct ConteinerView: UIViewControllerRepresentable {
+//        
+//        let chatRequestVC = ChatRequestViewController()
+//        
+//        func makeUIViewController(context: UIViewControllerRepresentableContext<ChatRequestVCProvider.ConteinerView>) -> ChatRequestViewController {
+//            return chatRequestVC
+//        }
+//        
+//        func updateUIViewController(_ uiViewController: ChatRequestVCProvider.ConteinerView.UIViewControllerType, context: UIViewControllerRepresentableContext<ChatRequestVCProvider.ConteinerView>) {
+//            
+//        }
+//    }
+//}
 
