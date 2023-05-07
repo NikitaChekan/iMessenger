@@ -53,7 +53,9 @@ class ListenerService {
     }
     
     func waitingChatsObserve(chats: [MChat], completion: @escaping (Result<[MChat], Error>) -> Void) -> ListenerRegistration? {
+        
         var chats = chats
+        
         let chatsReference = db.collection(["users", currentUserId, "waitingChats"].joined(separator: "/"))
         let chatsListener = chatsReference.addSnapshotListener { (querySnapshot, error) in
             guard let snapshot = querySnapshot else {

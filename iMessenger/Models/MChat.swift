@@ -16,9 +16,9 @@ struct MChat: Hashable, Decodable {
     
     var representation: [String : Any] {
         var rep = ["friendUserName": friendUserName]
-        rep = ["friendAvatarStringURL": friendAvatarStringURL]
-        rep = ["friendId": friendId]
-        rep = ["lastMessage": lastMessageContent]
+        rep["friendAvatarStringURL"] = friendAvatarStringURL
+        rep["friendId"] = friendId
+        rep["lastMessage"] = lastMessageContent
         return rep
     }
     
@@ -33,9 +33,9 @@ struct MChat: Hashable, Decodable {
         let data = document.data()
         
         guard let friendUserName = data["friendUserName"] as? String,
-        let friendAvatarStringURL = data["friendAvatarStringURL"] as? String,
-        let friendId = data["friendId"] as? String,
-        let lastMessageContent = data["lastMessage"] as? String else { return nil }
+              let friendAvatarStringURL = data["friendAvatarStringURL"] as? String,
+              let friendId = data["friendId"] as? String,
+              let lastMessageContent = data["lastMessage"] as? String else { return nil }
         
         self.friendUserName = friendUserName
         self.friendAvatarStringURL = friendAvatarStringURL
