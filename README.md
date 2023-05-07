@@ -26,3 +26,8 @@ chat
 - Waiting/Active user chats logic 
 - Chat request view logic
 - Create Chat and Message Models
+
+6. Real-Time Chat
+- Chat interface setup
+- Sending text/image messages
+- Extend Firebase Storage
