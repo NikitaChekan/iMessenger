@@ -64,6 +64,7 @@
 		DAF7853829EC74D90057712C /* users.json in Resources */ = {isa = PBXBuildFile; fileRef = DAF7853729EC74D80057712C /* users.json */; };
 		DAF7853C29EC76F10057712C /* MChat.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAF7853B29EC76F10057712C /* MChat.swift */; };
 		DAF7853E29EC76FC0057712C /* MUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAF7853D29EC76FC0057712C /* MUser.swift */; };
+		DAFB0D1F2A083FEB00D301E7 /* WaitingChatNavigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAFB0D1E2A083FEB00D301E7 /* WaitingChatNavigation.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -118,6 +119,7 @@
 		DAF7853729EC74D80057712C /* users.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = users.json; sourceTree = "<group>"; };
 		DAF7853B29EC76F10057712C /* MChat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MChat.swift; sourceTree = "<group>"; };
 		DAF7853D29EC76FC0057712C /* MUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MUser.swift; sourceTree = "<group>"; };
+		DAFB0D1E2A083FEB00D301E7 /* WaitingChatNavigation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaitingChatNavigation.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -286,6 +288,7 @@
 			children = (
 				DA73AB5129E8998F00E81FC3 /* SelfConfiguringCell.swift */,
 				DA3193B229F13864008B03F8 /* AuthNavigationDelegate.swift */,
+				DAFB0D1E2A083FEB00D301E7 /* WaitingChatNavigation.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -419,6 +422,7 @@
 				DA7326AE29EDC3F900D01C56 /* ProfileViewController.swift in Sources */,
 				DA3A7C0F29E1B87500662330 /* AuthViewController.swift in Sources */,
 				DA7326B229EDD2A200D01C56 /* UIView + Extention.swift in Sources */,
+				DAFB0D1F2A083FEB00D301E7 /* WaitingChatNavigation.swift in Sources */,
 				DA73AB5229E8998F00E81FC3 /* SelfConfiguringCell.swift in Sources */,
 				DA3A7C3229E2006D00662330 /* OneLineTextField.swift in Sources */,
 				DA3A7C3629E225FE00662330 /* SetupProfileViewController.swift in Sources */,

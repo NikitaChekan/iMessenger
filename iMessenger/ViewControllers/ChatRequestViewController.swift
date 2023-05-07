@@ -36,6 +36,8 @@ class ChatRequestViewController: UIViewController {
         cornerRadius: 10
     )
     
+    weak var delegate: WaitingChatNavigation?
+    
     private var chat: MChat
     
     init(chat: MChat) {
@@ -54,6 +56,21 @@ class ChatRequestViewController: UIViewController {
         
         customiseElements()
         setupConstraints()
+        
+        denyButton.addTarget(self, action: #selector(denyButtonTapped), for: .touchUpInside)
+        acceptButton.addTarget(self, action: #selector(acceptButtonTapped), for: .touchUpInside)
+    }
+    
+    @objc private func denyButtonTapped() {
+        self.dismiss(animated: true) {
+            self.delegate?.removeWaitingChat(chat: self.chat)
+        }
+    }
+    
+    @objc private func acceptButtonTapped() {
+        self.dismiss(animated: true) {
+            self.delegate?.chatToActive(chat: self.chat)
+        }
     }
     
     private func customiseElements() {
