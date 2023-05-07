@@ -72,6 +72,7 @@ class ListViewController: UIViewController {
                 self.showAlert(with: "Ошибка!", and: error.localizedDescription)
             }
         })
+        
     }
     
     private func setupSearchBar() {
