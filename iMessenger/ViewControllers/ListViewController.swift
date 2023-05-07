@@ -11,10 +11,10 @@ import FirebaseFirestore
 class ListViewController: UIViewController {
     
     var waitingChats = [MChat]()
-    let activeChats = [MChat]()
+    var activeChats = [MChat]()
     
     private var waitingChatsListener: ListenerRegistration?
-
+    private var activeChatsListener: ListenerRegistration?
     
     enum Section: Int, CaseIterable {
         case waitingChats, activeChats
@@ -49,6 +49,7 @@ class ListViewController: UIViewController {
     
     deinit {
         waitingChatsListener?.remove()
+        activeChatsListener?.remove()
     }
     
     override func viewDidLoad() {
@@ -68,6 +69,16 @@ class ListViewController: UIViewController {
                     self.present(chatRequestVC, animated: true)
                 }
                 self.waitingChats = chats
+                self.reloadData()
+            case .failure(let error):
+                self.showAlert(with: "Ошибка!", and: error.localizedDescription)
+            }
+        })
+        
+        activeChatsListener = ListenerService.shared.activeChatsObserve(chats: waitingChats, completion: { result in
+            switch result {
+            case .success(let chats):
+                self.activeChats = chats
                 self.reloadData()
             case .failure(let error):
                 self.showAlert(with: "Ошибка!", and: error.localizedDescription)
@@ -274,7 +285,14 @@ extension ListViewController: WaitingChatNavigation {
     }
     
     func chatToActive(chat: MChat) {
-        print(#function)
+        FirestoreService.shared.changeToActive(chat: chat) { result in
+            switch result {
+            case .success:
+                self.showAlert(with: "Успешно!", and: "Приятного общения с \(chat.friendUserName).")
+            case .failure(let error):
+                self.showAlert(with: "Ошибка!", and: error.localizedDescription)
+            }
+        }
     }
     
     
