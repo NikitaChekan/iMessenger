@@ -61,12 +61,13 @@
 		DADB7A0929E739F700EAD05E /* Bundle-Decodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = DADB7A0829E739F700EAD05E /* Bundle-Decodable.swift */; };
 		DAEFC24429FEF4EB00E07774 /* ListenerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAEFC24329FEF4EB00E07774 /* ListenerService.swift */; };
 		DAEFC24729FEFCD600E07774 /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = DAEFC24629FEFCD600E07774 /* SDWebImage */; };
+		DAF3E38D2A09887A008A1FFB /* MSender.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAF3E38C2A09887A008A1FFB /* MSender.swift */; };
 		DAF7853829EC74D90057712C /* users.json in Resources */ = {isa = PBXBuildFile; fileRef = DAF7853729EC74D80057712C /* users.json */; };
 		DAF7853C29EC76F10057712C /* MChat.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAF7853B29EC76F10057712C /* MChat.swift */; };
 		DAF7853E29EC76FC0057712C /* MUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAF7853D29EC76FC0057712C /* MUser.swift */; };
 		DAFB0D1F2A083FEB00D301E7 /* WaitingChatNavigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAFB0D1E2A083FEB00D301E7 /* WaitingChatNavigation.swift */; };
 		DAFB0D222A08636600D301E7 /* MessageKit in Frameworks */ = {isa = PBXBuildFile; productRef = DAFB0D212A08636600D301E7 /* MessageKit */; };
-		DAFB0D242A08642300D301E7 /* ChatsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAFB0D232A08642300D301E7 /* ChatsViewController.swift */; };
+		DAFB0D262A086A2E00D301E7 /* ChatsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAFB0D252A086A2E00D301E7 /* ChatsViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -118,11 +119,12 @@
 		DADB7A0529E7399F00EAD05E /* waitingChats.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = waitingChats.json; sourceTree = "<group>"; };
 		DADB7A0829E739F700EAD05E /* Bundle-Decodable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Bundle-Decodable.swift"; sourceTree = "<group>"; };
 		DAEFC24329FEF4EB00E07774 /* ListenerService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListenerService.swift; sourceTree = "<group>"; };
+		DAF3E38C2A09887A008A1FFB /* MSender.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MSender.swift; sourceTree = "<group>"; };
 		DAF7853729EC74D80057712C /* users.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = users.json; sourceTree = "<group>"; };
 		DAF7853B29EC76F10057712C /* MChat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MChat.swift; sourceTree = "<group>"; };
 		DAF7853D29EC76FC0057712C /* MUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MUser.swift; sourceTree = "<group>"; };
 		DAFB0D1E2A083FEB00D301E7 /* WaitingChatNavigation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaitingChatNavigation.swift; sourceTree = "<group>"; };
-		DAFB0D232A08642300D301E7 /* ChatsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatsViewController.swift; sourceTree = "<group>"; };
+		DAFB0D252A086A2E00D301E7 /* ChatsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatsViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -164,7 +166,7 @@
 				DA0AEA3229E346F4005834F5 /* PeopleViewController.swift */,
 				DA7326AD29EDC3F900D01C56 /* ProfileViewController.swift */,
 				DA299DE829EF1386001F5131 /* ChatRequestViewController.swift */,
-				DAFB0D232A08642300D301E7 /* ChatsViewController.swift */,
+				DAFB0D252A086A2E00D301E7 /* ChatsViewController.swift */,
 				DA73AB4A29E871D600E81FC3 /* Cell */,
 				DAF7853929EC753B0057712C /* Header */,
 			);
@@ -312,6 +314,7 @@
 				DAF7853D29EC76FC0057712C /* MUser.swift */,
 				DAF7853B29EC76F10057712C /* MChat.swift */,
 				DAB3DA1B29FF11B7009FF25F /* MMessage.swift */,
+				DAF3E38C2A09887A008A1FFB /* MSender.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -414,7 +417,7 @@
 				DA299DE929EF1386001F5131 /* ChatRequestViewController.swift in Sources */,
 				DAEFC24429FEF4EB00E07774 /* ListenerService.swift in Sources */,
 				DA2E860B29FC5317009133F6 /* StorageService.swift in Sources */,
-				DAFB0D242A08642300D301E7 /* ChatsViewController.swift in Sources */,
+				DAFB0D262A086A2E00D301E7 /* ChatsViewController.swift in Sources */,
 				DA73AB5029E8917400E81FC3 /* GradientView.swift in Sources */,
 				DA3A7C2E29E1D80200662330 /* UIStackView + Extension.swift in Sources */,
 				DA7326B029EDCEBE00D01C56 /* InsertableTextField.swift in Sources */,
@@ -449,6 +452,7 @@
 				DAB4654929E9DDE100DC15EE /* SectionHeader.swift in Sources */,
 				DAF7853C29EC76F10057712C /* MChat.swift in Sources */,
 				DA3A7C1F29E1C4B300662330 /* UIButton + Extension.swift in Sources */,
+				DAF3E38D2A09887A008A1FFB /* MSender.swift in Sources */,
 				DA0AEA3129E346B0005834F5 /* MainTabBarController.swift in Sources */,
 				DADB7A0929E739F700EAD05E /* Bundle-Decodable.swift in Sources */,
 				DA299DFB29F069B7001F5131 /* AuthError.swift in Sources */,
