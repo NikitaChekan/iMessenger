@@ -32,7 +32,10 @@ class ChatsViewController: MessagesViewController {
 // MARK: Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        navigationController?.navigationBar.tintColor = .label
+//        navigationItem.backBarButtonItem?.title = "Back"
+        
         configureMessageInputBar()
     }
     
