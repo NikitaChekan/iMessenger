@@ -39,6 +39,11 @@ class ChatsViewController: MessagesViewController {
         
         configureMessageInputBar()
         
+        if let layout = messagesCollectionView.collectionViewLayout as? MessagesCollectionViewFlowLayout {
+            layout.textMessageSizeCalculator.outgoingAvatarSize = .zero
+            layout.textMessageSizeCalculator.incomingAvatarSize = .zero
+        }
+        
         messagesCollectionView.backgroundColor = UIColor(named: "mainWhiteColor")
         messageInputBar.delegate = self
         messagesCollectionView.messagesDataSource = self
@@ -129,7 +134,7 @@ extension ChatsViewController: MessagesDisplayDelegate {
     }
     
     func textColor(for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> UIColor {
-        return isFromCurrentSender(message: message) ? UIColor(named: "messageColor")! : .white
+        return isFromCurrentSender(message: message) ? UIColor(named: "messageColor2")! : .white
     }
     
     func configureAvatarView(_ avatarView: AvatarView, for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) {
