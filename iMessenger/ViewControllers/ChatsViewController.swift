@@ -8,6 +8,7 @@
 import UIKit
 import MessageKit
 import InputBarAccessoryView
+import FirebaseFirestore
 
 class ChatsViewController: MessagesViewController {
     
@@ -16,6 +17,7 @@ class ChatsViewController: MessagesViewController {
     private let chat: MChat
     
     private var messages: [MMessage] = []
+    private var messageListener: ListenerRegistration?
     
 // MARK: Init
     init(user: MUser, chat: MChat) {
@@ -28,6 +30,10 @@ class ChatsViewController: MessagesViewController {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    deinit {
+        messageListener?.remove()
     }
     
 // MARK: Life Cycle
@@ -49,6 +55,15 @@ class ChatsViewController: MessagesViewController {
         messagesCollectionView.messagesDataSource = self
         messagesCollectionView.messagesLayoutDelegate = self
         messagesCollectionView.messagesDisplayDelegate = self
+        
+        messageListener = ListenerService.shared.messagesObserve(chat: chat, completion: { result in
+            switch result {
+            case .success(let message):
+                self.insertNewMessage(message: message)
+            case .failure(let error):
+                self.showAlert(with: "Ошибка!", and: error.localizedDescription)
+            }
+        })
     }
     
     private func insertNewMessage(message: MMessage) {
@@ -156,14 +171,14 @@ extension ChatsViewController: InputBarAccessoryViewDelegate {
     
     func inputBar(_ inputBar: InputBarAccessoryView, didPressSendButtonWith text: String) {
         let message = MMessage(user: user, content: text)
-        insertNewMessage(message: message)
+//        insertNewMessage(message: message)
         
         FirestoreService.shared.sendMessage(chat: chat, message: message) { result in
             switch result {
-            case .success(let success):
-                self.messagesCollectionView.scrollToBottom()
+            case .success:
+                self.messagesCollectionView.scrollToLastItem()
             case .failure(let error):
-                self.showAlert(with: "Ошибка", and: error.localizedDescription)
+                self.showAlert(with: "Ошибка!", and: error.localizedDescription)
             }
         }
         
