@@ -71,7 +71,16 @@ class ChatsViewController: MessagesViewController {
         messages.append(message)
         messages.sort()
         
+        let isLatestMessage = messages.firstIndex(of: message) == (messages.count - 1)
+        let shouldScrollToBottom = messagesCollectionView.isAtBottom && isLatestMessage
+        
         messagesCollectionView.reloadData()
+        
+        if shouldScrollToBottom {
+            DispatchQueue.main.async {
+                self.messagesCollectionView.scrollToLastItem(animated: true)
+            }
+        }
     }
     
 }
@@ -171,7 +180,7 @@ extension ChatsViewController: InputBarAccessoryViewDelegate {
     
     func inputBar(_ inputBar: InputBarAccessoryView, didPressSendButtonWith text: String) {
         let message = MMessage(user: user, content: text)
-//        insertNewMessage(message: message)
+        insertNewMessage(message: message) /// Удалили эту строчку 45 урок 15 мин
         
         FirestoreService.shared.sendMessage(chat: chat, message: message) { result in
             switch result {
@@ -185,4 +194,18 @@ extension ChatsViewController: InputBarAccessoryViewDelegate {
         inputBar.inputTextView.text = ""
     }
     
+}
+
+extension UIScrollView {
+    var isAtBottom: Bool {
+        return contentOffset.y >= verticalOffsetForBottom
+    }
+    
+    var verticalOffsetForBottom: CGFloat {
+      let scrollViewHeight = bounds.height
+      let scrollContentSizeHeight = contentSize.height
+      let bottomInset = contentInset.bottom
+      let scrollViewBottomOffset = scrollContentSizeHeight + bottomInset - scrollViewHeight
+      return scrollViewBottomOffset
+    }
 }
