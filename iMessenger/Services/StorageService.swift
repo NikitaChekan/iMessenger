@@ -13,10 +13,14 @@ class StorageService {
     
     static let shared = StorageService()
     
-    let storageRef = Storage.storage().reference()
+    let storageReference = Storage.storage().reference()
     
     private var avatarRef: StorageReference {
-        return storageRef.child("avatars")
+        return storageReference.child("avatars")
+    }
+    
+    private var chatsReference: StorageReference {
+        return storageReference.child("chats")
     }
     
     private var currentUserId: String {
@@ -48,6 +52,34 @@ class StorageService {
             }
         }
         
+    }
+    
+    func uploadImageMessage(photo: UIImage, to chat: MChat, completion: @escaping (Result<URL, Error>) -> Void) {
+        guard let scaledImage = photo.scaledToSafeUploadSize,
+              let imageData = scaledImage.jpegData(compressionQuality: 0.4)
+        else { return }
+        
+        let metaData = StorageMetadata()
+        metaData.contentType = "image/jpeg"
+        
+        let imageName = [UUID().uuidString, String(Date().timeIntervalSince1970)].joined()
+        let uid: String = Auth.auth().currentUser!.uid
+        let chatName = [chat.friendUserName, uid].joined()
+        
+        self.chatsReference.child(chatName).child(imageName).putData(imageData, metadata: metaData) { metadata, error in
+            guard let _ = metadata else {
+                completion(.failure(error!))
+                return
+            }
+            
+            self.chatsReference.child(chatName).child(imageName).downloadURL { url, error in
+                guard let downloadURL = url else {
+                    completion(.failure(error!))
+                    return
+                }
+                completion(.success(downloadURL))
+            }
+        }
     }
     
 }

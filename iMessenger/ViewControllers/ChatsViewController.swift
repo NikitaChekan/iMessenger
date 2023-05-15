@@ -83,6 +83,39 @@ class ChatsViewController: MessagesViewController {
         }
     }
     
+    @objc private func cameraButtonPressed() {
+        let picker = UIImagePickerController()
+        picker.delegate = self
+        
+        if UIImagePickerController.isSourceTypeAvailable(.camera) {
+            picker.sourceType = .camera
+        } else {
+            picker.sourceType = .photoLibrary
+        }
+        
+        present(picker, animated: true)
+    }
+    
+    private func sendImage(image: UIImage) {
+        StorageService.shared.uploadImageMessage(photo: image, to: chat) { result in
+            switch result {
+            case .success(let url):
+                var message = MMessage(user: self.user, image: image)
+                message.downloadURL = url
+                FirestoreService.shared.sendMessage(chat: self.chat, message: message) { result in
+                    switch result {
+                    case .success:
+                        self.messagesCollectionView.scrollToLastItem()
+                    case .failure(_):
+                        self.showAlert(with: "Ошибка!", and: "Изображение не доставлено")
+                    }
+                }
+            case .failure(let error):
+                self.showAlert(with: "Ошибка!", and: error.localizedDescription)
+            }
+        }
+    }
+    
 }
 
 // MARK: ConfigureMessageInputBar
@@ -109,6 +142,7 @@ extension ChatsViewController {
         messageInputBar.layer.shadowOffset = CGSize(width: 0, height: 4)
         
         configureSendButton()
+        configureCameraIcon()
         
     }
     
@@ -120,6 +154,23 @@ extension ChatsViewController {
         messageInputBar.sendButton.setSize(CGSize(width: 48, height: 48), animated: false)
         messageInputBar.middleContentViewPadding.right = -38
     }
+    
+    private func configureCameraIcon() {
+        let cameraItem = InputBarButtonItem(type: .system)
+        cameraItem.tintColor = UIColor(named: "messageColor")
+        
+        let cameraImage =  UIImage(systemName: "camera")!
+        cameraItem.image = cameraImage
+        
+        cameraItem.addTarget(self, action: #selector(cameraButtonPressed), for: .primaryActionTriggered)
+        cameraItem.setSize(CGSize(width: 60, height: 30), animated: false)
+        
+        messageInputBar.leftStackView.alignment = .center
+        messageInputBar.setLeftStackViewWidthConstant(to: 50, animated: false)
+        
+        messageInputBar.setStackViewItems([cameraItem], forStack: .left, animated: false)
+    }
+    
 }
 
 // MARK: MessagesDataSource
@@ -216,6 +267,15 @@ extension ChatsViewController: InputBarAccessoryViewDelegate {
         inputBar.inputTextView.text = ""
     }
     
+}
+
+// MARK: UINavigationControllerDelegate, UIImagePickerControllerDelegate
+extension ChatsViewController: UINavigationControllerDelegate, UIImagePickerControllerDelegate {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        picker.dismiss(animated: true)
+        guard let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage else { return }
+        sendImage(image: image)
+    }
 }
 
 extension UIScrollView {
