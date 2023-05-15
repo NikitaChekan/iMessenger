@@ -141,12 +141,34 @@ extension ChatsViewController: MessagesDataSource {
         return 1
     }
     
+    func cellTopLabelAttributedText(for message: MessageType, at indexPath: IndexPath) -> NSAttributedString? {
+        if indexPath.item % 5 == 0 {
+                return NSAttributedString(
+                    string: MessageKitDateFormatter.shared.string(from: message.sentDate),
+                    attributes: [
+                    NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 10),
+                    NSAttributedString.Key.foregroundColor: UIColor.darkGray
+                ])
+        } else {
+            return nil
+        }
+    }
+    
 }
 
 // MARK: MessagesLayoutDelegate
 extension ChatsViewController: MessagesLayoutDelegate {
+    
     func footerViewSize(for section: Int, in messagesCollectionView: MessagesCollectionView) -> CGSize {
         return CGSize(width: 0, height: 8)
+    }
+    
+    func cellTopLabelHeight(for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> CGFloat {
+        if (indexPath.item) % 5 == 0 {
+            return 30
+        } else {
+            return 0
+        }
     }
 }
 
