@@ -213,7 +213,7 @@ class FirestoreService {
     func sendMessage(chat: MChat, message: MMessage, completion: @escaping (Result<Void, Error>) -> Void) {
         let friendReference = usersRef.document(chat.friendId).collection("activeChats").document(currentUser.id)
         let friendMessageReference = friendReference.collection("messages")
-        let myMessageReference = usersRef.document(currentUser.id).collection("ActiveChats").document(chat.friendId).collection("message")
+        let myMessageReference = usersRef.document(currentUser.id).collection("activeChats").document(chat.friendId).collection("message")
         
         let chatForFriend = MChat(
             friendUserName: currentUser.userName,
