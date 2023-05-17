@@ -62,17 +62,18 @@ class StorageService {
         let metaData = StorageMetadata()
         metaData.contentType = "image/jpeg"
         
-        let imageName = [UUID().uuidString, String(Date().timeIntervalSince1970)].joined()
         let uid: String = Auth.auth().currentUser!.uid
-        let chatName = [chat.friendUserName, uid].joined()
         
-        self.chatsReference.child(chatName).child(imageName).putData(imageData, metadata: metaData) { metadata, error in
+        let chatName = [chat.friendUserName, uid].joined(separator: "|<>|")
+        let imageName = [UUID().uuidString, String(Date().timeIntervalSince1970)].joined()
+        
+        self.chatsReference.child(chatName).child(imageName).putData(imageData, metadata: metaData) { (metadata, error) in
             guard let _ = metadata else {
                 completion(.failure(error!))
                 return
             }
             
-            self.chatsReference.child(chatName).child(imageName).downloadURL { url, error in
+            self.chatsReference.child(chatName).child(imageName).downloadURL { (url, error) in
                 guard let downloadURL = url else {
                     completion(.failure(error!))
                     return
@@ -83,8 +84,10 @@ class StorageService {
     }
     
     func downloadImage(url: URL, completion: @escaping (Result<UIImage?, Error>) -> Void) {
+        
         let reference = Storage.storage().reference(forURL: url.absoluteString)
         let megaByte = Int64(1 * 1024 * 1024)
+        
         reference.getData(maxSize: megaByte) { (data, error) in
             guard let imageData = data else {
                 completion(.failure(error!))

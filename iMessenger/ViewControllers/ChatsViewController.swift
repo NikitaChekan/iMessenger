@@ -44,21 +44,14 @@ class ChatsViewController: MessagesViewController {
 //        navigationItem.backBarButtonItem?.title = "Back"
         
         configureMessageInputBar()
+        configureMessagesCollectionView()
         
-        if let layout = messagesCollectionView.collectionViewLayout as? MessagesCollectionViewFlowLayout {
-            layout.textMessageSizeCalculator.outgoingAvatarSize = .zero
-            layout.textMessageSizeCalculator.incomingAvatarSize = .zero
-            layout.photoMessageSizeCalculator.outgoingAvatarSize = .zero
-            layout.photoMessageSizeCalculator.incomingAvatarSize = .zero
-        }
-        
-        messagesCollectionView.backgroundColor = UIColor(named: "mainWhiteColor")
-        messageInputBar.delegate = self
-        messagesCollectionView.messagesDataSource = self
-        messagesCollectionView.messagesLayoutDelegate = self
-        messagesCollectionView.messagesDisplayDelegate = self
-        
-        messageListener = ListenerService.shared.messagesObserve(chat: chat, completion: { result in
+        addListeners()
+    }
+    
+    // MARK: Actions
+    private func addListeners() {
+        messageListener = ListenerService.shared.messagesObserve(chat: chat) { [weak self] result in
             switch result {
             case .success(var message):
                 if let url = message.downloadURL {
@@ -76,12 +69,12 @@ class ChatsViewController: MessagesViewController {
                         }
                     }
                 } else {
-                    self.insertNewMessage(message: message)
+                    self?.insertNewMessage(message: message)
                 }
             case .failure(let error):
-                self.showAlert(with: "Ошибка!", and: error.localizedDescription)
+                self?.showAlert(with: "Ошибка!", and: error.localizedDescription)
             }
-        })
+        }
     }
     
     private func insertNewMessage(message: MMessage) {
@@ -135,6 +128,35 @@ class ChatsViewController: MessagesViewController {
     }
     
 }
+
+// MARK: - Configure message collection view
+extension ChatsViewController {
+    
+    private func configureMessagesCollectionView() {
+        // Configure messages collections view
+        messagesCollectionView.backgroundColor = UIColor(named: "mainWhiteColor")
+        messagesCollectionView.showsVerticalScrollIndicator = false
+        
+        setupLayoutMessageCollectionView()
+        
+        // Adding delegates
+        messageInputBar.delegate = self
+        messagesCollectionView.messagesDataSource = self
+        messagesCollectionView.messagesLayoutDelegate = self
+        messagesCollectionView.messagesDisplayDelegate = self
+    }
+    
+    private func setupLayoutMessageCollectionView() {
+        if let layout = messagesCollectionView.collectionViewLayout as? MessagesCollectionViewFlowLayout {
+            layout.textMessageSizeCalculator.outgoingAvatarSize = .zero
+            layout.textMessageSizeCalculator.incomingAvatarSize = .zero
+            layout.photoMessageSizeCalculator.outgoingAvatarSize = .zero
+            layout.photoMessageSizeCalculator.incomingAvatarSize = .zero
+        }
+    }
+    
+}
+
 
 // MARK: ConfigureMessageInputBar
 extension ChatsViewController {
@@ -293,19 +315,5 @@ extension ChatsViewController: UINavigationControllerDelegate, UIImagePickerCont
         picker.dismiss(animated: true)
         guard let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage else { return }
         sendImage(image: image)
-    }
-}
-
-extension UIScrollView {
-    var isAtBottom: Bool {
-        return contentOffset.y >= verticalOffsetForBottom
-    }
-    
-    var verticalOffsetForBottom: CGFloat {
-      let scrollViewHeight = bounds.height
-      let scrollContentSizeHeight = contentSize.height
-      let bottomInset = contentInset.bottom
-      let scrollViewBottomOffset = scrollContentSizeHeight + bottomInset - scrollViewHeight
-      return scrollViewBottomOffset
     }
 }
