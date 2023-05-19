@@ -9,17 +9,19 @@ import UIKit
 
 class OneLineTextField: UITextField {
     
-    convenience init(font: UIFont? = .avenir20()) {
+    convenience init(font: UIFont? = .avenir20(), isSecure: Bool = false) {
         self.init()
         
         self.font = font
-        self.borderStyle = .none
+        
         self.translatesAutoresizingMaskIntoConstraints = false
+        self.borderStyle = .none
         
         var bottomView = UIView()
         bottomView = UIView.init(frame: CGRect.init(x: 0, y: 0, width: 0, height: 0))
         bottomView.backgroundColor = UIColor(named: "textFieldLight")
         bottomView.translatesAutoresizingMaskIntoConstraints = false
+        
         self.addSubview(bottomView)
         
         NSLayoutConstraint.activate([
@@ -29,5 +31,6 @@ class OneLineTextField: UITextField {
             bottomView.heightAnchor.constraint(equalToConstant: 1)
         ])
         
+        isSecureTextEntry = isSecure
     }
 }

@@ -43,6 +43,12 @@ class ChatsViewController: MessagesViewController {
         navigationController?.navigationBar.tintColor = .label
 //        navigationItem.backBarButtonItem?.title = "Back"
         
+//        NotificationCenter.default.addObserver(
+//            self,
+//            selector: #selector(keyboardWillAppear(notification:)),
+//            name: UIResponder.keyboardWillShowNotification, object: nil
+//        )
+
         configureMessageInputBar()
         configureMessagesCollectionView()
         
@@ -50,13 +56,18 @@ class ChatsViewController: MessagesViewController {
     }
     
     // MARK: Actions
+    
+//    @objc func keyboardWillAppear(notification: NSNotification) {
+//        messagesCollectionView.contentInset.bottom += 100
+//        messagesCollectionView.scrollToLastItem()
+//    }
+    
     private func addListeners() {
         messageListener = ListenerService.shared.messagesObserve(chat: chat) { [weak self] result in
             switch result {
             case .success(var message):
                 if let url = message.downloadURL {
                     StorageService.shared.downloadImage(url: url) { [weak self] result in
-                        
                         guard let self = self else { return }
                         
                         switch result {
@@ -113,6 +124,7 @@ class ChatsViewController: MessagesViewController {
             case .success(let url):
                 var message = MMessage(user: self.user, image: image)
                 message.downloadURL = url
+                
                 FirestoreService.shared.sendMessage(chat: self.chat, message: message) { result in
                     switch result {
                     case .success:

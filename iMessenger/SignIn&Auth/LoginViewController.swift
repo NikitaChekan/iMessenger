@@ -10,6 +10,9 @@ import GoogleSignIn
 
 class LoginViewController: UIViewController {
     
+    private let scrollView = UIScrollView()
+    private let stackView = UIStackView()
+    
     let welcomeLabel = UILabel(text: "Welcome back!", font: .avenir26())
     
     let loginWithLabel = UILabel(text: "Login with")
@@ -25,8 +28,6 @@ class LoginViewController: UIViewController {
         isShadow: true
     )
     
-    let emailTextField = OneLineTextField(font: .avenir20())
-    let passwordTextField = OneLineTextField(font: .avenir20())
     
     let loginButton = UIButton(
         title: "Login",
@@ -41,8 +42,13 @@ class LoginViewController: UIViewController {
         return button
     }()
     
+    let emailTextField = OneLineTextField(font: .avenir20())
+    let passwordTextField = OneLineTextField(font: .avenir20(), isSecure: true)
+    
     weak var delegate: AuthNavigationDelegate?
     
+    private var isPrivate = true
+    private var eyeButton = EyeButton()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -51,9 +57,41 @@ class LoginViewController: UIViewController {
         googleButton.customizeGoogleButton()
         setupConstraints()
         
-        loginButton.addTarget(self, action: #selector(loginButtonTapped), for: .touchUpInside)
-        signUpButton.addTarget(self, action: #selector(signUpButtonTapped), for: .touchUpInside)
-        googleButton.addTarget(self, action: #selector(googleButtonTapped), for: .touchUpInside)
+        configureElements()
+        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillAppear), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardDisappear), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    
+    // MARK: Actions
+    
+    @objc private func keyboardWillAppear(notification: NSNotification) {
+        let userInfo: NSDictionary = notification.userInfo! as NSDictionary
+        let keyboardInfo = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as! NSValue
+        let keyboardSize = keyboardInfo.cgRectValue.size
+        let difference = keyboardSize.height - (self.view.frame.height - stackView.frame.origin.y - stackView.frame.size.height)
+        
+        let scrollPoint = CGPointMake(0, difference)
+        
+        self.scrollView.setContentOffset(scrollPoint, animated: true)
+    }
+    
+    @objc private func keyboardDisappear() {
+        scrollView.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
+    }
+    
+    @objc private func eyeButtonTapped() {
+        let imageName = isPrivate ? "eye" : "eye.slash"
+        
+        passwordTextField.isSecureTextEntry.toggle()
+        eyeButton.setImage(UIImage(systemName: imageName), for: .normal)
+        isPrivate.toggle()
         
     }
     
@@ -108,6 +146,38 @@ class LoginViewController: UIViewController {
             self.delegate?.toSignUpVC()
         }
         present(SignUpViewController(), animated: true)
+    }
+    
+// MARK: Methods
+    private func configureElements() {
+        
+        // Configure scrollView
+        scrollView.alwaysBounceVertical = true
+        scrollView.keyboardDismissMode = .onDrag
+        
+        // Configure welcomeLabel
+        welcomeLabel.textAlignment = .center
+        
+        // Configure googleButton
+        googleButton.addTarget(self, action: #selector(googleButtonTapped), for: .touchUpInside)
+
+        // Configure emailTextField
+        emailTextField.delegate = self
+        emailTextField.returnKeyType = .go
+        emailTextField.keyboardType = .emailAddress
+        
+        // Configure passwordTextField
+        passwordTextField.delegate = self
+        eyeButton.addTarget(self, action: #selector(eyeButtonTapped), for: .touchUpInside)
+        passwordTextField.rightView = eyeButton
+        passwordTextField.rightViewMode = .always
+        
+        // Configure loginButton
+        loginButton.addTarget(self, action: #selector(loginButtonTapped), for: .touchUpInside)
+        
+        // Configure signInButton
+        signUpButton.addTarget(self, action: #selector(signUpButtonTapped), for: .touchUpInside)
+        
     }
     
 }
@@ -167,6 +237,28 @@ extension LoginViewController {
         ])
 
     }
+}
+
+// MARK: - UITextFieldDelegate
+extension LoginViewController: UITextFieldDelegate {
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if textField == emailTextField {
+            passwordTextField.becomeFirstResponder()
+        } else if textField == passwordTextField {
+            passwordTextField.resignFirstResponder()
+        }
+        
+        return true
+    }
+    
+    func textFieldDidChangeSelection(_ textField: UITextField) {
+        if textField == passwordTextField {
+            guard let text = textField.text else { return }
+            eyeButton.isEnabled = !text.isEmpty
+        }
+    }
+    
 }
 
 // MARK: - SwiftUI

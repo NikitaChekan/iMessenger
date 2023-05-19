@@ -57,6 +57,7 @@
 		DAB3DA1C29FF11B7009FF25F /* MMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB3DA1B29FF11B7009FF25F /* MMessage.swift */; };
 		DAB4654929E9DDE100DC15EE /* SectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB4654829E9DDE100DC15EE /* SectionHeader.swift */; };
 		DABFF25E29FAFC9800FAD63A /* UIApplication + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DABFF25D29FAFC9800FAD63A /* UIApplication + Extension.swift */; };
+		DAC1D57C2A17976500B2262E /* EyeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAC1D57B2A17976500B2262E /* EyeButton.swift */; };
 		DADB7A0629E7399F00EAD05E /* activeChats.json in Resources */ = {isa = PBXBuildFile; fileRef = DADB7A0429E7399E00EAD05E /* activeChats.json */; };
 		DADB7A0729E7399F00EAD05E /* waitingChats.json in Resources */ = {isa = PBXBuildFile; fileRef = DADB7A0529E7399F00EAD05E /* waitingChats.json */; };
 		DADB7A0929E739F700EAD05E /* Bundle-Decodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = DADB7A0829E739F700EAD05E /* Bundle-Decodable.swift */; };
@@ -117,6 +118,7 @@
 		DAB3DA1B29FF11B7009FF25F /* MMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MMessage.swift; sourceTree = "<group>"; };
 		DAB4654829E9DDE100DC15EE /* SectionHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionHeader.swift; sourceTree = "<group>"; };
 		DABFF25D29FAFC9800FAD63A /* UIApplication + Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIApplication + Extension.swift"; sourceTree = "<group>"; };
+		DAC1D57B2A17976500B2262E /* EyeButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EyeButton.swift; sourceTree = "<group>"; };
 		DADB7A0429E7399E00EAD05E /* activeChats.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = activeChats.json; sourceTree = "<group>"; };
 		DADB7A0529E7399F00EAD05E /* waitingChats.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = waitingChats.json; sourceTree = "<group>"; };
 		DADB7A0829E739F700EAD05E /* Bundle-Decodable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Bundle-Decodable.swift"; sourceTree = "<group>"; };
@@ -267,6 +269,7 @@
 				DA3A7C3129E2006D00662330 /* OneLineTextField.swift */,
 				DADB7A0829E739F700EAD05E /* Bundle-Decodable.swift */,
 				DA73AB4F29E8917400E81FC3 /* GradientView.swift */,
+				DAC1D57B2A17976500B2262E /* EyeButton.swift */,
 				DA3A7C2829E1D15900662330 /* UIKit */,
 			);
 			path = Extensions;
@@ -454,6 +457,7 @@
 				DABFF25E29FAFC9800FAD63A /* UIApplication + Extension.swift in Sources */,
 				DA299DF729F05EBB001F5131 /* AuthService.swift in Sources */,
 				DAB4654929E9DDE100DC15EE /* SectionHeader.swift in Sources */,
+				DAC1D57C2A17976500B2262E /* EyeButton.swift in Sources */,
 				DAF7853C29EC76F10057712C /* MChat.swift in Sources */,
 				DA3A7C1F29E1C4B300662330 /* UIButton + Extension.swift in Sources */,
 				DAF3E38D2A09887A008A1FFB /* MSender.swift in Sources */,
