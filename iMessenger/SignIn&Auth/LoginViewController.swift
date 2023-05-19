@@ -11,7 +11,7 @@ import GoogleSignIn
 class LoginViewController: UIViewController {
     
     private let scrollView = UIScrollView()
-    private let stackView = UIStackView()
+    private var stackView = UIStackView()
     
     let welcomeLabel = UILabel(text: "Welcome back!", font: .avenir26())
     
@@ -53,12 +53,13 @@ class LoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = .white
+//        view.backgroundColor = .white
         googleButton.customizeGoogleButton()
+        
+        self.view.backgroundColor = .secondarySystemBackground
+        
         setupConstraints()
-        
         configureElements()
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -187,55 +188,72 @@ extension LoginViewController {
     
     private func setupConstraints() {
         
+        // View for loginWithLabel and googleButton
         let loginWithView = ButtonFormView(label: loginWithLabel, button: googleButton)
+        
+        // Stack view for emailLabel and emailTextField
         let emailStackView = UIStackView(
             arrangedSubviews: [emailLabel, emailTextField],
             axis: .vertical,
             spacing: 0
         )
+        
+        // Stack view for passwordLabel and passwordTextField
         let passwordStackView = UIStackView(
             arrangedSubviews: [passwordLabel, passwordTextField],
             axis: .vertical,
             spacing: 0
         )
-    
+        
+        // Constrain for loginButton
         loginButton.heightAnchor.constraint(equalToConstant: 60).isActive = true
-        let stackView = UIStackView(
+        
+        // Stack view for loginWithView, orLabel, emailStackView, passwordStackView and loginButton
+        let inputStackView = UIStackView(
             arrangedSubviews: [loginWithView, orLabel, emailStackView, passwordStackView, loginButton],
             axis: .vertical,
-            spacing: 40
+            spacing: 33
         )
         
-        signUpButton.contentHorizontalAlignment = .leading
+        // Stack view for welcomeLabel and inputStackView
+        let topStackView = UIStackView(arrangedSubviews: [welcomeLabel, inputStackView], axis: .vertical, spacing: 20)
+        
+        // Stack view for needAnAccountLabel and signUpButton
         let bottomStackView = UIStackView(arrangedSubviews: [needAnAccountLabel, signUpButton], axis: .horizontal, spacing: 10)
         bottomStackView.alignment = .firstBaseline
         
-        welcomeLabel.translatesAutoresizingMaskIntoConstraints = false
+        // Stack view for topStackView and bottomStackView
+        let stackView = UIStackView(arrangedSubviews: [topStackView, bottomStackView], axis: .vertical, spacing: 17)
+        
+        // Setup stackView
+        stackView.alignment = .fill
+        stackView.distribution = .fillProportionally
+        
+        // Adding subviews
+        view.addSubview(scrollView)
+        scrollView.addSubview(stackView)
+        
+        // Setup scrollView and StackView
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
         stackView.translatesAutoresizingMaskIntoConstraints = false
-        bottomStackView.translatesAutoresizingMaskIntoConstraints = false
         
-        view.addSubview(welcomeLabel)
-        view.addSubview(stackView)
-        view.addSubview(bottomStackView)
-        
+        // Setup constraints
         NSLayoutConstraint.activate([
-            welcomeLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 120),
-            welcomeLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor)
-        ])
-        
-        
-        NSLayoutConstraint.activate([
-            stackView.topAnchor.constraint(equalTo: welcomeLabel.bottomAnchor, constant: 90),
-            stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 40),
-            stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -40)
-        ])
-        
-        NSLayoutConstraint.activate([
-            bottomStackView.topAnchor.constraint(equalTo: stackView.bottomAnchor, constant: 20),
-            bottomStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 40),
-            bottomStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -40)
-        ])
+            scrollView.topAnchor.constraint(equalTo: view.topAnchor),
+            scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
 
+        ])
+        
+        NSLayoutConstraint.activate([
+            stackView.topAnchor.constraint(greaterThanOrEqualTo: scrollView.contentLayoutGuide.topAnchor, constant: 90),
+            stackView.centerXAnchor.constraint(lessThanOrEqualTo: scrollView.centerXAnchor),
+            stackView.widthAnchor.constraint(equalTo: scrollView.frameLayoutGuide.widthAnchor, multiplier: 0.8),
+            stackView.heightAnchor.constraint(equalTo: scrollView.frameLayoutGuide.heightAnchor, multiplier: 0.84)
+        ])
+        
+        self.stackView = stackView
     }
 }
 
