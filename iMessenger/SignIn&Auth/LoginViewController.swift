@@ -10,6 +10,7 @@ import GoogleSignIn
 
 class LoginViewController: UIViewController {
     
+    // MARK: Properties
     private let scrollView = UIScrollView()
     private var stackView = UIStackView()
     
@@ -27,7 +28,6 @@ class LoginViewController: UIViewController {
         backgroundColor: .white,
         isShadow: true
     )
-    
     
     let loginButton = UIButton(
         title: "Login",
@@ -47,13 +47,13 @@ class LoginViewController: UIViewController {
     
     weak var delegate: AuthNavigationDelegate?
     
-    private var isPrivate = true
-    private var eyeButton = EyeButton()
+    private var isPrivateConfirmTextField = true
+    private var eyeButtonForConfirmTextField = EyeButton()
 
+    // MARK: Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        view.backgroundColor = .white
         googleButton.customizeGoogleButton()
         
         self.view.backgroundColor = .secondarySystemBackground
@@ -71,7 +71,6 @@ class LoginViewController: UIViewController {
     
     
     // MARK: Actions
-    
     @objc private func keyboardWillAppear(notification: NSNotification) {
         let userInfo: NSDictionary = notification.userInfo! as NSDictionary
         let keyboardInfo = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as! NSValue
@@ -88,11 +87,11 @@ class LoginViewController: UIViewController {
     }
     
     @objc private func eyeButtonTapped() {
-        let imageName = isPrivate ? "eye" : "eye.slash"
+        let imageName = isPrivateConfirmTextField ? "eye" : "eye.slash"
         
         passwordTextField.isSecureTextEntry.toggle()
-        eyeButton.setImage(UIImage(systemName: imageName), for: .normal)
-        isPrivate.toggle()
+        eyeButtonForConfirmTextField.setImage(UIImage(systemName: imageName), for: .normal)
+        isPrivateConfirmTextField.toggle()
         
     }
     
@@ -169,8 +168,8 @@ class LoginViewController: UIViewController {
         
         // Configure passwordTextField
         passwordTextField.delegate = self
-        eyeButton.addTarget(self, action: #selector(eyeButtonTapped), for: .touchUpInside)
-        passwordTextField.rightView = eyeButton
+        eyeButtonForConfirmTextField.addTarget(self, action: #selector(eyeButtonTapped), for: .touchUpInside)
+        passwordTextField.rightView = eyeButtonForConfirmTextField
         passwordTextField.rightViewMode = .always
         
         // Configure loginButton
@@ -243,7 +242,6 @@ extension LoginViewController {
             scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
-
         ])
         
         NSLayoutConstraint.activate([
@@ -273,7 +271,7 @@ extension LoginViewController: UITextFieldDelegate {
     func textFieldDidChangeSelection(_ textField: UITextField) {
         if textField == passwordTextField {
             guard let text = textField.text else { return }
-            eyeButton.isEnabled = !text.isEmpty
+            eyeButtonForConfirmTextField.isEnabled = !text.isEmpty
         }
     }
     
