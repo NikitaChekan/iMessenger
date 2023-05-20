@@ -55,10 +55,6 @@ class SignUpViewController: UIViewController {
 
         setupConstraints()
         configureElements()
-//
-//        signUpButton.addTarget(self, action: #selector(signUpButtonTapped), for: .touchUpInside)
-//        loginButton.addTarget(self, action: #selector(loginButtonTapped), for: .touchUpInside)
-
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -226,41 +222,6 @@ extension SignUpViewController {
         ])
         
         self.stackView = stackView
-        
-//        let stackView = UIStackView(
-//            arrangedSubviews: [emailStackView, passwordStackView, confirmPasswordStackView, signUpButton],
-//            axis: .vertical,
-//            spacing: 40
-//        )
-//
-//        loginButton.contentHorizontalAlignment = .leading
-//        let bottomStackView = UIStackView(arrangedSubviews: [alreadyOnboardLabel, loginButton], axis: .horizontal, spacing: 10)
-//        bottomStackView.alignment = .firstBaseline
-//
-//        welcomeLabel.translatesAutoresizingMaskIntoConstraints = false
-//        stackView.translatesAutoresizingMaskIntoConstraints = false
-//        bottomStackView.translatesAutoresizingMaskIntoConstraints = false
-//
-//        view.addSubview(welcomeLabel)
-//        view.addSubview(stackView)
-//        view.addSubview(bottomStackView)
-//
-//        NSLayoutConstraint.activate([
-//            welcomeLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 160),
-//            welcomeLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor)
-//        ])
-//
-//        NSLayoutConstraint.activate([
-//            stackView.topAnchor.constraint(equalTo: welcomeLabel.bottomAnchor, constant: 160),
-//            stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 40),
-//            stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -40)
-//        ])
-//
-//        NSLayoutConstraint.activate([
-//            bottomStackView.topAnchor.constraint(equalTo: stackView.bottomAnchor, constant: 20),
-//            bottomStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 40),
-//            bottomStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -40)
-//        ])
         
     }
 }
