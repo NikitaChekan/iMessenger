@@ -139,7 +139,7 @@ class SignUpViewController: UIViewController {
             // Configure passwordTextField
             passwordTextField.delegate = self
             passwordTextField.returnKeyType = .go
-            eyeButtonForConfirmTextField.addTarget(self, action: #selector(eyeButtonForPasswordTapped), for: .touchUpInside)
+            eyeButtonForPasswordTextField.addTarget(self, action: #selector(eyeButtonForPasswordTapped), for: .touchUpInside)
             passwordTextField.rightView = eyeButtonForPasswordTextField
             passwordTextField.rightViewMode = .always
             
