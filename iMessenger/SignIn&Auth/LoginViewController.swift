@@ -39,6 +39,7 @@ class LoginViewController: UIViewController {
         button.setTitle("Sign Up", for: .normal)
         button.setTitleColor(UIColor(named: "buttonRed"), for: .normal)
         button.titleLabel?.font = .avenir20()
+        button.contentHorizontalAlignment = .leading
         return button
     }()
     
