@@ -59,8 +59,7 @@ class SetupProfileViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = .secondarySystemBackground
-        
+        configureView()
         configureElements()
         setupConstraints()
     }
@@ -117,7 +116,37 @@ class SetupProfileViewController: UIViewController {
             }
     }
     
+    // MARK: Override Methods
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        
+        switch traitCollection.userInterfaceStyle {
+        case .unspecified:
+            break
+        case .light:
+            fullImageView.circleImageView.image = UIImage(named: "avatar")
+            fullImageView.plusButton.tintColor = UIColor(named: "buttonBlack")
+        case .dark:
+            fullImageView.circleImageView.image = UIImage(named: "avatar-white")
+            fullImageView.plusButton.tintColor = .white
+        @unknown default:
+            break
+        }
+        
+    }
+    
     // MARK: Methods
+    
+    private func configureView() {
+        view.backgroundColor = .secondarySystemBackground
+        
+        let avatar = traitCollection.userInterfaceStyle == .light ? UIImage(named: "avatar") : UIImage(named: "avatar-white")
+        let tintColor = traitCollection.userInterfaceStyle == .light ? UIColor(named: "buttonBlack") : UIColor.white
+        
+        fullImageView.circleImageView.image = avatar
+        fullImageView.plusButton.tintColor = tintColor
+    }
+    
     private func configureElements() {
     
         // Configure scrollView
@@ -200,7 +229,7 @@ extension SetupProfileViewController {
         let stackView = UIStackView(
             arrangedSubviews: [topStackView, bottomStackView],
             axis: .vertical,
-            spacing: 30 // 40?
+            spacing: 40
         )
         
         // Configure stackView
@@ -227,42 +256,10 @@ extension SetupProfileViewController {
             stackView.topAnchor.constraint(greaterThanOrEqualTo: scrollView.contentLayoutGuide.topAnchor, constant: 70),
             stackView.centerXAnchor.constraint(lessThanOrEqualTo: scrollView.centerXAnchor),
             stackView.widthAnchor.constraint(equalTo: scrollView.frameLayoutGuide.widthAnchor, multiplier: 0.8),
-            stackView.heightAnchor.constraint(equalTo: scrollView.frameLayoutGuide.heightAnchor, multiplier: 0.82) // 0.80?
+            stackView.heightAnchor.constraint(equalTo: scrollView.frameLayoutGuide.heightAnchor, multiplier: 0.82)
         ])
         
         self.stackView = stackView
-        
-//        goToChatsButton.heightAnchor.constraint(equalToConstant: 60).isActive = true
-//        let stackView = UIStackView(
-//            arrangedSubviews: [fullNameStackView, aboutMeStackView, sexStackView, goToChatsButton],
-//            axis: .vertical,
-//            spacing: 40
-//        )
-//
-//        welcomeLabel.translatesAutoresizingMaskIntoConstraints = false
-//        fullImageView.translatesAutoresizingMaskIntoConstraints = false
-//        stackView.translatesAutoresizingMaskIntoConstraints = false
-//
-//
-//        view.addSubview(welcomeLabel)
-//        view.addSubview(fullImageView)
-//        view.addSubview(stackView)
-//
-//        NSLayoutConstraint.activate([
-//            welcomeLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 160),
-//            welcomeLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor)
-//        ])
-//
-//        NSLayoutConstraint.activate([
-//            fullImageView.topAnchor.constraint(equalTo: welcomeLabel.bottomAnchor, constant: 40),
-//            fullImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor)
-//        ])
-//
-//        NSLayoutConstraint.activate([
-//            stackView.topAnchor.constraint(equalTo: fullImageView.bottomAnchor, constant: 40),
-//            stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 40),
-//            stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -40)
-//        ])
         
     }
 }
