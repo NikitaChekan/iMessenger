@@ -11,7 +11,12 @@ import SDWebImage
 
 class SetupProfileViewController: UIViewController {
     
+    // MARK: Properties
+    private let scrollView = UIScrollView()
+    private var stackView = UIStackView()
+    
     let welcomeLabel = UILabel(text: "Set up profile!", font: .avenir26())
+    
     let fullImageView = AddPhotoView()
     
     let fullNameLabel = UILabel(text: "Full name")
@@ -26,11 +31,13 @@ class SetupProfileViewController: UIViewController {
     let goToChatsButton = UIButton(
         title: "Go to chats!",
         titleColor: .white,
-        backgroundColor: UIColor(named: "buttonBlack") ?? .black
+        backgroundColor: UIColor(named: "buttonBlack") ?? .black,
+        cornerRadius: 4
     )
     
     private let currentUser: User
     
+    // MARK: Init
     init(currentUser: User) {
         self.currentUser = currentUser
         super.init(nibName: nil, bundle: nil)
@@ -39,7 +46,6 @@ class SetupProfileViewController: UIViewController {
             fullNameTextField.text = userName
         }
         
-        // TODO: Set Google Image
         if let photoURL = currentUser.photoURL {
             fullImageView.circleImageView.sd_setImage(with: photoURL)
         }
@@ -49,14 +55,38 @@ class SetupProfileViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = .white
-        setupConstraints()
+        view.backgroundColor = .secondarySystemBackground
         
-        goToChatsButton.addTarget(self, action: #selector(goToChatsButtonTapped), for: .touchUpInside)
-        fullImageView.plusButton.addTarget(self, action: #selector(plusButtonTapped), for: .touchUpInside)
+        configureElements()
+        setupConstraints()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillAppear), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardDisappear), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    
+    // MARK: Actions
+    @objc private func keyboardWillAppear(notification: NSNotification) {
+        let userInfo: NSDictionary = notification.userInfo! as NSDictionary
+        let keyboardInfo = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as! NSValue
+        let keyboardSize = keyboardInfo.cgRectValue.size
+        let difference = keyboardSize.height - (self.view.frame.height - stackView.frame.origin.y - stackView.frame.size.height)
+        
+        let scrollPoint = CGPointMake(0, difference)
+        
+        self.scrollView.setContentOffset(scrollPoint, animated: true)
+    }
+    
+    @objc private func keyboardDisappear() {
+        scrollView.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
     }
 
     @objc private func plusButtonTapped() {
@@ -86,60 +116,153 @@ class SetupProfileViewController: UIViewController {
                 }
             }
     }
+    
+    // MARK: Methods
+    private func configureElements() {
+    
+        // Configure scrollView
+        scrollView.alwaysBounceVertical = true
+        scrollView.keyboardDismissMode = .onDrag
+    
+        // Configure welcomeLabel
+        welcomeLabel.textAlignment = .center
+        
+        // Configure fullImageView
+        fullImageView.plusButton.addTarget(self, action: #selector(plusButtonTapped), for: .touchUpInside)
+
+        // Configure fullImageView
+        fullNameTextField.delegate = self
+        fullNameTextField.returnKeyType = .go
+        
+        // Configure fullImageView
+        aboutMeTextField.delegate = self
+        
+        // Configure goToChatsButton
+        goToChatsButton.addTarget(self, action: #selector(goToChatsButtonTapped), for: .touchUpInside)
+    }
+    
 }
+        
 
 // MARK: - Setup Constraints
 extension SetupProfileViewController {
     
     private func setupConstraints() {
         
+        // Stack view for fullNameLabel and fullNameTextField
         let fullNameStackView = UIStackView(
             arrangedSubviews: [fullNameLabel, fullNameTextField],
             axis: .vertical,
             spacing: 0
         )
+        
+        // Stack view for aboutMeLabel and aboutMeTextField
         let aboutMeStackView = UIStackView(
             arrangedSubviews: [aboutMeLabel, aboutMeTextField],
             axis: .vertical,
             spacing: 0
         )
+        
+        // Stack view for sexLabel and sexSegmentedControl
         let sexStackView = UIStackView(
             arrangedSubviews: [sexLabel, sexSegmentedControl],
             axis: .vertical,
-            spacing: 12
+            spacing: 0
         )
         
-        goToChatsButton.heightAnchor.constraint(equalToConstant: 60).isActive = true
-        let stackView = UIStackView(
+        // Configure sexStackView
+        sexStackView.distribution = .fillEqually
+        
+        // Constraint for goToChatsButton and fullImageView
+        NSLayoutConstraint.activate([
+            goToChatsButton.heightAnchor.constraint(equalToConstant: 60),
+            fullImageView.widthAnchor.constraint(equalToConstant: 146)
+        ])
+        
+        // Stack view for welcomeLabel and fullImageView
+        let topStackView = UIStackView(arrangedSubviews: [welcomeLabel, fullImageView], axis: .vertical, spacing: 30)
+
+        // Configure topStackView
+        topStackView.alignment = .center
+        topStackView.distribution = .fillProportionally
+        
+        // Stack view for fullNameStackView, aboutMeStackView, sexStackView, goToChatsButton
+        let bottomStackView = UIStackView(
             arrangedSubviews: [fullNameStackView, aboutMeStackView, sexStackView, goToChatsButton],
             axis: .vertical,
-            spacing: 40
+            spacing: 30
         )
         
-        welcomeLabel.translatesAutoresizingMaskIntoConstraints = false
-        fullImageView.translatesAutoresizingMaskIntoConstraints = false
+        // Configure bottomStackView
+        bottomStackView.distribution = .fillProportionally
+        
+        // Stack view for topStackView and bottomsStackView
+        let stackView = UIStackView(
+            arrangedSubviews: [topStackView, bottomStackView],
+            axis: .vertical,
+            spacing: 30 // 40?
+        )
+        
+        // Configure stackView
+        stackView.alignment = .fill
+        stackView.distribution = .fillProportionally
+        
+        // Adding subviews
+        view.addSubview(scrollView)
+        scrollView.addSubview(stackView)
+        
+        // Setup scrollView and stackView
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
         stackView.translatesAutoresizingMaskIntoConstraints = false
-
-
-        view.addSubview(welcomeLabel)
-        view.addSubview(fullImageView)
-        view.addSubview(stackView)
         
+        // Setup constraints
         NSLayoutConstraint.activate([
-            welcomeLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 160),
-            welcomeLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+            scrollView.topAnchor.constraint(equalTo: view.topAnchor),
+            scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
         
         NSLayoutConstraint.activate([
-            fullImageView.topAnchor.constraint(equalTo: welcomeLabel.bottomAnchor, constant: 40),
-            fullImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+            stackView.topAnchor.constraint(greaterThanOrEqualTo: scrollView.contentLayoutGuide.topAnchor, constant: 70),
+            stackView.centerXAnchor.constraint(lessThanOrEqualTo: scrollView.centerXAnchor),
+            stackView.widthAnchor.constraint(equalTo: scrollView.frameLayoutGuide.widthAnchor, multiplier: 0.8),
+            stackView.heightAnchor.constraint(equalTo: scrollView.frameLayoutGuide.heightAnchor, multiplier: 0.82) // 0.80?
         ])
         
-        NSLayoutConstraint.activate([
-            stackView.topAnchor.constraint(equalTo: fullImageView.bottomAnchor, constant: 40),
-            stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 40),
-            stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -40)
-        ])
+        self.stackView = stackView
+        
+//        goToChatsButton.heightAnchor.constraint(equalToConstant: 60).isActive = true
+//        let stackView = UIStackView(
+//            arrangedSubviews: [fullNameStackView, aboutMeStackView, sexStackView, goToChatsButton],
+//            axis: .vertical,
+//            spacing: 40
+//        )
+//
+//        welcomeLabel.translatesAutoresizingMaskIntoConstraints = false
+//        fullImageView.translatesAutoresizingMaskIntoConstraints = false
+//        stackView.translatesAutoresizingMaskIntoConstraints = false
+//
+//
+//        view.addSubview(welcomeLabel)
+//        view.addSubview(fullImageView)
+//        view.addSubview(stackView)
+//
+//        NSLayoutConstraint.activate([
+//            welcomeLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 160),
+//            welcomeLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+//        ])
+//
+//        NSLayoutConstraint.activate([
+//            fullImageView.topAnchor.constraint(equalTo: welcomeLabel.bottomAnchor, constant: 40),
+//            fullImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+//        ])
+//
+//        NSLayoutConstraint.activate([
+//            stackView.topAnchor.constraint(equalTo: fullImageView.bottomAnchor, constant: 40),
+//            stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 40),
+//            stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -40)
+//        ])
         
     }
 }
@@ -153,6 +276,21 @@ extension SetupProfileViewController: UINavigationControllerDelegate, UIImagePic
         
         guard let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage else { return }
         fullImageView.circleImageView.image = image
+    }
+    
+}
+
+// MARK: - UITextFieldDelegate
+extension SetupProfileViewController: UITextFieldDelegate {
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if textField == fullNameTextField {
+            aboutMeTextField.becomeFirstResponder()
+        } else if textField == aboutMeTextField {
+            aboutMeTextField.resignFirstResponder()
+        }
+        
+        return true
     }
     
 }
