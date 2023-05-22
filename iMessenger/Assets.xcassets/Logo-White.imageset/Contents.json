@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "Logo.png",
+      "filename" : "IChat-White.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "Logo@2x.png",
+      "filename" : "IChat-White@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "Logo@3x.png",
+      "filename" : "IChat-White@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

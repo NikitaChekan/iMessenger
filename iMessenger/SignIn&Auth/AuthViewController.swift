@@ -9,7 +9,8 @@ import UIKit
 
 class AuthViewController: UIViewController {
     
-    let logoImageView = UIImageView(image: UIImage(named: "Logo"), contentMode: .scaleAspectFit)
+    // MARK: Properties
+    let logoImageView = UIImageView(image: UIImage(named: "Logo-White"), contentMode: .scaleAspectFit)
     
     let googleLabel = UILabel(text: "Get started with")
     let emailLabel = UILabel(text: "Or sign up with")
@@ -38,20 +39,15 @@ class AuthViewController: UIViewController {
     let signUpVC = SignUpViewController()
     let loginVC = LoginViewController()
 
+    // MARK: Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        view.backgroundColor = .secondarySystemBackground
+                
         googleButton.customizeGoogleButton()
+        
+        configureView()
+        configureButtons()
         setupConstraints()
-        
-        emailButton.addTarget(self, action: #selector(emailButtonTapped), for: .touchUpInside)
-        loginButton.addTarget(self, action: #selector(loginButtonTapped), for: .touchUpInside)
-        
-        googleButton.addTarget(self, action: #selector(googleButtonTapped), for: .touchUpInside)
-
-        signUpVC.delegate = self
-        loginVC.delegate = self
     }
     
     // MARK: Actions
@@ -83,37 +79,92 @@ class AuthViewController: UIViewController {
         }
     }
     
+    // MARK: Override Methods
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        
+        switch traitCollection.userInterfaceStyle {
+        case .unspecified:
+            break
+        case .light:
+            logoImageView.image = UIImage(named: "Logo-White")
+        case .dark:
+            logoImageView.image = UIImage(named: "Logo-Black")
+        @unknown default:
+            break
+        }
+        
+    }
+    
+    // MARK: Methods
+    
+    private func configureView() {
+        view.backgroundColor = .secondarySystemBackground
+        
+        let image = traitCollection.userInterfaceStyle == .light ? UIImage(named: "Logo-White") : UIImage(named: "Logo-Black")
+        
+        // Configure delegate for signUpVC and loginVC
+        signUpVC.delegate = self
+        loginVC.delegate = self
+    }
+    
+    private func configureButtons() {
+        
+        // Configure emailButton
+        emailButton.addTarget(self, action: #selector(emailButtonTapped), for: .touchUpInside)
+        
+        // Configure loginButton
+        loginButton.addTarget(self, action: #selector(loginButtonTapped), for: .touchUpInside)
+        
+        // Configure googleButton
+        googleButton.addTarget(self, action: #selector(googleButtonTapped), for: .touchUpInside)
+        
+    }
+    
 }
 
 // MARK: - Setup Constraints
 extension AuthViewController {
     
     private func setupConstraints() {
+        
+        // Logo Image View
         logoImageView.translatesAutoresizingMaskIntoConstraints = false
         
+        // View for googleLabel and googleButton
         let googleView = ButtonFormView(label: googleLabel, button: googleButton)
+        
+        // View for emailLabel and emailButton
         let emailView = ButtonFormView(label: emailLabel, button: emailButton)
+        
+        // View for alreadyOnboardLabel and loginButton
         let loginView = ButtonFormView(label: alreadyOnboardLabel, button: loginButton)
         
+        // Stack view for googleView, emailView and loginView
         let stackView = UIStackView(
             arrangedSubviews: [googleView, emailView, loginView],
             axis: .vertical,
             spacing: 40
         )
+        
+        // Configure stackView
         stackView.translatesAutoresizingMaskIntoConstraints = false
         
+        // Adding subviews
         view.addSubview(logoImageView)
         view.addSubview(stackView)
         
+        // Setup constraints
         NSLayoutConstraint.activate([
-            logoImageView.topAnchor.constraint(equalTo: view.topAnchor, constant: 160),
+            logoImageView.topAnchor.constraint(lessThanOrEqualTo: view.topAnchor, constant: 160),
             logoImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor)
         ])
         
         NSLayoutConstraint.activate([
-            stackView.topAnchor.constraint(equalTo: logoImageView.bottomAnchor, constant: 160),
+            stackView.topAnchor.constraint(greaterThanOrEqualTo: logoImageView.bottomAnchor, constant: 100),
             stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 40),
-            stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -40)
+            stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -40),
+            stackView.bottomAnchor.constraint(lessThanOrEqualTo: view.bottomAnchor, constant: -70)
         ])
     }
     
