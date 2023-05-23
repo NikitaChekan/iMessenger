@@ -105,17 +105,46 @@ class ChatsViewController: MessagesViewController {
         }
     }
     
-    @objc private func cameraButtonPressed() {
-        let picker = UIImagePickerController()
-        picker.delegate = self
+    @objc private func cameraButtonPressed(_ sender: UIButton) {
+        
+        let imagePicker = UIImagePickerController()
+        imagePicker.delegate = self
+        
+        let alertController = UIAlertController(title: "Chose Image Source", message: nil, preferredStyle: .actionSheet)
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        alertController.addAction(cancelAction)
         
         if UIImagePickerController.isSourceTypeAvailable(.camera) {
-            picker.sourceType = .camera
-        } else {
-            picker.sourceType = .photoLibrary
+            let cameraAction = UIAlertAction(title: "Camera", style: .default) { action in
+                imagePicker.sourceType = .camera
+                self.present(imagePicker, animated: true, completion: nil)
+            }
+            alertController.addAction(cameraAction)
         }
         
-        present(picker, animated: true)
+        if UIImagePickerController.isSourceTypeAvailable(.photoLibrary) {
+            let photoLibraryAction = UIAlertAction(title: "Photo Library", style: .default) { action in
+                imagePicker.sourceType = .photoLibrary
+                self.present(imagePicker, animated: true, completion: nil)
+            }
+            alertController.addAction(photoLibraryAction)
+        }
+        
+        alertController.popoverPresentationController?.sourceView = sender
+        
+        self.present(alertController, animated: true, completion: nil)
+        
+//        let picker = UIImagePickerController()
+//        picker.delegate = self
+//
+//        if UIImagePickerController.isSourceTypeAvailable(.camera) {
+//            picker.sourceType = .camera
+//        } else {
+//            picker.sourceType = .photoLibrary
+//        }
+//
+//        present(picker, animated: true)
     }
     
     private func sendImage(image: UIImage) {
@@ -324,8 +353,14 @@ extension ChatsViewController: InputBarAccessoryViewDelegate {
 // MARK: UINavigationControllerDelegate, UIImagePickerControllerDelegate
 extension ChatsViewController: UINavigationControllerDelegate, UIImagePickerControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        picker.dismiss(animated: true)
-        guard let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage else { return }
-        sendImage(image: image)
+        
+        guard let selectedImage = info[.originalImage] as? UIImage else { return }
+        
+        sendImage(image: selectedImage)
+        picker.dismiss(animated: true, completion: nil)
+        
+//        picker.dismiss(animated: true)
+//        guard let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage else { return }
+//        sendImage(image: image)
     }
 }
