@@ -97,7 +97,6 @@ class AuthViewController: UIViewController {
     }
     
     // MARK: Methods
-    
     private func configureView() {
         view.backgroundColor = .secondarySystemBackground
         

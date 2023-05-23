@@ -10,6 +10,7 @@ import SDWebImage
 
 class ProfileViewController: UIViewController {
     
+    // MARK: Properties
     let containerView = UIView()
     let imageView = UIImageView(image: UIImage(named: "human11"), contentMode: .scaleAspectFill)
     let nameLabel = UILabel(
@@ -24,6 +25,7 @@ class ProfileViewController: UIViewController {
     
     private let user: MUser
     
+    // MARK: Init
     init(user: MUser) {
         self.user = user
         self.nameLabel.text = user.userName
@@ -36,11 +38,41 @@ class ProfileViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        view.backgroundColor = .secondarySystemBackground
+        
         customiseElements()
         setupConstraints()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillAppear), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardDisappear), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    // MARK: Actions
+    
+    @objc private func keyboardWillAppear(notification: NSNotification) {
+        let userInfo: NSDictionary = notification.userInfo! as NSDictionary
+        let keyboardInfo = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as! NSValue
+        let keyboardSize = keyboardInfo.cgRectValue.size
+        
+        let difference = -keyboardSize.height + 30
+        
+        UIView.animate(withDuration: 0.015) {
+            self.containerView.transform = CGAffineTransform(translationX: self.containerView.frame.origin.x, y: difference)
+        }
+    }
+    
+    @objc private func keyboardDisappear() {
+        UIView.animate(withDuration: 2.0) {
+            self.containerView.transform = CGAffineTransform.identity
+        }
     }
     
     private func customiseElements() {
