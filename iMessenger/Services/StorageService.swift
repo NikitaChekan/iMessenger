@@ -64,7 +64,7 @@ class StorageService {
         
         let uid: String = Auth.auth().currentUser!.uid
         
-        let chatName = [chat.friendUserName, uid].joined(separator: "|<>|")
+        let chatName = [chat.friendId, uid].joined(separator: "|<>|")
         let imageName = [UUID().uuidString, String(Date().timeIntervalSince1970)].joined()
         
         self.chatsReference.child(chatName).child(imageName).putData(imageData, metadata: metaData) { (metadata, error) in
