@@ -264,6 +264,40 @@ class FirestoreService {
         }
     }
     
+    func checkExistenceWaitingChat(for user: MUser, completion: @escaping (Result<Bool, Error>) -> Void) {
+        let friendReference = usersRef.document(user.id).collection("waitingChats").document(currentUser.id)
+        
+        friendReference.getDocument { document, error in
+            if let document = document, document.exists {
+                guard let _ = MChat(document: document) else {
+                    return
+                }
+                
+                completion(.success(true))
+            }
+            
+            if let error = error {
+                completion(.failure(error))
+            }
+        }
+    }
+    
+    func checkExistenceActiveChat(for user: MUser, completion: @escaping (Result<Bool, Error>) -> Void) {
+        let userReference = usersRef.document(currentUser.id).collection("activeChats").document(user.id)
+        
+        userReference.getDocument { document, error in
+            if let document = document, document.exists {
+                guard let _ = MChat(document: document) else { return }
+                
+                completion(.success(true))
+            }
+            
+            if let error = error {
+                completion(.failure(error))
+            }
+        }
+    }
+    
     func updateViewedMessage(for senderId: String, friendId: String) {
         let messageReference = usersRef.document(currentUser.id).collection("activeChats").document(friendId).collection("messages").document(senderId)
         
@@ -271,5 +305,21 @@ class FirestoreService {
             "isViewed": true
         ])
     }
+    
+    func getChat(for id: String, completion: @escaping (Result<MChat, Error>) -> Void) {
+            let chatReference = usersRef.document(currentUser.id).collection("activeChats").document(id)
+            
+            chatReference.getDocument { document, error in
+                if let document = document, document.exists {
+                    guard let chat = MChat(document: document) else { return }
+                    
+                    completion(.success(chat))
+                }
+                
+                if let error = error {
+                    completion(.failure(error))
+                }
+            }
+        }
     
 }
