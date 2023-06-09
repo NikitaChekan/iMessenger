@@ -47,22 +47,14 @@ class PeopleViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = .orange
+//        view.backgroundColor = .orange
         setupSearchBar()
         setupCollectionView()
         createDataSource()
         
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Log Out", style: .plain, target: self, action: #selector(signOut))
+        addListeners()
         
-        usersListener = ListenerService.shared.usersObserve(users: users, completion: { result in
-            switch result {
-            case .success(let users):
-                self.users = users
-                self.reloadData(with: nil)
-            case .failure(let error):
-                self.showAlert(with: "Ошибка!", and: error.localizedDescription)
-            }
-        })
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Log Out", style: .plain, target: self, action: #selector(signOut))
         
     }
 
@@ -119,6 +111,18 @@ class PeopleViewController: UIViewController {
         collectionView.register(UserCell.self, forCellWithReuseIdentifier: UserCell.reuseId)
         
         collectionView.delegate = self
+    }
+    
+    private func addListeners() {
+        usersListener = ListenerService.shared.usersObserve(users: users, completion: { result in
+            switch result {
+            case .success(let users):
+                self.users = users
+                self.reloadData(with: nil)
+            case .failure(let error):
+                self.showAlert(with: "Ошибка!", and: error.localizedDescription)
+            }
+        })
     }
     
     private func reloadData(with searchText: String?) {

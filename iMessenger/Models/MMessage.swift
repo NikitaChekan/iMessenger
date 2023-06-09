@@ -22,6 +22,7 @@ struct MMessage: Hashable, MessageType {
     var sender: MessageKit.SenderType
     var sentDate: Date
     let id: String?
+    var isViewed: Bool
     
     var messageId: String {
         return id ?? UUID().uuidString
@@ -39,19 +40,21 @@ struct MMessage: Hashable, MessageType {
     var image: UIImage? = nil
     var downloadURL: URL? = nil
     
-    init(user: MUser, content: String) {
+    init(user: MUser, content: String, isViewed: Bool) {
         self.content = content
         sender = MSender(senderId: user.id, displayName: user.userName)
         sentDate = Date()
         id = nil
+        self.isViewed = isViewed
     }
     
-    init(user: MUser, image: UIImage) {
+    init(user: MUser, image: UIImage, isViewed: Bool) {
         sender = MSender(senderId: user.id, displayName: user.userName)
         self.image = image
         content = ""
         sentDate = Date()
         id = nil
+        self.isViewed = isViewed
     }
     
     init?(document: QueryDocumentSnapshot) {
@@ -59,10 +62,13 @@ struct MMessage: Hashable, MessageType {
         guard let sendDate = data["created"] as? Timestamp else { return nil }
         guard let senderId = data["senderId"] as? String else { return nil }
         guard let senderName = data["senderName"] as? String else { return nil }
+        guard let isViewed = data["isViewed"] as? Bool else { return nil }
+        
 
         self.id = document.documentID
         self.sentDate = sendDate.dateValue()
-        sender = MSender(senderId: senderId, displayName: senderName)
+        self.sender = MSender(senderId: senderId, displayName: senderName)
+        self.isViewed = isViewed
         
         if let content = data["content"] as? String {
             self.content = content
@@ -81,6 +87,7 @@ struct MMessage: Hashable, MessageType {
             "created" : sentDate,
             "senderId" : sender.senderId,
             "senderName" : sender.displayName,
+            "isViewed" : isViewed
         ]
         
         if let url = downloadURL {

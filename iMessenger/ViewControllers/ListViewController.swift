@@ -10,11 +10,10 @@ import FirebaseFirestore
 
 class ListViewController: UIViewController {
     
-    var waitingChats = [MChat]()
-    var activeChats = [MChat]()
-    
-    private var waitingChatsListener: ListenerRegistration?
-    private var activeChatsListener: ListenerRegistration?
+    enum Layout {
+        case filled
+        case empty
+    }
     
     enum Section: Int, CaseIterable {
         case waitingChats, activeChats
@@ -25,12 +24,42 @@ class ListViewController: UIViewController {
                 return "Waiting chats"
             case .activeChats:
                 return "Active chats"
-
+                
             }
         }
     }
     
-    var dataSource: UICollectionViewDiffableDataSource<Section, MChat>?
+    var waitingChats = [MChat]()
+    var activeChats = [MChat]()
+    
+    private var waitingLayout: Layout = .filled
+    private var isEmptyWaitingChats: Bool = false {
+        willSet {
+            switch newValue {
+            case true:
+                waitingLayout = .empty
+            case false:
+                waitingLayout = .filled
+            }
+        }
+    }
+    private var activeLayout: Layout = .filled
+    private var isEmptyActiveChats: Bool = false {
+        willSet {
+            switch newValue {
+            case true:
+                activeLayout = .empty
+            case false:
+                activeLayout = .filled
+            }
+        }
+    }
+    
+    private var waitingChatsListener: ListenerRegistration?
+    private var activeChatsListener: ListenerRegistration?
+    
+    
+    private var dataSource: UICollectionViewDiffableDataSource<Section, MChat>?
     
     var collectionView: UICollectionView!
     
@@ -58,33 +87,15 @@ class ListViewController: UIViewController {
         setupSearchBar()
         setupCollectionView()
         createDataSource()
-        reloadData()
         
-        waitingChatsListener = ListenerService.shared.waitingChatsObserve(chats: waitingChats, completion: { result in
-            switch result {
-            case .success(let chats):
-                if self.waitingChats != [], self.waitingChats.count <= chats.count {
-                    let chatRequestVC = ChatRequestViewController(chat: chats.last!)
-                    chatRequestVC.delegate = self
-                    self.present(chatRequestVC, animated: true)
-                }
-                self.waitingChats = chats
-                self.reloadData()
-            case .failure(let error):
-                self.showAlert(with: "Ошибка!", and: error.localizedDescription)
-            }
-        })
+        addListeners()
         
-        activeChatsListener = ListenerService.shared.activeChatsObserve(chats: waitingChats, completion: { result in
-            switch result {
-            case .success(let chats):
-                self.activeChats = chats
-                self.reloadData()
-            case .failure(let error):
-                self.showAlert(with: "Ошибка!", and: error.localizedDescription)
-            }
-        })
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         
+        self.reloadData()
     }
     
     private func setupSearchBar() {
@@ -120,11 +131,86 @@ class ListViewController: UIViewController {
         collectionView.delegate = self
     }
     
+    private func addListeners() {
+        
+        waitingChatsListener = ListenerService.shared.waitingChatsObserve(chats: waitingChats, completion: { result in
+            switch result {
+            case .success(let chats):
+                if self.waitingChats != [], self.waitingChats.count <= chats.count {
+                    let chatRequestVC = ChatRequestViewController(chat: chats.last!)
+                    chatRequestVC.delegate = self
+                    self.present(chatRequestVC, animated: true)
+                }
+                self.waitingChats = chats
+                self.isEmptyWaitingChats = self.waitingChats.isEmpty
+                
+                self.reloadData()
+            case .failure(let error):
+                self.showAlert(with: "Ошибка!", and: error.localizedDescription)
+            }
+        })
+        
+        activeChatsListener = ListenerService.shared.activeChatsObserve(chats: activeChats, completion: { result in
+            switch result {
+            case .success(let chats):
+                self.activeChats = chats
+                self.isEmptyActiveChats = self.activeChats.isEmpty
+                
+                self.reloadData()
+            case .failure(let error):
+                self.showAlert(with: "Ошибка!", and: error.localizedDescription)
+            }
+        })
+    }
+    
     private func reloadData() {
         var snapshot = NSDiffableDataSourceSnapshot<Section, MChat>()
+        
         snapshot.appendSections([.waitingChats, .activeChats])
-        snapshot.appendItems(waitingChats, toSection: .waitingChats)
-        snapshot.appendItems(activeChats, toSection: .activeChats)
+        
+        switch waitingLayout {
+        case .filled:
+            snapshot.appendItems(waitingChats, toSection: .waitingChats)
+        case .empty:
+            snapshot.appendItems([MChat.waitingPlugModel], toSection: .waitingChats)
+        }
+        
+        switch activeLayout {
+        case .filled:
+            snapshot.appendItems(activeChats, toSection: .activeChats)
+        case .empty:
+            snapshot.appendItems([MChat.activePlugModel], toSection: .activeChats)
+        }
+        
+        snapshot.reloadItems(waitingChats)
+        snapshot.reloadItems(activeChats)
+        
+        dataSource?.apply(snapshot, animatingDifferences: true)
+    }
+    
+    private func reloadData(with searchText: String) {
+        
+        let waitingFiltered = waitingChats.filter { $0.contains(filter: searchText) }
+        let activeFiltered = activeChats.filter { $0.contains(filter: searchText) }
+        
+        var snapshot = NSDiffableDataSourceSnapshot<Section, MChat>()
+        
+        snapshot.appendSections([.waitingChats, .activeChats])
+        
+        switch waitingLayout {
+        case .filled:
+            snapshot.appendItems(waitingFiltered, toSection: .waitingChats)
+        case .empty:
+            snapshot.appendItems([MChat.waitingPlugModel], toSection: .waitingChats)
+        }
+        
+        switch activeLayout {
+        case .filled:
+            snapshot.appendItems(activeFiltered, toSection: .activeChats)
+        case .empty:
+            snapshot.appendItems([MChat.activePlugModel], toSection: .activeChats)
+        }
+        
         dataSource?.apply(snapshot, animatingDifferences: true)
     }
     
@@ -303,7 +389,7 @@ extension ListViewController: WaitingChatNavigation {
 // MARK: - UISearchBarDelegate
 extension ListViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        print(searchText)
+        reloadData(with: searchText)
     }
 }
 

@@ -43,11 +43,11 @@ class ChatsViewController: MessagesViewController {
         navigationController?.navigationBar.tintColor = .label
 //        navigationItem.backBarButtonItem?.title = "Back"
         
-//        NotificationCenter.default.addObserver(
-//            self,
-//            selector: #selector(keyboardWillAppear(notification:)),
-//            name: UIResponder.keyboardWillShowNotification, object: nil
-//        )
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(keyboardWillAppear(notification:)),
+            name: UIResponder.keyboardWillShowNotification, object: nil
+        )
 
         configureMessageInputBar()
         configureMessagesCollectionView()
@@ -57,10 +57,10 @@ class ChatsViewController: MessagesViewController {
     
     // MARK: Actions
     
-//    @objc func keyboardWillAppear(notification: NSNotification) {
-//        messagesCollectionView.contentInset.bottom += 100
-//        messagesCollectionView.scrollToLastItem()
-//    }
+    @objc func keyboardWillAppear(notification: NSNotification) {
+        messagesCollectionView.contentInset.bottom += 10
+        messagesCollectionView.scrollToLastItem()
+    }
     
     private func addListeners() {
         messageListener = ListenerService.shared.messagesObserve(chat: chat) { [weak self] result in
@@ -88,21 +88,20 @@ class ChatsViewController: MessagesViewController {
         }
     }
     
-    private func insertNewMessage(message: MMessage) {
+    private func insertNewMessage(message: MMessage, isImage: Bool = false) {
         guard !messages.contains(message) else { return }
         messages.append(message)
         messages.sort()
         
-        let isLatestMessage = messages.firstIndex(of: message) == (messages.count - 1)
-        let shouldScrollToBottom = messagesCollectionView.isAtBottom && isLatestMessage
-        
         messagesCollectionView.reloadData()
         
-        if shouldScrollToBottom {
-            DispatchQueue.main.async {
-                self.messagesCollectionView.scrollToLastItem(animated: true)
-            }
+        if message.isViewed {
+            self.messagesCollectionView.scrollToLastItem(animated: false)
+        } else  {
+            self.messagesCollectionView.scrollToLastItem(animated: true)
+            FirestoreService.shared.updateViewedMessage(for: message.messageId, friendId: self.chat.friendId)
         }
+
     }
     
     @objc private func cameraButtonPressed(_ sender: UIButton) {
@@ -134,30 +133,21 @@ class ChatsViewController: MessagesViewController {
         alertController.popoverPresentationController?.sourceView = sender
         
         self.present(alertController, animated: true, completion: nil)
-        
-//        let picker = UIImagePickerController()
-//        picker.delegate = self
-//
-//        if UIImagePickerController.isSourceTypeAvailable(.camera) {
-//            picker.sourceType = .camera
-//        } else {
-//            picker.sourceType = .photoLibrary
-//        }
-//
-//        present(picker, animated: true)
+
     }
     
     private func sendImage(image: UIImage) {
         StorageService.shared.uploadImageMessage(photo: image, to: chat) { result in
             switch result {
             case .success(let url):
-                var message = MMessage(user: self.user, image: image)
+                var message = MMessage(user: self.user, image: image, isViewed: false)
                 message.downloadURL = url
                 
                 FirestoreService.shared.sendMessage(chat: self.chat, message: message) { result in
                     switch result {
                     case .success:
                         self.messagesCollectionView.scrollToLastItem()
+                        FirestoreService.shared.updateViewedMessage(for: message.messageId, friendId: self.chat.friendId)
                     case .failure(_):
                         self.showAlert(with: "Ошибка!", and: "Изображение не доставлено")
                     }
@@ -203,6 +193,8 @@ extension ChatsViewController {
 extension ChatsViewController {
     
     func configureMessageInputBar() {
+        messageInputBar.delegate = self
+        
         messageInputBar.isTranslucent = true
         messageInputBar.separatorLine.isHidden = true
         messageInputBar.backgroundView.backgroundColor = UIColor(named: "mainWhiteColor")
@@ -333,13 +325,14 @@ extension ChatsViewController: MessagesDisplayDelegate {
 extension ChatsViewController: InputBarAccessoryViewDelegate {
     
     func inputBar(_ inputBar: InputBarAccessoryView, didPressSendButtonWith text: String) {
-        let message = MMessage(user: user, content: text)
-        insertNewMessage(message: message) /// Удалили эту строчку 45 урок 15 мин
+        let message = MMessage(user: user, content: text, isViewed: false)
+//        insertNewMessage(message: message) /// Удалили эту строчку 45 урок 15 мин
         
         FirestoreService.shared.sendMessage(chat: chat, message: message) { result in
             switch result {
             case .success:
                 self.messagesCollectionView.scrollToLastItem()
+                FirestoreService.shared.updateViewedMessage(for: message.messageId, friendId: self.chat.friendId)
             case .failure(let error):
                 self.showAlert(with: "Ошибка!", and: error.localizedDescription)
             }
@@ -350,17 +343,16 @@ extension ChatsViewController: InputBarAccessoryViewDelegate {
     
 }
 
-// MARK: UINavigationControllerDelegate, UIImagePickerControllerDelegate
-extension ChatsViewController: UINavigationControllerDelegate, UIImagePickerControllerDelegate {
+// MARK: UIImagePickerControllerDelegate
+extension ChatsViewController: UIImagePickerControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         
         guard let selectedImage = info[.originalImage] as? UIImage else { return }
         
         sendImage(image: selectedImage)
         picker.dismiss(animated: true, completion: nil)
-        
-//        picker.dismiss(animated: true)
-//        guard let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage else { return }
-//        sendImage(image: image)
     }
 }
+
+// MARK: UINavigationControllerDelegate
+extension ChatsViewController: UINavigationControllerDelegate { }
