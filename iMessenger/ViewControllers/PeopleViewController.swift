@@ -11,11 +11,7 @@ import FirebaseFirestore
 
 class PeopleViewController: UIViewController {
     
-    var users = [MUser]()
-    private var usersListener: ListenerRegistration?
     
-    var collectionView: UICollectionView!
-    var dataSource: UICollectionViewDiffableDataSource<Section, MUser>!
 
     enum Section: Int, CaseIterable {
         case users
@@ -27,6 +23,12 @@ class PeopleViewController: UIViewController {
             }
         }
     }
+    
+    var users = [MUser]()
+    private var usersListener: ListenerRegistration?
+    
+    var collectionView: UICollectionView!
+    var dataSource: UICollectionViewDiffableDataSource<Section, MUser>!
 
     private let currentUser: MUser
     
@@ -47,7 +49,6 @@ class PeopleViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        view.backgroundColor = .orange
         setupSearchBar()
         setupCollectionView()
         createDataSource()
@@ -80,9 +81,28 @@ class PeopleViewController: UIViewController {
         
         present(alertController, animated: true)
     }
+        
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        
+        switch traitCollection.userInterfaceStyle {
+        case .unspecified:
+            break
+        case .light:
+            for cell in collectionView.visibleCells {
+                cell.layer.shadowColor = UIColor.secondarySystemBackground.cgColor
+            }
+        case .dark:
+            for cell in collectionView.visibleCells {
+                cell.layer.shadowColor = UIColor.secondarySystemBackground.cgColor
+            }
+        @unknown default:
+            break
+        }
+    }
     
     private func setupSearchBar() {
-        navigationController?.navigationBar.barTintColor = UIColor(named: "mainWhiteColor")
+//        navigationController?.navigationBar.barTintColor = UIColor(named: "mainWhiteColor")
         navigationController?.navigationBar.shadowImage = UIImage()
         
         let searchController = UISearchController(searchResultsController: nil)
@@ -99,7 +119,7 @@ class PeopleViewController: UIViewController {
             collectionViewLayout: createCompositionalLayout()
         )
         collectionView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        collectionView.backgroundColor = UIColor(named: "mainWhiteColor")
+//        collectionView.backgroundColor = UIColor(named: "mainWhiteColor")
         view.addSubview(collectionView)
         
         collectionView.register(

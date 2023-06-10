@@ -19,10 +19,10 @@ class UserCell: UICollectionViewCell, SelfConfiguringCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        backgroundColor = .white
+        backgroundColor = .secondarySystemBackground
         layer.cornerRadius = 4
         
-        layer.shadowColor = #colorLiteral(red: 0.7411764706, green: 0.7411764706, blue: 0.7411764706, alpha: 1)
+        layer.shadowColor = UIColor(named: "shadowColor")?.cgColor
         layer.shadowRadius = 3
         layer.shadowOpacity = 0.5
         layer.shadowOffset = CGSize(width: 0, height: 4)

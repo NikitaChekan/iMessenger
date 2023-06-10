@@ -89,7 +89,6 @@ class ListViewController: UIViewController {
         createDataSource()
         
         addListeners()
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -389,6 +388,7 @@ extension ListViewController: WaitingChatNavigation {
 // MARK: - UISearchBarDelegate
 extension ListViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        searchBar.placeholder = "Enter a friend's name..."
         reloadData(with: searchText)
     }
 }
