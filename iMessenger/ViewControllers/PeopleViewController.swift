@@ -90,11 +90,11 @@ class PeopleViewController: UIViewController {
             break
         case .light:
             for cell in collectionView.visibleCells {
-                cell.layer.shadowColor = UIColor.secondarySystemBackground.cgColor
+                cell.layer.shadowColor = UIColor(named: "shadowColor")?.cgColor
             }
         case .dark:
             for cell in collectionView.visibleCells {
-                cell.layer.shadowColor = UIColor.secondarySystemBackground.cgColor
+                cell.layer.shadowColor = UIColor(named: "shadowColor")?.cgColor
             }
         @unknown default:
             break
@@ -102,7 +102,7 @@ class PeopleViewController: UIViewController {
     }
     
     private func setupSearchBar() {
-//        navigationController?.navigationBar.barTintColor = UIColor(named: "mainWhiteColor")
+        navigationController?.navigationBar.barTintColor = UIColor(named: "backgroundAppColor")
         navigationController?.navigationBar.shadowImage = UIImage()
         
         let searchController = UISearchController(searchResultsController: nil)
@@ -119,7 +119,7 @@ class PeopleViewController: UIViewController {
             collectionViewLayout: createCompositionalLayout()
         )
         collectionView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-//        collectionView.backgroundColor = UIColor(named: "mainWhiteColor")
+        collectionView.backgroundColor = UIColor(named: "backgroundAppColor")
         view.addSubview(collectionView)
         
         collectionView.register(

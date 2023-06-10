@@ -165,7 +165,7 @@ extension ChatsViewController {
     
     private func configureMessagesCollectionView() {
         // Configure messages collections view
-        messagesCollectionView.backgroundColor = UIColor(named: "mainWhiteColor")
+        messagesCollectionView.backgroundColor = UIColor(named: "backgroundAppColor")
         messagesCollectionView.showsVerticalScrollIndicator = false
         
         setupLayoutMessageCollectionView()
@@ -197,8 +197,9 @@ extension ChatsViewController {
         
         messageInputBar.isTranslucent = true
         messageInputBar.separatorLine.isHidden = true
-        messageInputBar.backgroundView.backgroundColor = UIColor(named: "mainWhiteColor")
-        messageInputBar.inputTextView.backgroundColor = .white
+        messageInputBar.backgroundView.backgroundColor = UIColor(named: "backgroundAppColor")
+        messageInputBar.inputTextView.backgroundColor = UIColor(named: "textFieldLight")
+        messageInputBar.inputTextView.placeholder = "Message"
         messageInputBar.inputTextView.placeholderTextColor = #colorLiteral(red: 0.7411764706, green: 0.7411764706, blue: 0.7411764706, alpha: 1)
         messageInputBar.inputTextView.textContainerInset = UIEdgeInsets(top: 14, left: 30, bottom: 14, right: 36)
         messageInputBar.inputTextView.placeholderLabelInsets = UIEdgeInsets(top: 14, left: 36, bottom: 14, right: 36)
@@ -209,7 +210,7 @@ extension ChatsViewController {
         messageInputBar.inputTextView.scrollIndicatorInsets = UIEdgeInsets(top: 14, left: 0, bottom: 14, right: 0)
         
         
-        messageInputBar.layer.shadowColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+        messageInputBar.layer.shadowColor = UIColor(named: "shadowColor")?.cgColor
         messageInputBar.layer.shadowRadius = 5
         messageInputBar.layer.shadowOpacity = 0.3
         messageInputBar.layer.shadowOffset = CGSize(width: 0, height: 4)

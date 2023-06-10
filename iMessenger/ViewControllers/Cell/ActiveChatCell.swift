@@ -25,7 +25,7 @@ class ActiveChatCell: UICollectionViewCell, SelfConfiguringCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        backgroundColor = .white
+        backgroundColor = .secondarySystemBackground
         self.layer.cornerRadius = 4
         self.clipsToBounds = true
         

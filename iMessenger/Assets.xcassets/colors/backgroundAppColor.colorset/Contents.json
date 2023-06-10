@@ -5,9 +5,9 @@
         "color-space" : "srgb",
         "components" : {
           "alpha" : "1.000",
-          "blue" : "51",
-          "green" : "51",
-          "red" : "51"
+          "blue" : "0.992",
+          "green" : "0.973",
+          "red" : "0.969"
         }
       },
       "idiom" : "universal"
@@ -20,13 +20,8 @@
         }
       ],
       "color" : {
-        "color-space" : "srgb",
-        "components" : {
-          "alpha" : "1.000",
-          "blue" : "51",
-          "green" : "51",
-          "red" : "51"
-        }
+        "platform" : "osx",
+        "reference" : "controlBackgroundColor"
       },
       "idiom" : "universal"
     }

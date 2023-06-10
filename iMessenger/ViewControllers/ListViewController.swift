@@ -98,7 +98,7 @@ class ListViewController: UIViewController {
     }
     
     private func setupSearchBar() {
-        navigationController?.navigationBar.barTintColor = UIColor(named: "mainWhiteColor")
+        navigationController?.navigationBar.barTintColor = UIColor(named: "backgroundAppColor")
         navigationController?.navigationBar.shadowImage = UIImage()
         
         let searchController = UISearchController(searchResultsController: nil)
@@ -115,7 +115,7 @@ class ListViewController: UIViewController {
             collectionViewLayout: createCompositionalLayout()
         )
         collectionView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        collectionView.backgroundColor = UIColor(named: "mainWhiteColor")
+        collectionView.backgroundColor = UIColor(named: "backgroundAppColor")
         view.addSubview(collectionView)
         
         collectionView.register(
