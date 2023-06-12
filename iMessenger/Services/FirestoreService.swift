@@ -269,10 +269,7 @@ class FirestoreService {
         
         friendReference.getDocument { document, error in
             if let document = document, document.exists {
-                guard let _ = MChat(document: document) else {
-                    return
-                }
-                
+                guard let _ = MChat(document: document) else { return }
                 completion(.success(true))
             }
             

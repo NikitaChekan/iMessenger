@@ -8,7 +8,7 @@
 import UIKit
 import SDWebImage
 
-class UserCell: UICollectionViewCell, SelfConfiguringCell {
+class UserCell: UICollectionViewCell {
     
     let userImageView = UIImageView()
     let userName = UILabel(text: "text", font: .laoSangamMN20())
@@ -38,13 +38,6 @@ class UserCell: UICollectionViewCell, SelfConfiguringCell {
     
     override func prepareForReuse() {
         userImageView.image = nil
-    }
-    
-    func configure<U>(with value: U) where U : Hashable {
-        guard let user: MUser = value as? MUser else { return }
-        userName.text = user.userName
-        guard let url = URL(string: user.avatarStringURL) else { return }
-        userImageView.sd_setImage(with: url)
     }
     
     required init?(coder: NSCoder) {
@@ -86,6 +79,18 @@ extension UserCell {
             userName.bottomAnchor.constraint(equalTo: containerView.bottomAnchor)
         ])
     }
+}
+
+// MARK: - Setup Constraints
+extension UserCell: SelfConfiguringCell {
+    
+    func configure<U>(with value: U) where U : Hashable {
+        guard let user: MUser = value as? MUser else { return }
+        userName.text = user.userName
+        guard let url = URL(string: user.avatarStringURL) else { return }
+        userImageView.sd_setImage(with: url)
+    }
+    
 }
 
 // MARK: - SwiftUI

@@ -8,7 +8,7 @@
 import UIKit
 import SDWebImage
 
-class ActiveChatCell: UICollectionViewCell, SelfConfiguringCell {
+class ActiveChatCell: UICollectionViewCell {
     
     static var reuseId = "ActiveChatCell"
     
@@ -31,13 +31,6 @@ class ActiveChatCell: UICollectionViewCell, SelfConfiguringCell {
         
         setupConstraints()
         
-    }
-    
-    func configure<U>(with value: U) where U : Hashable {
-        guard let chat: MChat = value as? MChat else { return }
-        friendName.text = chat.friendUserName
-        lastMessage.text = chat.lastMessageContent
-        friendImageView.sd_setImage(with: URL(string: chat.friendAvatarStringURL))
     }
     
     required init?(coder: NSCoder) {
@@ -88,6 +81,16 @@ extension ActiveChatCell {
             gradientView.widthAnchor.constraint(equalToConstant: 10)
         ])
         
+    }
+}
+
+// MARK: - Setup Constraints
+extension ActiveChatCell: SelfConfiguringCell {
+    func configure<U>(with value: U) where U : Hashable {
+        guard let chat: MChat = value as? MChat else { return }
+        friendName.text = chat.friendUserName
+        lastMessage.text = chat.lastMessageContent
+        friendImageView.sd_setImage(with: URL(string: chat.friendAvatarStringURL))
     }
 }
 

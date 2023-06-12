@@ -10,14 +10,14 @@ import SDWebImage
 
 class ProfileViewController: UIViewController {
     
-    // MARK: Enumeration
+    // MARK: - Enumeration
     enum State {
          case withTextField
          case withMessage
          case withButton
      }
     
-    // MARK: Properties
+    // MARK: - Properties
     
     weak var delegate: ProfileNavigation?
     
@@ -33,9 +33,9 @@ class ProfileViewController: UIViewController {
     )
     
     let myTextField = InsertableTextField()
-    private lazy var requestLabel = UILabel(text: "Запрос отправлен!", font: .systemFont(ofSize: 18, weight: .light))
+    private lazy var requestLabel = UILabel(text: "Request is sent!", font: .systemFont(ofSize: 18, weight: .light))
     private lazy var chatButton = UIButton(
-        title: "GO TO CHAT",
+        title: "Welcome to chat",
         titleColor: .white,
         backgroundColor: .black,
         font: .laoSangamMN20(),
@@ -46,7 +46,7 @@ class ProfileViewController: UIViewController {
     private let user: MUser
     private let state: State
     
-    // MARK: Init
+    // MARK: - Init
     init(user: MUser, state: State) {
         self.user = user
         self.nameLabel.text = user.userName
@@ -60,7 +60,7 @@ class ProfileViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
-    // MARK: Life Cycle
+    // MARK: - Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -85,7 +85,7 @@ class ProfileViewController: UIViewController {
         }
     }
     
-    // MARK: Actions
+    // MARK: - Actions
     
     @objc private func keyboardWillAppear(notification: NSNotification) {
         let userInfo: NSDictionary = notification.userInfo! as NSDictionary

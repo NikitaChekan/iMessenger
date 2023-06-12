@@ -27,6 +27,9 @@ class PeopleViewController: UIViewController {
     var users = [MUser]()
     private var usersListener: ListenerRegistration?
     
+    private var isSearch: Bool = false
+    private var countPerson: Int = 0
+    
     var collectionView: UICollectionView!
     var dataSource: UICollectionViewDiffableDataSource<Section, MUser>!
 
@@ -146,12 +149,25 @@ class PeopleViewController: UIViewController {
     }
     
     private func reloadData(with searchText: String?) {
-        let filtered = users.filter { (user) -> Bool in
+        let filtered = users.filter { user in
             user.contains(filter: searchText)
         }
+        
         var snapshot = NSDiffableDataSourceSnapshot<Section, MUser>()
+        
+        if searchText == nil || searchText == "" {
+            isSearch = false
+            countPerson = users.count
+        } else {
+            isSearch = true
+            countPerson = filtered.count
+        }
+        
         snapshot.appendSections([.users])
         snapshot.appendItems(filtered, toSection: .users)
+        
+        snapshot.reloadSections([.users])
+        
         dataSource?.apply(snapshot, animatingDifferences: true)
     }
     
@@ -186,12 +202,26 @@ extension PeopleViewController {
             ) as? SectionHeader else { fatalError("Can not create new section header") }
             guard let section = Section(rawValue: indexPath.section) else { fatalError("Unknown section kind")}
             
-            let items = self.dataSource.snapshot().itemIdentifiers(inSection: .users)
-            sectionHeader.configure(
-                text: section.description(usersCount: items.count),
-                font: .systemFont(ofSize: 36, weight: .light),
-                textColor: .label
-            )
+//            let items = self.dataSource.snapshot().itemIdentifiers(inSection: .users)
+//            sectionHeader.configure(
+//                text: section.description(usersCount: items.count),
+//                font: .systemFont(ofSize: 36, weight: .light),
+//                textColor: .label
+//            )
+            
+            if self.isSearch {
+                sectionHeader.configure(
+                    text: "\(self.countPerson) person",
+                    font: .systemFont(ofSize: 36, weight: .light),
+                    textColor: .label
+                )
+            } else {
+                sectionHeader.configure(
+                    text: section.description(usersCount: self.countPerson),
+                    font: .systemFont(ofSize: 36, weight: .light),
+                    textColor: .label
+                )
+            }
             
             return sectionHeader
         }
@@ -311,6 +341,7 @@ extension PeopleViewController: UICollectionViewDelegate {
 extension PeopleViewController: ProfileNavigation {
     func show(_ chat: MChat) {
         let chatViewController = ChatsViewController(user: currentUser, chat: chat)
+        chatViewController.hidesBottomBarWhenPushed = true
         navigationController?.pushViewController(chatViewController, animated: true)
     }
 }

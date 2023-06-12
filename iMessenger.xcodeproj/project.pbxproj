@@ -55,6 +55,8 @@
 		DA73AB5229E8998F00E81FC3 /* SelfConfiguringCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA73AB5129E8998F00E81FC3 /* SelfConfiguringCell.swift */; };
 		DAA43C8B2A33CC580011DB66 /* ProfileNavigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAA43C8A2A33CC580011DB66 /* ProfileNavigation.swift */; };
 		DAA43C8D2A33D1AA0011DB66 /* ChatError.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAA43C8C2A33D1AA0011DB66 /* ChatError.swift */; };
+		DAA43C8F2A371DFF0011DB66 /* ActivePlugCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAA43C8E2A371DFF0011DB66 /* ActivePlugCell.swift */; };
+		DAA43C912A3720A70011DB66 /* WaitingPlugCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAA43C902A3720A70011DB66 /* WaitingPlugCell.swift */; };
 		DAAC1AB52A155EC500CCC6BF /* UIScrollView + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAAC1AB42A155EC500CCC6BF /* UIScrollView + Extension.swift */; };
 		DAB3DA1C29FF11B7009FF25F /* MMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB3DA1B29FF11B7009FF25F /* MMessage.swift */; };
 		DAB4654929E9DDE100DC15EE /* SectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB4654829E9DDE100DC15EE /* SectionHeader.swift */; };
@@ -118,6 +120,8 @@
 		DA73AB5129E8998F00E81FC3 /* SelfConfiguringCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelfConfiguringCell.swift; sourceTree = "<group>"; };
 		DAA43C8A2A33CC580011DB66 /* ProfileNavigation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileNavigation.swift; sourceTree = "<group>"; };
 		DAA43C8C2A33D1AA0011DB66 /* ChatError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatError.swift; sourceTree = "<group>"; };
+		DAA43C8E2A371DFF0011DB66 /* ActivePlugCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivePlugCell.swift; sourceTree = "<group>"; };
+		DAA43C902A3720A70011DB66 /* WaitingPlugCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaitingPlugCell.swift; sourceTree = "<group>"; };
 		DAAC1AB42A155EC500CCC6BF /* UIScrollView + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIScrollView + Extension.swift"; sourceTree = "<group>"; };
 		DAB3DA1B29FF11B7009FF25F /* MMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MMessage.swift; sourceTree = "<group>"; };
 		DAB4654829E9DDE100DC15EE /* SectionHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionHeader.swift; sourceTree = "<group>"; };
@@ -295,7 +299,9 @@
 			isa = PBXGroup;
 			children = (
 				DA73AB4B29E8722A00E81FC3 /* ActiveChatCell.swift */,
+				DAA43C8E2A371DFF0011DB66 /* ActivePlugCell.swift */,
 				DA73AB4D29E8723C00E81FC3 /* WaitingChatCell.swift */,
+				DAA43C902A3720A70011DB66 /* WaitingPlugCell.swift */,
 				DA7326A929ED6E3900D01C56 /* UserCell.swift */,
 			);
 			path = Cell;
@@ -432,6 +438,7 @@
 				DAFB0D262A086A2E00D301E7 /* ChatsViewController.swift in Sources */,
 				DA73AB5029E8917400E81FC3 /* GradientView.swift in Sources */,
 				DA3A7C2E29E1D80200662330 /* UIStackView + Extension.swift in Sources */,
+				DAA43C8F2A371DFF0011DB66 /* ActivePlugCell.swift in Sources */,
 				DA7326B029EDCEBE00D01C56 /* InsertableTextField.swift in Sources */,
 				DA73AB4C29E8722A00E81FC3 /* ActiveChatCell.swift in Sources */,
 				DA7326AA29ED6E3900D01C56 /* UserCell.swift in Sources */,
@@ -472,6 +479,7 @@
 				DA0AEA3129E346B0005834F5 /* MainTabBarController.swift in Sources */,
 				DADB7A0929E739F700EAD05E /* Bundle-Decodable.swift in Sources */,
 				DA299DFB29F069B7001F5131 /* AuthError.swift in Sources */,
+				DAA43C912A3720A70011DB66 /* WaitingPlugCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

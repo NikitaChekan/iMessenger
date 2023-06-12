@@ -8,7 +8,7 @@
 import UIKit
 import SDWebImage
 
-class WaitingChatCell: UICollectionViewCell, SelfConfiguringCell {
+class WaitingChatCell: UICollectionViewCell {
     
     static var reuseId = "WaitingChatCell"
     
@@ -22,11 +22,6 @@ class WaitingChatCell: UICollectionViewCell, SelfConfiguringCell {
         self.clipsToBounds = true
         
         setupConstraints()
-    }
-    
-    func configure<U>(with value: U) where U : Hashable {
-        guard let chat: MChat = value as? MChat else { return }
-        friendImageView.sd_setImage(with: URL(string: chat.friendAvatarStringURL))
     }
     
     required init?(coder: NSCoder) {
@@ -49,6 +44,16 @@ extension WaitingChatCell {
             friendImageView.bottomAnchor.constraint(equalTo: self.bottomAnchor)
         ])
     }
+}
+
+// MARK: - Setup Constraints
+extension WaitingChatCell: SelfConfiguringCell {
+    
+    func configure<U>(with value: U) where U : Hashable {
+        guard let chat: MChat = value as? MChat else { return }
+        friendImageView.sd_setImage(with: URL(string: chat.friendAvatarStringURL))
+    }
+    
 }
 
 // MARK: - SwiftUI
