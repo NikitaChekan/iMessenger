@@ -85,6 +85,7 @@ class ListViewController: UIViewController {
         super.viewDidLoad()
 
         setupSearchBar()
+        
         setupCollectionView()
         createDataSource()
         
@@ -106,6 +107,11 @@ class ListViewController: UIViewController {
         navigationItem.hidesSearchBarWhenScrolling = false
         searchController.hidesNavigationBarDuringPresentation = false
         searchController.obscuresBackgroundDuringPresentation = false
+        
+        searchController.searchBar.placeholder = "Enter a friend name..."
+        searchController.searchBar.barTintColor = UIColor(named: "tabBarColor")
+        searchController.searchBar.tintColor = UIColor(named: "tabBarColor")
+        
         searchController.searchBar.delegate = self
     }
     
@@ -470,13 +476,11 @@ extension ListViewController: WaitingChatNavigation {
         }
     }
     
-    
 }
 
 // MARK: - UISearchBarDelegate
 extension ListViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        searchBar.placeholder = "Enter a friend's name..."
         reloadData(with: searchText)
     }
 }

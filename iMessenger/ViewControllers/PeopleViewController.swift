@@ -59,6 +59,7 @@ class PeopleViewController: UIViewController {
         addListeners()
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Log Out", style: .plain, target: self, action: #selector(signOut))
+        navigationItem.rightBarButtonItem?.tintColor = UIColor(named: "tabBarColor")
         
     }
 
@@ -81,6 +82,7 @@ class PeopleViewController: UIViewController {
                 print("Error signing out: \(error.localizedDescription)")
             }
         }))
+        
         
         present(alertController, animated: true)
     }
@@ -113,6 +115,10 @@ class PeopleViewController: UIViewController {
         navigationItem.hidesSearchBarWhenScrolling = false
         searchController.hidesNavigationBarDuringPresentation = false
         searchController.obscuresBackgroundDuringPresentation = false
+        
+        searchController.searchBar.barTintColor = UIColor(named: "tabBarColor")
+        searchController.searchBar.tintColor = UIColor(named: "tabBarColor")
+        
         searchController.searchBar.delegate = self
     }
     

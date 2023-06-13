@@ -262,7 +262,6 @@
 				DA3A7C2D29E1D80200662330 /* UIStackView + Extension.swift */,
 				DA0AEA2A29E338C8005834F5 /* SegmentedControl + Extension.swift */,
 				DA7326AB29ED6FED00D01C56 /* UIViewController + Extension.swift */,
-				DA7326AF29EDCEBE00D01C56 /* InsertableTextField.swift */,
 				DA7326B129EDD2A200D01C56 /* UIView + Extention.swift */,
 				DA2E860C29FC55E7009133F6 /* UIImage + Extension.swift */,
 				DAAC1AB42A155EC500CCC6BF /* UIScrollView + Extension.swift */,
@@ -279,6 +278,7 @@
 				DADB7A0829E739F700EAD05E /* Bundle-Decodable.swift */,
 				DA73AB4F29E8917400E81FC3 /* GradientView.swift */,
 				DAC1D57B2A17976500B2262E /* EyeButton.swift */,
+				DA7326AF29EDCEBE00D01C56 /* InsertableTextField.swift */,
 				DA3A7C2829E1D15900662330 /* UIKit */,
 			);
 			path = Extensions;

@@ -12,7 +12,7 @@ class InsertableTextField: UITextField {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        backgroundColor = .white
+        backgroundColor = UIColor(named: "textFieldLight")
         placeholder = "Write something here..."
         font = UIFont.systemFont(ofSize: 14)
         clearButtonMode = .whileEditing
