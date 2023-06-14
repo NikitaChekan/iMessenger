@@ -52,7 +52,7 @@ class ListenerService {
         return usersListener
     }
     
-    func waitingChatsObserve(chats: [MChat], completion: @escaping (Result<[MChat], Error>) -> Void) -> ListenerRegistration? {
+    func waitingChatsObserve(chats: [MChat], addedCompletion:((MChat) -> Void)? = nil, completion: @escaping (Result<[MChat], Error>) -> Void) -> ListenerRegistration? {
         
         var chats = chats
         
@@ -70,6 +70,7 @@ class ListenerService {
                 case .added:
                     guard !chats.contains(chat) else { return }
                     chats.append(chat)
+                    addedCompletion?(chat)
                 case .modified:
                     guard let index = chats.firstIndex(of: chat) else { return }
                     chats[index] = chat

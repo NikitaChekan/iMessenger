@@ -58,6 +58,9 @@
 		DAA43C8F2A371DFF0011DB66 /* ActivePlugCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAA43C8E2A371DFF0011DB66 /* ActivePlugCell.swift */; };
 		DAA43C912A3720A70011DB66 /* WaitingPlugCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAA43C902A3720A70011DB66 /* WaitingPlugCell.swift */; };
 		DAA5AADF2A39E46500258016 /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAA5AADE2A39E46500258016 /* NotificationService.swift */; };
+		DAA5AAE12A3A227100258016 /* BadgeLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAA5AAE02A3A227100258016 /* BadgeLabel.swift */; };
+		DAA5AAE32A3A252500258016 /* DateHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAA5AAE22A3A252500258016 /* DateHelper.swift */; };
+		DAA5AAE52A3A25D400258016 /* Date + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAA5AAE42A3A25D400258016 /* Date + Extension.swift */; };
 		DAAC1AB52A155EC500CCC6BF /* UIScrollView + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAAC1AB42A155EC500CCC6BF /* UIScrollView + Extension.swift */; };
 		DAB3DA1C29FF11B7009FF25F /* MMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB3DA1B29FF11B7009FF25F /* MMessage.swift */; };
 		DAB4654929E9DDE100DC15EE /* SectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB4654829E9DDE100DC15EE /* SectionHeader.swift */; };
@@ -124,6 +127,9 @@
 		DAA43C8E2A371DFF0011DB66 /* ActivePlugCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivePlugCell.swift; sourceTree = "<group>"; };
 		DAA43C902A3720A70011DB66 /* WaitingPlugCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaitingPlugCell.swift; sourceTree = "<group>"; };
 		DAA5AADE2A39E46500258016 /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
+		DAA5AAE02A3A227100258016 /* BadgeLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BadgeLabel.swift; sourceTree = "<group>"; };
+		DAA5AAE22A3A252500258016 /* DateHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateHelper.swift; sourceTree = "<group>"; };
+		DAA5AAE42A3A25D400258016 /* Date + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date + Extension.swift"; sourceTree = "<group>"; };
 		DAAC1AB42A155EC500CCC6BF /* UIScrollView + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIScrollView + Extension.swift"; sourceTree = "<group>"; };
 		DAB3DA1B29FF11B7009FF25F /* MMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MMessage.swift; sourceTree = "<group>"; };
 		DAB4654829E9DDE100DC15EE /* SectionHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionHeader.swift; sourceTree = "<group>"; };
@@ -206,6 +212,7 @@
 				DA299DFA29F069B7001F5131 /* AuthError.swift */,
 				DA3193B929F13FC4008B03F8 /* UserError.swift */,
 				DAA43C8C2A33D1AA0011DB66 /* ChatError.swift */,
+				DAA5AAE22A3A252500258016 /* DateHelper.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -268,6 +275,7 @@
 				DA7326B129EDD2A200D01C56 /* UIView + Extention.swift */,
 				DA2E860C29FC55E7009133F6 /* UIImage + Extension.swift */,
 				DAAC1AB42A155EC500CCC6BF /* UIScrollView + Extension.swift */,
+				DAA5AAE42A3A25D400258016 /* Date + Extension.swift */,
 			);
 			path = UIKit;
 			sourceTree = "<group>";
@@ -282,6 +290,7 @@
 				DA73AB4F29E8917400E81FC3 /* GradientView.swift */,
 				DAC1D57B2A17976500B2262E /* EyeButton.swift */,
 				DA7326AF29EDCEBE00D01C56 /* InsertableTextField.swift */,
+				DAA5AAE02A3A227100258016 /* BadgeLabel.swift */,
 				DA3A7C2829E1D15900662330 /* UIKit */,
 			);
 			path = Extensions;
@@ -449,7 +458,9 @@
 				DAF7853E29EC76FC0057712C /* MUser.swift in Sources */,
 				DA3A7C2129E1C79F00662330 /* UIFont + Extension.swift in Sources */,
 				DAA5AADF2A39E46500258016 /* NotificationService.swift in Sources */,
+				DAA5AAE12A3A227100258016 /* BadgeLabel.swift in Sources */,
 				DA0AEA3329E346F4005834F5 /* PeopleViewController.swift in Sources */,
+				DAA5AAE32A3A252500258016 /* DateHelper.swift in Sources */,
 				DA7326AC29ED6FED00D01C56 /* UIViewController + Extension.swift in Sources */,
 				DA3A7C2C29E1D33000662330 /* ButtonFormView.swift in Sources */,
 				DA3A7C3029E1FCB000662330 /* SignUpViewController.swift in Sources */,
@@ -484,6 +495,7 @@
 				DADB7A0929E739F700EAD05E /* Bundle-Decodable.swift in Sources */,
 				DA299DFB29F069B7001F5131 /* AuthError.swift in Sources */,
 				DAA43C912A3720A70011DB66 /* WaitingPlugCell.swift in Sources */,
+				DAA5AAE52A3A25D400258016 /* Date + Extension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -17,6 +17,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     let notificationService = NotificationService()
     var activeChatsListener: ListenerRegistration?
+    var waitingChatsListener: ListenerRegistration?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         FirebaseApp.configure()
@@ -25,7 +26,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         notificationService.notificationCenter.delegate = notificationService
         
         if Auth.auth().currentUser != nil {
-            addMessageListener()
+            addActiveChatsListener()
+            addWaitingChatsListener()
         }
         
         return true
@@ -55,11 +57,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 // MARK: - Adding listeners service
 extension AppDelegate {
-    func addMessageListener() {
-        activeChatsListener = ListenerService.shared.activeChatsObserve(chats: []) { isPushNotification, chat in
-            if isPushNotification {
-                NotificationService().push(chat.lastMessageContent, title: chat.friendUserName)
+    
+    func addActiveChatsListener() {
+        activeChatsListener = ListenerService.shared.activeChatsObserve(chats: []) { (isSendPushNotification, chat) in
+            if isSendPushNotification {
+                self.notificationService.push(chat.lastMessageContent, title: chat.friendUserName)
             }
         } completion: { _ in }
     }
+    
+    func addWaitingChatsListener() {
+        waitingChatsListener = ListenerService.shared.waitingChatsObserve(chats: []) { chat in
+            self.notificationService.push("\(chat.friendUserName) invited you to chat!")
+        } completion: { _ in }
+    }
+    
 }

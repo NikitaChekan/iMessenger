@@ -73,6 +73,9 @@ class PeopleViewController: UIViewController {
                 self.appDelegate.activeChatsListener?.remove()
                 self.appDelegate.activeChatsListener = nil
                 
+                self.appDelegate.waitingChatsListener?.remove()
+                self.appDelegate.waitingChatsListener = nil
+                
                 let keyWindow = UIApplication.shared.connectedScenes
                     .filter({$0.activationState == .foregroundActive})
                     .map({$0 as? UIWindowScene})

@@ -31,7 +31,11 @@ class MainTabBarController: UITabBarController {
         super.viewDidLoad()
         
         if appDelegate.activeChatsListener == nil {
-            appDelegate.addMessageListener()
+            appDelegate.addActiveChatsListener()
+        }
+        
+        if appDelegate.waitingChatsListener == nil {
+            appDelegate.addWaitingChatsListener()
         }
         
         let listViewController = ListViewController(currentUser: currentUser)
