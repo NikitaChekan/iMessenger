@@ -143,7 +143,7 @@ class ChatsViewController: MessagesViewController {
                 var message = MMessage(user: self.user, image: image, isViewed: false)
                 message.downloadURL = url
                 
-                FirestoreService.shared.sendMessage(chat: self.chat, message: message) { result in
+                FirestoreService.shared.sendMessage(chat: self.chat, message: message, isImage: true) { result in
                     switch result {
                     case .success:
                         self.messagesCollectionView.scrollToLastItem()

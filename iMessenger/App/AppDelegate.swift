@@ -9,14 +9,25 @@ import UIKit
 import FirebaseCore
 import GoogleSignIn
 import FirebaseStorage
+import FirebaseFirestore
+import FirebaseAuth
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
-
+    let notificationService = NotificationService()
+    var activeChatsListener: ListenerRegistration?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         FirebaseApp.configure()
+        
+        notificationService.requestAutorization()
+        notificationService.notificationCenter.delegate = notificationService
+        
+        if Auth.auth().currentUser != nil {
+            addMessageListener()
+        }
+        
         return true
     }
     
@@ -42,3 +53,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 }
 
+// MARK: - Adding listeners service
+extension AppDelegate {
+    func addMessageListener() {
+        activeChatsListener = ListenerService.shared.activeChatsObserve(chats: []) { isPushNotification, chat in
+            if isPushNotification {
+                NotificationService().push(chat.lastMessageContent, title: chat.friendUserName)
+            }
+        } completion: { _ in }
+    }
+}

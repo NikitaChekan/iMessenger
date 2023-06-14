@@ -30,6 +30,10 @@ class MainTabBarController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        if appDelegate.activeChatsListener == nil {
+            appDelegate.addMessageListener()
+        }
+        
         let listViewController = ListViewController(currentUser: currentUser)
         let peopleViewController = PeopleViewController(currentUser: currentUser)
         

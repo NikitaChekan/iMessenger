@@ -69,6 +69,10 @@ class PeopleViewController: UIViewController {
         alertController.addAction(UIAlertAction(title: "Sign Out", style: .destructive, handler: { (_) in
             do {
                 try Auth.auth().signOut()
+                
+                self.appDelegate.activeChatsListener?.remove()
+                self.appDelegate.activeChatsListener = nil
+                
                 let keyWindow = UIApplication.shared.connectedScenes
                     .filter({$0.activationState == .foregroundActive})
                     .map({$0 as? UIWindowScene})

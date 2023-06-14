@@ -57,6 +57,7 @@
 		DAA43C8D2A33D1AA0011DB66 /* ChatError.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAA43C8C2A33D1AA0011DB66 /* ChatError.swift */; };
 		DAA43C8F2A371DFF0011DB66 /* ActivePlugCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAA43C8E2A371DFF0011DB66 /* ActivePlugCell.swift */; };
 		DAA43C912A3720A70011DB66 /* WaitingPlugCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAA43C902A3720A70011DB66 /* WaitingPlugCell.swift */; };
+		DAA5AADF2A39E46500258016 /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAA5AADE2A39E46500258016 /* NotificationService.swift */; };
 		DAAC1AB52A155EC500CCC6BF /* UIScrollView + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAAC1AB42A155EC500CCC6BF /* UIScrollView + Extension.swift */; };
 		DAB3DA1C29FF11B7009FF25F /* MMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB3DA1B29FF11B7009FF25F /* MMessage.swift */; };
 		DAB4654929E9DDE100DC15EE /* SectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB4654829E9DDE100DC15EE /* SectionHeader.swift */; };
@@ -122,6 +123,7 @@
 		DAA43C8C2A33D1AA0011DB66 /* ChatError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatError.swift; sourceTree = "<group>"; };
 		DAA43C8E2A371DFF0011DB66 /* ActivePlugCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivePlugCell.swift; sourceTree = "<group>"; };
 		DAA43C902A3720A70011DB66 /* WaitingPlugCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaitingPlugCell.swift; sourceTree = "<group>"; };
+		DAA5AADE2A39E46500258016 /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
 		DAAC1AB42A155EC500CCC6BF /* UIScrollView + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIScrollView + Extension.swift"; sourceTree = "<group>"; };
 		DAB3DA1B29FF11B7009FF25F /* MMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MMessage.swift; sourceTree = "<group>"; };
 		DAB4654829E9DDE100DC15EE /* SectionHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionHeader.swift; sourceTree = "<group>"; };
@@ -192,6 +194,7 @@
 				DA3193B429F13C7E008B03F8 /* FirestoreService.swift */,
 				DA2E860A29FC5316009133F6 /* StorageService.swift */,
 				DAEFC24329FEF4EB00E07774 /* ListenerService.swift */,
+				DAA5AADE2A39E46500258016 /* NotificationService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -445,6 +448,7 @@
 				DA3A7C2529E1CCBD00662330 /* UILabel + Extension.swift in Sources */,
 				DAF7853E29EC76FC0057712C /* MUser.swift in Sources */,
 				DA3A7C2129E1C79F00662330 /* UIFont + Extension.swift in Sources */,
+				DAA5AADF2A39E46500258016 /* NotificationService.swift in Sources */,
 				DA0AEA3329E346F4005834F5 /* PeopleViewController.swift in Sources */,
 				DA7326AC29ED6FED00D01C56 /* UIViewController + Extension.swift in Sources */,
 				DA3A7C2C29E1D33000662330 /* ButtonFormView.swift in Sources */,

@@ -85,7 +85,7 @@ class ListenerService {
         return chatsListener
     }
     
-    func activeChatsObserve(chats: [MChat], completion: @escaping (Result<[MChat], Error>) -> Void) -> ListenerRegistration? {
+    func activeChatsObserve(chats: [MChat], modifiedCompletion: ((Bool, MChat) -> Void)? = nil, completion: @escaping (Result<[MChat], Error>) -> Void) -> ListenerRegistration? {
         
         var chats = chats
         
@@ -106,6 +106,7 @@ class ListenerService {
                 case .modified:
                     guard let index = chats.firstIndex(of: chat) else { return }
                     chats[index] = chat
+                    modifiedCompletion?(chat.lastSenderId != self.currentUserId, chat)
                 case .removed:
                     guard let index = chats.firstIndex(of: chat) else { return }
                     chats.remove(at: index)
