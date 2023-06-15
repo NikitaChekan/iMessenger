@@ -135,6 +135,7 @@ class SignUpViewController: UIViewController {
             emailTextField.delegate = self
             emailTextField.returnKeyType = .go
             emailTextField.keyboardType = .emailAddress
+            emailTextField.tintColor = UIColor(named: "tabBarColor")
             
             // Configure passwordTextField
             passwordTextField.delegate = self
@@ -142,12 +143,14 @@ class SignUpViewController: UIViewController {
             eyeButtonForPasswordTextField.addTarget(self, action: #selector(eyeButtonForPasswordTapped), for: .touchUpInside)
             passwordTextField.rightView = eyeButtonForPasswordTextField
             passwordTextField.rightViewMode = .always
+            passwordTextField.tintColor = UIColor(named: "tabBarColor")
             
             // Configure confirmPasswordTextField
             confirmPasswordTextField.delegate = self
             eyeButtonForConfirmTextField.addTarget(self, action: #selector(eyeButtonForConfirmTapped), for: .touchUpInside)
             confirmPasswordTextField.rightView = eyeButtonForConfirmTextField
             confirmPasswordTextField.rightViewMode = .always
+            confirmPasswordTextField.tintColor = UIColor(named: "tabBarColor")
             
             // Configure signUpButton
             signUpButton.addTarget(self, action: #selector(signUpButtonTapped), for: .touchUpInside)

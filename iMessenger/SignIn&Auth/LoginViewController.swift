@@ -166,12 +166,15 @@ class LoginViewController: UIViewController {
         emailTextField.delegate = self
         emailTextField.returnKeyType = .go
         emailTextField.keyboardType = .emailAddress
+        emailTextField.tintColor = UIColor(named: "tabBarColor")
+
         
         // Configure passwordTextField
         passwordTextField.delegate = self
         eyeButtonForConfirmTextField.addTarget(self, action: #selector(eyeButtonTapped), for: .touchUpInside)
         passwordTextField.rightView = eyeButtonForConfirmTextField
         passwordTextField.rightViewMode = .always
+        passwordTextField.tintColor = UIColor(named: "tabBarColor")
         
         // Configure loginButton
         loginButton.addTarget(self, action: #selector(loginButtonTapped), for: .touchUpInside)

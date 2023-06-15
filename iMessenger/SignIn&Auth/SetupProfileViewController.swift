@@ -162,9 +162,11 @@ class SetupProfileViewController: UIViewController {
         // Configure fullImageView
         fullNameTextField.delegate = self
         fullNameTextField.returnKeyType = .go
+        fullNameTextField.tintColor = UIColor(named: "tabBarColor")
         
         // Configure fullImageView
         aboutMeTextField.delegate = self
+        aboutMeTextField.tintColor = UIColor(named: "tabBarColor")
         
         // Configure goToChatsButton
         goToChatsButton.addTarget(self, action: #selector(goToChatsButtonTapped), for: .touchUpInside)
