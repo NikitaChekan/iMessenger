@@ -218,7 +218,7 @@ class FirestoreService {
         let myReference = usersRef.document(currentUser.id).collection("activeChats").document(chat.friendId)
         let myMessageReference = myReference.collection("messages")
         
-        let messageContent = isImage ? "Изображение 🖼" : message.content
+        let messageContent = isImage ? "Picture 🖼" : message.content
         
         // Update chat for current user
         var chat = chat

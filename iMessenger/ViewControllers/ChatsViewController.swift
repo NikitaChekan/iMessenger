@@ -56,12 +56,44 @@ class ChatsViewController: MessagesViewController {
     }
     
     // MARK: Actions
-    
     @objc func keyboardWillAppear(notification: NSNotification) {
         messagesCollectionView.contentInset.bottom += 10
         messagesCollectionView.scrollToLastItem()
     }
     
+    @objc private func cameraButtonPressed(_ sender: UIButton) {
+        
+        let imagePicker = UIImagePickerController()
+        imagePicker.delegate = self
+        
+        let alertController = UIAlertController(title: "Chose Image Source", message: nil, preferredStyle: .actionSheet)
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        alertController.addAction(cancelAction)
+        
+        if UIImagePickerController.isSourceTypeAvailable(.camera) {
+            let cameraAction = UIAlertAction(title: "Camera", style: .default) { action in
+                imagePicker.sourceType = .camera
+                self.present(imagePicker, animated: true, completion: nil)
+            }
+            alertController.addAction(cameraAction)
+        }
+        
+        if UIImagePickerController.isSourceTypeAvailable(.photoLibrary) {
+            let photoLibraryAction = UIAlertAction(title: "Photo Library", style: .default) { action in
+                imagePicker.sourceType = .photoLibrary
+                self.present(imagePicker, animated: true, completion: nil)
+            }
+            alertController.addAction(photoLibraryAction)
+        }
+        
+        alertController.popoverPresentationController?.sourceView = sender
+        
+        self.present(alertController, animated: true, completion: nil)
+        
+    }
+    
+    // MARK: Methods
     private func addListeners() {
         messageListener = ListenerService.shared.messagesObserve(chat: chat) { [weak self] result in
             switch result {
@@ -104,37 +136,6 @@ class ChatsViewController: MessagesViewController {
 
     }
     
-    @objc private func cameraButtonPressed(_ sender: UIButton) {
-        
-        let imagePicker = UIImagePickerController()
-        imagePicker.delegate = self
-        
-        let alertController = UIAlertController(title: "Chose Image Source", message: nil, preferredStyle: .actionSheet)
-        
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-        alertController.addAction(cancelAction)
-        
-        if UIImagePickerController.isSourceTypeAvailable(.camera) {
-            let cameraAction = UIAlertAction(title: "Camera", style: .default) { action in
-                imagePicker.sourceType = .camera
-                self.present(imagePicker, animated: true, completion: nil)
-            }
-            alertController.addAction(cameraAction)
-        }
-        
-        if UIImagePickerController.isSourceTypeAvailable(.photoLibrary) {
-            let photoLibraryAction = UIAlertAction(title: "Photo Library", style: .default) { action in
-                imagePicker.sourceType = .photoLibrary
-                self.present(imagePicker, animated: true, completion: nil)
-            }
-            alertController.addAction(photoLibraryAction)
-        }
-        
-        alertController.popoverPresentationController?.sourceView = sender
-        
-        self.present(alertController, animated: true, completion: nil)
-
-    }
     
     private func sendImage(image: UIImage) {
         StorageService.shared.uploadImageMessage(photo: image, to: chat) { result in
@@ -171,7 +172,6 @@ extension ChatsViewController {
         setupLayoutMessageCollectionView()
         
         // Adding delegates
-        messageInputBar.delegate = self
         messagesCollectionView.messagesDataSource = self
         messagesCollectionView.messagesLayoutDelegate = self
         messagesCollectionView.messagesDisplayDelegate = self
@@ -201,8 +201,8 @@ extension ChatsViewController {
         messageInputBar.inputTextView.backgroundColor = UIColor(named: "textFieldLight")
         messageInputBar.inputTextView.placeholder = "Message"
         messageInputBar.inputTextView.placeholderTextColor = #colorLiteral(red: 0.7411764706, green: 0.7411764706, blue: 0.7411764706, alpha: 1)
-        messageInputBar.inputTextView.textContainerInset = UIEdgeInsets(top: 14, left: 30, bottom: 14, right: 36)
-        messageInputBar.inputTextView.placeholderLabelInsets = UIEdgeInsets(top: 14, left: 36, bottom: 14, right: 36)
+        messageInputBar.inputTextView.textContainerInset = UIEdgeInsets(top: 14, left: 10, bottom: 14, right: 36)
+        messageInputBar.inputTextView.placeholderLabelInsets = UIEdgeInsets(top: 14, left: 16, bottom: 14, right: 36)
         messageInputBar.inputTextView.layer.borderColor = #colorLiteral(red: 0.7411764706, green: 0.7411764706, blue: 0.7411764706, alpha: 0.4033635232)
         messageInputBar.inputTextView.layer.borderWidth = 0.2
         messageInputBar.inputTextView.layer.cornerRadius = 18.0
@@ -254,6 +254,10 @@ extension ChatsViewController: MessagesDataSource {
         return MSender(senderId: user.id, displayName: user.userName)
     }
     
+//    func currentSender() -> MessageKit.SenderType {
+//        return MSender(senderId: user.id, displayName: user.userName)
+//    }
+    
     func messageForItem(at indexPath: IndexPath, in messagesCollectionView: MessageKit.MessagesCollectionView) -> MessageKit.MessageType {
         return messages[indexPath.item]
     }
@@ -267,16 +271,32 @@ extension ChatsViewController: MessagesDataSource {
     }
     
     func cellTopLabelAttributedText(for message: MessageType, at indexPath: IndexPath) -> NSAttributedString? {
-        if indexPath.item % 5 == 0 {
-                return NSAttributedString(
-                    string: MessageKitDateFormatter.shared.string(from: message.sentDate),
-                    attributes: [
+        
+        let beforeIndex = indexPath.index(before: indexPath.item)
+        
+        if beforeIndex >= 0 {
+            let beforeMessage = messages[beforeIndex]
+            
+            if !beforeMessage.sentDate.hasSame(.day, as: message.sentDate) {
+                return NSAttributedString(string: MessageKitDateFormatter.shared.string(from: message.sentDate), attributes: [
                     NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 10),
                     NSAttributedString.Key.foregroundColor: UIColor.darkGray
                 ])
-        } else {
-            return nil
+            }
         }
+        
+        return nil
+        
+//        if indexPath.item % 5 == 0 {
+//                return NSAttributedString(
+//                    string: MessageKitDateFormatter.shared.string(from: message.sentDate),
+//                    attributes: [
+//                    NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 10),
+//                    NSAttributedString.Key.foregroundColor: UIColor.darkGray
+//                ])
+//        } else {
+//            return nil
+//        }
     }
     
 }
@@ -289,11 +309,24 @@ extension ChatsViewController: MessagesLayoutDelegate {
     }
     
     func cellTopLabelHeight(for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> CGFloat {
-        if (indexPath.item) % 5 == 0 {
-            return 30
-        } else {
-            return 0
+        
+        let beforeIndex = indexPath.index(before: indexPath.item)
+        
+        if beforeIndex >= 0 {
+            let beforeMessage = messages[beforeIndex]
+            
+            if !beforeMessage.sentDate.hasSame(.day, as: message.sentDate) {
+                return 30
+            }
         }
+        
+        return 0
+        
+//        if (indexPath.item) % 5 == 0 {
+//            return 30
+//        } else {
+//            return 0
+//        }
     }
 }
 
@@ -312,9 +345,9 @@ extension ChatsViewController: MessagesDisplayDelegate {
         avatarView.isHidden = true
     }
     
-    func avatarSize(for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> CGSize? {
-        return .zero
-    }
+//    func avatarSize(for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> CGSize? {
+//        return .zero
+//    }
     
     func messageStyle(for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> MessageStyle {
         return .bubble
