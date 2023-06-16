@@ -105,6 +105,13 @@ class AuthViewController: UIViewController {
         // Configure delegate for signUpVC and loginVC
         signUpVC.delegate = self
         loginVC.delegate = self
+        
+        // Configure logoImageView
+        logoImageView.layer.shadowColor = UIColor.black.cgColor
+        logoImageView.layer.shadowRadius = 4
+        logoImageView.layer.shadowOpacity = 0.5
+        logoImageView.layer.shadowOffset = CGSize(width: 0, height: 4)
+        
     }
     
     private func configureButtons() {
@@ -160,7 +167,7 @@ extension AuthViewController {
         ])
         
         NSLayoutConstraint.activate([
-            stackView.topAnchor.constraint(greaterThanOrEqualTo: logoImageView.bottomAnchor, constant: 100),
+            stackView.topAnchor.constraint(greaterThanOrEqualTo: logoImageView.bottomAnchor, constant: 5),
             stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 40),
             stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -40),
             stackView.bottomAnchor.constraint(lessThanOrEqualTo: view.bottomAnchor, constant: -70)
