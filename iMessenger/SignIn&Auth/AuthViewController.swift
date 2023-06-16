@@ -101,6 +101,7 @@ class AuthViewController: UIViewController {
         view.backgroundColor = .secondarySystemBackground
         
         let image = traitCollection.userInterfaceStyle == .light ? UIImage(named: "Logo-White") : UIImage(named: "Logo-Black")
+        logoImageView.image = image
         
         // Configure delegate for signUpVC and loginVC
         signUpVC.delegate = self
