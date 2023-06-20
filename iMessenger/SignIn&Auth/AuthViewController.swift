@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SPConfetti
 
 class AuthViewController: UIViewController {
     
@@ -51,6 +52,11 @@ class AuthViewController: UIViewController {
     }
     
     // MARK: Actions
+    
+    @objc private func logoImageTapped() {
+        SPConfetti.startAnimating(.fullWidthToDown, particles: [.triangle, .arc], duration: 3)
+    }
+    
     @objc private func emailButtonTapped() {
         present(signUpVC, animated: true)
     }
@@ -117,6 +123,11 @@ class AuthViewController: UIViewController {
     
     private func configureButtons() {
         
+        // Configure logoImageView
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(logoImageTapped))
+        logoImageView.isUserInteractionEnabled = true
+        logoImageView.addGestureRecognizer(tapGestureRecognizer)
+        
         // Configure emailButton
         emailButton.addTarget(self, action: #selector(emailButtonTapped), for: .touchUpInside)
         
@@ -125,7 +136,7 @@ class AuthViewController: UIViewController {
         
         // Configure googleButton
         googleButton.addTarget(self, action: #selector(googleButtonTapped), for: .touchUpInside)
-        
+            
     }
     
 }
