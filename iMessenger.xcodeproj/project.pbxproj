@@ -217,19 +217,11 @@
 			path = Helpers;
 			sourceTree = "<group>";
 		};
-		DA3193B629F13D5A008B03F8 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
 		DA3A7BFE29E1B87500662330 = {
 			isa = PBXGroup;
 			children = (
 				DA3A7C0929E1B87500662330 /* iMessenger */,
 				DA3A7C0829E1B87500662330 /* Products */,
-				DA3193B629F13D5A008B03F8 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -255,8 +247,8 @@
 				DADB7A0529E7399F00EAD05E /* waitingChats.json */,
 				DADB7A0429E7399E00EAD05E /* activeChats.json */,
 				DAF7853729EC74D80057712C /* users.json */,
-				DA3A7C1329E1B87700662330 /* Assets.xcassets */,
 				DA3A7C1529E1B87700662330 /* LaunchScreen.storyboard */,
+				DA3A7C1329E1B87700662330 /* Assets.xcassets */,
 			);
 			path = iMessenger;
 			sourceTree = "<group>";
@@ -637,6 +629,10 @@
 				DEVELOPMENT_TEAM = 9M963S5SV4;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = iMessenger/App/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.social-networking";
+				INFOPLIST_KEY_NSCameraUsageDescription = "For taking photos inside the app.";
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "Good work and save data.";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "To allow access to the photo library.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
 				INFOPLIST_KEY_UIMainStoryboardFile = "";
@@ -669,6 +665,10 @@
 				DEVELOPMENT_TEAM = 9M963S5SV4;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = iMessenger/App/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.social-networking";
+				INFOPLIST_KEY_NSCameraUsageDescription = "For taking photos inside the app.";
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "Good work and save data.";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "To allow access to the photo library.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
 				INFOPLIST_KEY_UIMainStoryboardFile = "";
