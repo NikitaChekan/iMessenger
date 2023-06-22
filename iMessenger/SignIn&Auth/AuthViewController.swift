@@ -7,6 +7,7 @@
 
 import UIKit
 import SPConfetti
+import SPAlert
 
 class AuthViewController: UIViewController {
     
@@ -80,8 +81,9 @@ class AuthViewController: UIViewController {
                     }
                 }
             case .failure(let error):
-                self.showAlert(with: "Ошибка!", and: error.localizedDescription)
-            }
+                let alertView = SPAlertView(title: "Error!", message: error.localizedDescription, preset: .error)
+                alertView.duration = 4
+                alertView.present()             }
         }
     }
     

@@ -44,6 +44,8 @@
 		DA3A7C3829E228C900662330 /* AddPhotoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA3A7C3729E228C900662330 /* AddPhotoView.swift */; };
 		DA55DE3029F2AB0E000A739C /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = DA55DE2F29F2AB0E000A739C /* GoogleSignIn */; };
 		DA55DE3229F2B505000A739C /* GoogleSignInSwift in Frameworks */ = {isa = PBXBuildFile; productRef = DA55DE3129F2B505000A739C /* GoogleSignInSwift */; };
+		DA5A97A22A422940005F73EA /* SPAlert in Frameworks */ = {isa = PBXBuildFile; productRef = DA5A97A12A422940005F73EA /* SPAlert */; };
+		DA5A97A52A439772005F73EA /* SPIndicator in Frameworks */ = {isa = PBXBuildFile; productRef = DA5A97A42A439772005F73EA /* SPIndicator */; };
 		DA7326AA29ED6E3900D01C56 /* UserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA7326A929ED6E3900D01C56 /* UserCell.swift */; };
 		DA7326AC29ED6FED00D01C56 /* UIViewController + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA7326AB29ED6FED00D01C56 /* UIViewController + Extension.swift */; };
 		DA7326AE29EDC3F900D01C56 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA7326AD29EDC3F900D01C56 /* ProfileViewController.swift */; };
@@ -162,7 +164,9 @@
 				DA3193B829F13D5A008B03F8 /* FirebaseFirestore in Frameworks */,
 				DA299DF029F0105D001F5131 /* FirebaseAuth in Frameworks */,
 				DA55DE3029F2AB0E000A739C /* GoogleSignIn in Frameworks */,
+				DA5A97A22A422940005F73EA /* SPAlert in Frameworks */,
 				DA9899BE2A41E1FD00EA8417 /* SPConfetti in Frameworks */,
+				DA5A97A52A439772005F73EA /* SPIndicator in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -370,6 +374,8 @@
 				DAEFC24629FEFCD600E07774 /* SDWebImage */,
 				DAFB0D212A08636600D301E7 /* MessageKit */,
 				DA9899BD2A41E1FD00EA8417 /* SPConfetti */,
+				DA5A97A12A422940005F73EA /* SPAlert */,
+				DA5A97A42A439772005F73EA /* SPIndicator */,
 			);
 			productName = iMessenger;
 			productReference = DA3A7C0729E1B87500662330 /* iMessenger.app */;
@@ -405,6 +411,8 @@
 				DAEFC24529FEFCD600E07774 /* XCRemoteSwiftPackageReference "SDWebImage" */,
 				DAFB0D202A08636500D301E7 /* XCRemoteSwiftPackageReference "MessageKit" */,
 				DA9899BC2A41E1FC00EA8417 /* XCRemoteSwiftPackageReference "SPConfetti" */,
+				DA5A97A02A422940005F73EA /* XCRemoteSwiftPackageReference "SPAlert" */,
+				DA5A97A32A439772005F73EA /* XCRemoteSwiftPackageReference "SPIndicator" */,
 			);
 			productRefGroup = DA3A7C0829E1B87500662330 /* Products */;
 			projectDirPath = "";
@@ -735,6 +743,22 @@
 				minimumVersion = 7.0.0;
 			};
 		};
+		DA5A97A02A422940005F73EA /* XCRemoteSwiftPackageReference "SPAlert" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ivanvorobei/SPAlert.git";
+			requirement = {
+				kind = exactVersion;
+				version = 4.2.0;
+			};
+		};
+		DA5A97A32A439772005F73EA /* XCRemoteSwiftPackageReference "SPIndicator" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ivanvorobei/SPIndicator.git";
+			requirement = {
+				kind = exactVersion;
+				version = 1.6.5;
+			};
+		};
 		DA9899BC2A41E1FC00EA8417 /* XCRemoteSwiftPackageReference "SPConfetti" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/ivanvorobei/SPConfetti.git";
@@ -796,6 +820,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = DA55DE2E29F2AB0E000A739C /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */;
 			productName = GoogleSignInSwift;
+		};
+		DA5A97A12A422940005F73EA /* SPAlert */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DA5A97A02A422940005F73EA /* XCRemoteSwiftPackageReference "SPAlert" */;
+			productName = SPAlert;
+		};
+		DA5A97A42A439772005F73EA /* SPIndicator */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DA5A97A32A439772005F73EA /* XCRemoteSwiftPackageReference "SPIndicator" */;
+			productName = SPIndicator;
 		};
 		DA9899BD2A41E1FD00EA8417 /* SPConfetti */ = {
 			isa = XCSwiftPackageProductDependency;

@@ -8,6 +8,7 @@
 import UIKit
 import FirebaseAuth
 import FirebaseFirestore
+import SPAlert
 
 class PeopleViewController: UIViewController {
     
@@ -156,7 +157,9 @@ class PeopleViewController: UIViewController {
                 self.users = users
                 self.reloadData(with: nil)
             case .failure(let error):
-                self.showAlert(with: "Ошибка!", and: error.localizedDescription)
+                let alertView = SPAlertView(title: "Error!", message: error.localizedDescription, preset: .error)
+                alertView.duration = 4
+                alertView.present()
             }
         })
     }
@@ -318,7 +321,9 @@ extension PeopleViewController: UICollectionViewDelegate {
                 isContinue = false
                 self.present(profileViewController, animated: true)
             case .failure(let error):
-                self.showAlert(with: "Ошибка!", and: error.localizedDescription)
+                let alertView = SPAlertView(title: "Error!", message: error.localizedDescription, preset: .error)
+                alertView.duration = 4
+                alertView.present()
             }
         }
         
@@ -331,7 +336,9 @@ extension PeopleViewController: UICollectionViewDelegate {
                 
                 self.present(profileViewController, animated: true)
             case .failure(let error):
-                self.showAlert(with: "Ошибка!", and: error.localizedDescription)
+                let alertView = SPAlertView(title: "Error!", message: error.localizedDescription, preset: .error)
+                alertView.duration = 4
+                alertView.present()
             }
         }
         

@@ -7,6 +7,7 @@
 
 import UIKit
 import FirebaseFirestore
+import SPAlert
 
 class ListViewController: UIViewController {
     
@@ -153,7 +154,9 @@ class ListViewController: UIViewController {
                 
                 self.reloadData()
             case .failure(let error):
-                self.showAlert(with: "Ошибка!", and: error.localizedDescription)
+                let alertView = SPAlertView(title: "Error!", message: error.localizedDescription, preset: .error)
+                alertView.duration = 4
+                alertView.present()
             }
         })
         
@@ -167,7 +170,9 @@ class ListViewController: UIViewController {
                 self.reloadData()
 
             case .failure(let error):
-                self.showAlert(with: "Ошибка!", and: error.localizedDescription)
+                let alertView = SPAlertView(title: "Error!", message: error.localizedDescription, preset: .error)
+                alertView.duration = 4
+                alertView.present()
             }
         })
     }
@@ -460,9 +465,13 @@ extension ListViewController: WaitingChatNavigation {
         FirestoreService.shared.deleteWaitingChat(chat: chat) { result in
             switch result {
             case .success:
-                self.showAlert(with: "Успешно!", and: "Чат с \(chat.friendUserName) был удален.")
+                let alertView = SPAlertView(title: "Successful", message: "Сhat with a \(chat.friendUserName) was deleted!", preset: .done)
+                alertView.duration = 3
+                alertView.present()
             case .failure(let error):
-                self.showAlert(with: "Ошибка!", and: error.localizedDescription)
+                let alertView = SPAlertView(title: "Error!", message: error.localizedDescription, preset: .error)
+                alertView.duration = 4
+                alertView.present()
             }
         }
     }
@@ -471,9 +480,13 @@ extension ListViewController: WaitingChatNavigation {
         FirestoreService.shared.changeToActive(chat: chat) { result in
             switch result {
             case .success:
-                self.showAlert(with: "Успешно!", and: "Приятного общения с \(chat.friendUserName).")
+                let alertView = SPAlertView(title: "Successful", message: "It's nice to talk to a \(chat.friendUserName)!", preset: .done)
+                alertView.duration = 3
+                alertView.present()
             case .failure(let error):
-                self.showAlert(with: "Ошибка!", and: error.localizedDescription)
+                let alertView = SPAlertView(title: "Error!", message: error.localizedDescription, preset: .error)
+                alertView.duration = 4
+                alertView.present()
             }
         }
     }

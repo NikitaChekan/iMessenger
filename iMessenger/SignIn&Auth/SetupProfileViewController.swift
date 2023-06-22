@@ -8,6 +8,8 @@
 import UIKit
 import FirebaseAuth
 import SDWebImage
+import SPAlert
+import SPIndicator
 
 class SetupProfileViewController: UIViewController {
     
@@ -105,13 +107,16 @@ class SetupProfileViewController: UIViewController {
             sex: sexSegmentedControl.titleForSegment(at: sexSegmentedControl.selectedSegmentIndex)) { (result) in
                 switch result {
                 case .success(let mUser):
-                    self.showAlert(with: "Успешно!", and: "Приятного общения!") {
+                    let indicatorView = SPIndicatorView(title: "Successful", message: "It's nice to talk!", preset: .done)
+                    indicatorView.present(duration: 3) {
                         let mainTabBar = MainTabBarController(currentUser: mUser)
                         mainTabBar.modalPresentationStyle = .fullScreen
                         self.present(mainTabBar, animated: true)
                     }
                 case .failure(let error):
-                    self.showAlert(with: "Ошибка!", and: error.localizedDescription)
+                    let alertView = SPAlertView(title: "Error!", message: error.localizedDescription, preset: .error)
+                    alertView.duration = 4
+                    alertView.present()
                 }
             }
     }

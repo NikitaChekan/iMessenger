@@ -7,6 +7,8 @@
 
 import UIKit
 import GoogleSignIn
+import SPAlert
+import SPIndicator
 
 class LoginViewController: UIViewController {
     
@@ -112,7 +114,9 @@ class LoginViewController: UIViewController {
                     }
                 }
             case .failure(let error):
-                self.showAlert(with: "Ошибка!", and: error.localizedDescription)
+                let alertView = SPAlertView(title: "Error!", message: error.localizedDescription, preset: .error)
+                alertView.duration = 4
+                alertView.present()
             }
         }
     }
@@ -124,7 +128,8 @@ class LoginViewController: UIViewController {
         ) { (result) in
             switch result {
             case .success(let user):
-                self.showAlert(with: "Успешно!", and: "Вы авторизованы!") {
+                let indicatorView = SPIndicatorView(title: "Successful", message: "You are authorized!", preset: .done)
+                indicatorView.present(duration: 3) {
                     FirestoreService.shared.getUserData(user: user) { (result) in
                         switch result {
                         case .success(let mUser):
@@ -137,7 +142,9 @@ class LoginViewController: UIViewController {
                     }
                 }
             case .failure(let error):
-                self.showAlert(with: "Ошибка!", and: error.localizedDescription)
+                let alertView = SPAlertView(title: "Error!", message: error.localizedDescription, preset: .error)
+                alertView.duration = 4
+                alertView.present()
             }
         }
     }

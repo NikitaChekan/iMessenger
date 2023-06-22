@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import SPAlert
+import SPIndicator
 
 class SignUpViewController: UIViewController {
     
@@ -106,11 +108,14 @@ class SignUpViewController: UIViewController {
         ) { (result) in
             switch result {
             case .success(let user):
-                self.showAlert(with: "Успешно!", and: "Вы зарегистрированы!") {
+                let indicatorView = SPIndicatorView(title: "Successful", message: "You are registered!", preset: .done)
+                indicatorView.present(duration: 3) {
                     self.present(SetupProfileViewController(currentUser: user), animated: true)
                 }
             case .failure(let error):
-                self.showAlert(with: "Ошибка!", and: error.localizedDescription)
+                let alertView = SPAlertView(title: "Error!", message: error.localizedDescription, preset: .error)
+                alertView.duration = 4
+                alertView.present()
             }
         }
     }
@@ -280,13 +285,13 @@ struct SignUpVCProvider: PreviewProvider {
     }
 }
 
-extension UIViewController {
-    func showAlert(with title: String, and message: String, completion: @escaping () -> Void = { }) {
-        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        let okAction = UIAlertAction(title: "OK", style: .default) { (_) in
-            completion()
-        }
-        alertController.addAction(okAction)
-        present(alertController, animated: true)
-    }
-}
+//extension UIViewController {
+//    func showAlert(with title: String, and message: String, completion: @escaping () -> Void = { }) {
+//        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+//        let okAction = UIAlertAction(title: "OK", style: .default) { (_) in
+//            completion()
+//        }
+//        alertController.addAction(okAction)
+//        present(alertController, animated: true)
+//    }
+//}

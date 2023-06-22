@@ -9,6 +9,7 @@ import UIKit
 import MessageKit
 import InputBarAccessoryView
 import FirebaseFirestore
+import SPAlert
 
 class ChatsViewController: MessagesViewController {
     
@@ -107,7 +108,9 @@ class ChatsViewController: MessagesViewController {
                             message.image = image
                             self.insertNewMessage(message: message)
                         case .failure(let error):
-                            self.showAlert(with: "Ошибка!", and: error.localizedDescription)
+                            let alertView = SPAlertView(title: "Error!", message: error.localizedDescription, preset: .error)
+                            alertView.duration = 4
+                            alertView.present()
 
                         }
                     }
@@ -115,7 +118,9 @@ class ChatsViewController: MessagesViewController {
                     self?.insertNewMessage(message: message)
                 }
             case .failure(let error):
-                self?.showAlert(with: "Ошибка!", and: error.localizedDescription)
+                let alertView = SPAlertView(title: "Error!", message: error.localizedDescription, preset: .error)
+                alertView.duration = 4
+                alertView.present()
             }
         }
     }
@@ -150,11 +155,15 @@ class ChatsViewController: MessagesViewController {
                         self.messagesCollectionView.scrollToLastItem()
                         FirestoreService.shared.updateViewedMessage(for: message.messageId, friendId: self.chat.friendId)
                     case .failure(_):
-                        self.showAlert(with: "Ошибка!", and: "Изображение не доставлено")
+                        let alertView = SPAlertView(title: "Error!", message: "Image not delivered!", preset: .error)
+                        alertView.duration = 4
+                        alertView.present()
                     }
                 }
             case .failure(let error):
-                self.showAlert(with: "Ошибка!", and: error.localizedDescription)
+                let alertView = SPAlertView(title: "Error!", message: error.localizedDescription, preset: .error)
+                alertView.duration = 4
+                alertView.present()
             }
         }
     }
@@ -399,7 +408,9 @@ extension ChatsViewController: InputBarAccessoryViewDelegate {
                 self.messagesCollectionView.scrollToLastItem()
                 FirestoreService.shared.updateViewedMessage(for: message.messageId, friendId: self.chat.friendId)
             case .failure(let error):
-                self.showAlert(with: "Ошибка!", and: error.localizedDescription)
+                let alertView = SPAlertView(title: "Error!", message: error.localizedDescription, preset: .error)
+                alertView.duration = 4
+                alertView.present()
             }
         }
         

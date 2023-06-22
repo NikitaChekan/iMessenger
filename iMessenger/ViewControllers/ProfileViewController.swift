@@ -7,6 +7,7 @@
 
 import UIKit
 import SDWebImage
+import SPAlert
 
 class ProfileViewController: UIViewController {
     
@@ -114,8 +115,9 @@ class ProfileViewController: UIViewController {
                 case .failure(let error):
                     let scene = UIApplication.shared.connectedScenes.first as? UIWindowScene
                     let viewController = scene!.windows[0].rootViewController
-                    
-                    UIApplication.getTopViewController(base: viewController)?.showAlert(with: "Ошибка!", and: error.localizedDescription)
+                    let alertView = SPAlertView(title: "Error!", message: error.localizedDescription, preset: .error)
+                    alertView.duration = 4
+                    alertView.present()
                 }
             }
         }
@@ -129,12 +131,13 @@ class ProfileViewController: UIViewController {
             FirestoreService.shared.createWaitingChat(message: message, receiver: self.user) { result in
                 switch result {
                 case .success:
-                    UIApplication.getTopViewController()?.showAlert(
-                        with: "Успешно!",
-                        and: "Ваше сообщение для \(self.user.userName) было отправлено!"
-                    )
+                    let alertView = SPAlertView(title: "Successful", message: "Your message for a \(self.user.userName) was sent!", preset: .done)
+                    alertView.duration = 3
+                    alertView.present()
                 case .failure(let error):
-                    UIApplication.getTopViewController()?.showAlert(with: "Ошибка!", and: error.localizedDescription)
+                    let alertView = SPAlertView(title: "Error!", message: error.localizedDescription, preset: .error)
+                    alertView.duration = 4
+                    alertView.present()
                 }
             }
             
