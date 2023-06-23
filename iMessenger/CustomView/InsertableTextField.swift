@@ -7,8 +7,9 @@
 
 import UIKit
 
-class InsertableTextField: UITextField {
+final class InsertableTextField: UITextField {
     
+    // MARK: - Properties
     private var isEmoji: Bool = false
     
     override var textInputMode: UITextInputMode? {
@@ -23,6 +24,7 @@ class InsertableTextField: UITextField {
         return nil
     }
     
+    // MARK: - Init
     override init(frame: CGRect) {
         super.init(frame: frame)
         
@@ -43,12 +45,6 @@ class InsertableTextField: UITextField {
         leftView?.frame = CGRect(x: 0, y: 0, width: 19, height: 19)
         leftViewMode = .always
         
-//        let image = UIImage(systemName: "smiley")
-//        let imageView = UIImageView(image: image)
-//        imageView.setupColor(color: .lightGray)
-//        leftView = imageView
-//        leftViewMode = .always
-        
         let button = UIButton(type: .system)
         button.setImage(UIImage(named: "Sent"), for: .normal)
         button.applyGradients(cornerRadius: 10)
@@ -63,11 +59,13 @@ class InsertableTextField: UITextField {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: - Actions
     @objc private func showEmoji() {
         self.isEmoji = true
         self.becomeFirstResponder()
     }
     
+    // MARK: - Methods
     override func leftViewRect(forBounds bounds: CGRect) -> CGRect {
         var rect = super.leftViewRect(forBounds: bounds)
         rect.origin.x += 12

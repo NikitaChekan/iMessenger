@@ -9,30 +9,30 @@ import UIKit
 import SPAlert
 import SPIndicator
 
-class SignUpViewController: UIViewController {
+final class SignUpViewController: UIViewController {
     
     // MARK: Properties
     private let scrollView = UIScrollView()
     private var stackView = UIStackView()
     
-    let welcomeLabel = UILabel(text: "Good to see you!", font: .avenir26())
+    private let welcomeLabel = UILabel(text: "Good to see you!", font: .avenir26())
     
-    let emailLabel = UILabel(text: "Email")
-    let passwordLabel = UILabel(text: "Password")
-    let confirmPasswordLabel = UILabel(text: "Confirm password")
-    let alreadyOnboardLabel = UILabel(text: "Already onboard?")
+    private let emailLabel = UILabel(text: "Email")
+    private let passwordLabel = UILabel(text: "Password")
+    private let confirmPasswordLabel = UILabel(text: "Confirm password")
+    private let alreadyOnboardLabel = UILabel(text: "Already onboard?")
     
-    let emailTextField = OneLineTextField(font: .avenir20())
-    let passwordTextField = OneLineTextField(font: .avenir20(), isSecure: true)
-    let confirmPasswordTextField = OneLineTextField(font: .avenir20(), isSecure: true)
+    private let emailTextField = OneLineTextField(font: .avenir20())
+    private let passwordTextField = OneLineTextField(font: .avenir20(), isSecure: true)
+    private let confirmPasswordTextField = OneLineTextField(font: .avenir20(), isSecure: true)
     
-    let signUpButton = UIButton(
+    private let signUpButton = UIButton(
         title: "Sign Up",
         titleColor: .white,
         backgroundColor: UIColor(named: "buttonBlack") ?? .black
     )
     
-    let loginButton: UIButton = {
+    private let loginButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("Login", for: .normal)
         button.setTitleColor(UIColor(named: "buttonRed"), for: .normal)
@@ -127,43 +127,43 @@ class SignUpViewController: UIViewController {
     }
     
     // MARK: Methods
-        private func configureElements() {
-            
-            // Configure scrollView
-            scrollView.alwaysBounceVertical = true
-            scrollView.keyboardDismissMode = .onDrag
-            
-            // Configure welcomeLabel
-            welcomeLabel.textAlignment = .center
-            
-            // Configure emailTextField
-            emailTextField.delegate = self
-            emailTextField.returnKeyType = .go
-            emailTextField.keyboardType = .emailAddress
-            emailTextField.tintColor = UIColor(named: "tabBarColor")
-            
-            // Configure passwordTextField
-            passwordTextField.delegate = self
-            passwordTextField.returnKeyType = .go
-            eyeButtonForPasswordTextField.addTarget(self, action: #selector(eyeButtonForPasswordTapped), for: .touchUpInside)
-            passwordTextField.rightView = eyeButtonForPasswordTextField
-            passwordTextField.rightViewMode = .always
-            passwordTextField.tintColor = UIColor(named: "tabBarColor")
-            
-            // Configure confirmPasswordTextField
-            confirmPasswordTextField.delegate = self
-            eyeButtonForConfirmTextField.addTarget(self, action: #selector(eyeButtonForConfirmTapped), for: .touchUpInside)
-            confirmPasswordTextField.rightView = eyeButtonForConfirmTextField
-            confirmPasswordTextField.rightViewMode = .always
-            confirmPasswordTextField.tintColor = UIColor(named: "tabBarColor")
-            
-            // Configure signUpButton
-            signUpButton.addTarget(self, action: #selector(signUpButtonTapped), for: .touchUpInside)
-            
-            // Configure loginButton
-            loginButton.addTarget(self, action: #selector(loginButtonTapped), for: .touchUpInside)
-            
-        }
+    private func configureElements() {
+        
+        // Configure scrollView
+        scrollView.alwaysBounceVertical = true
+        scrollView.keyboardDismissMode = .onDrag
+        
+        // Configure welcomeLabel
+        welcomeLabel.textAlignment = .center
+        
+        // Configure emailTextField
+        emailTextField.delegate = self
+        emailTextField.returnKeyType = .go
+        emailTextField.keyboardType = .emailAddress
+        emailTextField.tintColor = UIColor(named: "tabBarColor")
+        
+        // Configure passwordTextField
+        passwordTextField.delegate = self
+        passwordTextField.returnKeyType = .go
+        eyeButtonForPasswordTextField.addTarget(self, action: #selector(eyeButtonForPasswordTapped), for: .touchUpInside)
+        passwordTextField.rightView = eyeButtonForPasswordTextField
+        passwordTextField.rightViewMode = .always
+        passwordTextField.tintColor = UIColor(named: "tabBarColor")
+        
+        // Configure confirmPasswordTextField
+        confirmPasswordTextField.delegate = self
+        eyeButtonForConfirmTextField.addTarget(self, action: #selector(eyeButtonForConfirmTapped), for: .touchUpInside)
+        confirmPasswordTextField.rightView = eyeButtonForConfirmTextField
+        confirmPasswordTextField.rightViewMode = .always
+        confirmPasswordTextField.tintColor = UIColor(named: "tabBarColor")
+        
+        // Configure signUpButton
+        signUpButton.addTarget(self, action: #selector(signUpButtonTapped), for: .touchUpInside)
+        
+        // Configure loginButton
+        loginButton.addTarget(self, action: #selector(loginButtonTapped), for: .touchUpInside)
+        
+    }
     
 }
 

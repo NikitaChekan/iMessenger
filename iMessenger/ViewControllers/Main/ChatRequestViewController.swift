@@ -7,7 +7,9 @@
 
 import UIKit
 
-class ChatRequestViewController: UIViewController {
+final class ChatRequestViewController: UIViewController {
+    
+    weak var delegate: WaitingChatNavigation?
     
     let containerView = UIView()
     let imageView = UIImageView(image: UIImage(named: "human11"), contentMode: .scaleAspectFill)
@@ -36,10 +38,10 @@ class ChatRequestViewController: UIViewController {
         cornerRadius: 10
     )
     
-    weak var delegate: WaitingChatNavigation?
     
     private var chat: MChat
     
+    // MARK: - Init
     init(chat: MChat) {
         self.chat = chat
         nameLabel.text = chat.friendUserName
@@ -51,6 +53,7 @@ class ChatRequestViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: - Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
                 
@@ -61,6 +64,13 @@ class ChatRequestViewController: UIViewController {
         acceptButton.addTarget(self, action: #selector(acceptButtonTapped), for: .touchUpInside)
     }
     
+    // MARK: - Layout methods
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        acceptButton.applyGradients(cornerRadius: 10)
+    }
+    
+    // MARK: - Actions
     @objc private func denyButtonTapped() {
         self.dismiss(animated: true) {
             self.delegate?.removeWaitingChat(chat: self.chat)
@@ -73,6 +83,7 @@ class ChatRequestViewController: UIViewController {
         }
     }
     
+    // MARK: - Methods
     private func customiseElements() {
         imageView.translatesAutoresizingMaskIntoConstraints = false
         containerView.translatesAutoresizingMaskIntoConstraints = false
@@ -88,12 +99,9 @@ class ChatRequestViewController: UIViewController {
         containerView.layer.cornerRadius = 30
     }
     
-    override func viewWillLayoutSubviews() {
-        super.viewWillLayoutSubviews()
-        acceptButton.applyGradients(cornerRadius: 10)
-    }
 }
 
+// MARK: - setup Constraints
 extension ChatRequestViewController {
     
     private func setupConstraints() {

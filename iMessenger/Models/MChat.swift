@@ -10,6 +10,7 @@ import FirebaseFirestore
 
 struct MChat: Hashable, Decodable {
     
+    // MARK: - Properties
     static let waitingPlugModel = MChat(friendUserName: "nil", friendAvatarStringURL: "0", friendId: "0", lastMessageContent: "nil", lastSenderId: "0", lastMessageDate: Date())
     static let activePlugModel = MChat(friendUserName: "nil", friendAvatarStringURL: "1", friendId: "1", lastMessageContent: "nil", lastSenderId: "1", lastMessageDate: Date())
     
@@ -30,6 +31,7 @@ struct MChat: Hashable, Decodable {
         return rep
     }
     
+    // MARK: - Init
     init(friendUserName: String, friendAvatarStringURL: String, friendId: String, lastMessageContent: String, lastSenderId: String, lastMessageDate: Date) {
         self.friendUserName = friendUserName
         self.friendAvatarStringURL = friendAvatarStringURL
@@ -75,6 +77,7 @@ struct MChat: Hashable, Decodable {
         self.lastMessageDate = lastMessageDate.dateValue()
     }
     
+    // MARK: - Methods
     func hash(into hasher: inout Hasher) {
         hasher.combine(friendId)
     }

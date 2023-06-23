@@ -10,33 +10,33 @@ import GoogleSignIn
 import SPAlert
 import SPIndicator
 
-class LoginViewController: UIViewController {
+final class LoginViewController: UIViewController {
     
     // MARK: Properties
     private let scrollView = UIScrollView()
     private var stackView = UIStackView()
     
-    let welcomeLabel = UILabel(text: "Welcome back!", font: .avenir26())
+    private let welcomeLabel = UILabel(text: "Welcome back!", font: .avenir26())
     
-    let loginWithLabel = UILabel(text: "Login with")
-    let orLabel = UILabel(text: "or")
-    let emailLabel = UILabel(text: "Email")
-    let passwordLabel = UILabel(text: "Password")
-    let needAnAccountLabel = UILabel(text: "Need an account?")
+    private let loginWithLabel = UILabel(text: "Login with")
+    private let orLabel = UILabel(text: "or")
+    private let emailLabel = UILabel(text: "Email")
+    private let passwordLabel = UILabel(text: "Password")
+    private let needAnAccountLabel = UILabel(text: "Need an account?")
     
-    let googleButton = UIButton(
+    private let googleButton = UIButton(
         title: "Google",
         titleColor: .black,
         backgroundColor: .white,
         isShadow: true
     )
     
-    let loginButton = UIButton(
+    private let loginButton = UIButton(
         title: "Login",
         titleColor: .white,
         backgroundColor: UIColor(named: "buttonBlack") ?? .black
     )
-    let signUpButton: UIButton = {
+    private let signUpButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("Sign Up", for: .normal)
         button.setTitleColor(UIColor(named: "buttonRed"), for: .normal)
@@ -45,8 +45,8 @@ class LoginViewController: UIViewController {
         return button
     }()
     
-    let emailTextField = OneLineTextField(font: .avenir20())
-    let passwordTextField = OneLineTextField(font: .avenir20(), isSecure: true)
+    private let emailTextField = OneLineTextField(font: .avenir20())
+    private let passwordTextField = OneLineTextField(font: .avenir20(), isSecure: true)
     
     weak var delegate: AuthNavigationDelegate?
     
@@ -174,7 +174,6 @@ class LoginViewController: UIViewController {
         emailTextField.returnKeyType = .go
         emailTextField.keyboardType = .emailAddress
         emailTextField.tintColor = UIColor(named: "tabBarColor")
-
         
         // Configure passwordTextField
         passwordTextField.delegate = self
@@ -292,22 +291,22 @@ extension LoginViewController: UITextFieldDelegate {
 
 import SwiftUI
 
-struct LoginVCProvider: PreviewProvider {
-    static var previews: some View {
-        ConteinerView()
-            .ignoresSafeArea()
-    }
-    
-    struct ConteinerView: UIViewControllerRepresentable {
-        
-        let viewController = LoginViewController()
-        
-        func makeUIViewController(context: UIViewControllerRepresentableContext<LoginVCProvider.ConteinerView>) -> LoginViewController {
-            return viewController
-        }
-        
-        func updateUIViewController(_ uiViewController: LoginVCProvider.ConteinerView.UIViewControllerType, context: UIViewControllerRepresentableContext<LoginVCProvider.ConteinerView>) {
-            
-        }
-    }
-}
+//struct LoginVCProvider: PreviewProvider {
+//    static var previews: some View {
+//        ConteinerView()
+//            .ignoresSafeArea()
+//    }
+//    
+//    struct ConteinerView: UIViewControllerRepresentable {
+//        
+//        let viewController = LoginViewController()
+//        
+//        func makeUIViewController(context: UIViewControllerRepresentableContext<LoginVCProvider.ConteinerView>) -> LoginViewController {
+//            return viewController
+//        }
+//        
+//        func updateUIViewController(_ uiViewController: LoginVCProvider.ConteinerView.UIViewControllerType, context: UIViewControllerRepresentableContext<LoginVCProvider.ConteinerView>) {
+//            
+//        }
+//    }
+//}

@@ -9,15 +9,9 @@ import UIKit
 import FirebaseFirestore
 import MessageKit
 
-struct imageItem: MediaItem {
-    var url: URL?
-    var image: UIImage?
-    var placeholderImage: UIImage
-    var size: CGSize
-}
-
 struct MMessage: Hashable, MessageType {
     
+    // MARK: - Properties
     let content: String
     var sender: MessageKit.SenderType
     var sentDate: Date
@@ -30,7 +24,7 @@ struct MMessage: Hashable, MessageType {
     
     var kind: MessageKit.MessageKind {
         if let image = image {
-            let mediaItem = imageItem(url: nil, image: nil, placeholderImage: image, size: image.size)
+            let mediaItem = ImageItem(url: nil, image: nil, placeholderImage: image, size: image.size)
             return .photo(mediaItem)
         } else {
             return .text(content)
@@ -40,6 +34,7 @@ struct MMessage: Hashable, MessageType {
     var image: UIImage? = nil
     var downloadURL: URL? = nil
     
+    // MARK: - Init
     init(user: MUser, content: String, isViewed: Bool) {
         self.content = content
         sender = MSender(senderId: user.id, displayName: user.userName)
@@ -99,6 +94,7 @@ struct MMessage: Hashable, MessageType {
         return rep
     }
     
+    // MARK: - Methods
     func hash(into hasher: inout Hasher) {
         hasher.combine(messageId)
     }
@@ -108,7 +104,7 @@ struct MMessage: Hashable, MessageType {
     }
     
 }
-
+// MARK: - Comparable
 extension MMessage: Comparable {
     static func < (lhs: MMessage, rhs: MMessage) -> Bool {
         return lhs.sentDate < rhs.sentDate

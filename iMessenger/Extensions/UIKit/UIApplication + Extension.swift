@@ -12,7 +12,7 @@ import UIKit
 extension UIApplication {
     // MARK: - Methods
     
-    class func getTopViewController(base: UIViewController? = UIApplication.shared.keyWindow?.rootViewController) -> UIViewController? {
+    class func getTopViewController(base: UIViewController?) -> UIViewController? {
         // This code benath for get rootViewController
         // let scene = UIApplication.shared.connectedScenes.first as? UIWindowScene
         // let viewController = scene!.windows[0].rootViewController

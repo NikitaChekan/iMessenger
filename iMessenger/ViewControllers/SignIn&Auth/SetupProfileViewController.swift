@@ -11,26 +11,26 @@ import SDWebImage
 import SPAlert
 import SPIndicator
 
-class SetupProfileViewController: UIViewController {
+final class SetupProfileViewController: UIViewController {
     
     // MARK: Properties
     private let scrollView = UIScrollView()
     private var stackView = UIStackView()
     
-    let welcomeLabel = UILabel(text: "Set up profile!", font: .avenir26())
+    private let welcomeLabel = UILabel(text: "Set up profile!", font: .avenir26())
     
-    let fullImageView = AddPhotoView()
+    private let fullImageView = AddPhotoView()
     
-    let fullNameLabel = UILabel(text: "Full name")
-    let aboutMeLabel = UILabel(text: "About me")
-    let sexLabel = UILabel(text: "Sex")
+    private let fullNameLabel = UILabel(text: "Full name")
+    private let aboutMeLabel = UILabel(text: "About me")
+    private let sexLabel = UILabel(text: "Sex")
     
-    let fullNameTextField = OneLineTextField(font: .avenir20())
-    let aboutMeTextField = OneLineTextField(font: .avenir20())
+    private let fullNameTextField = OneLineTextField(font: .avenir20())
+    private let aboutMeTextField = OneLineTextField(font: .avenir20())
     
-    let sexSegmentedControl = UISegmentedControl(first: "Male", second: "Female")
+    private let sexSegmentedControl = UISegmentedControl(first: "Male", second: "Female")
     
-    let goToChatsButton = UIButton(
+    private let goToChatsButton = UIButton(
         title: "Go to chats!",
         titleColor: .white,
         backgroundColor: UIColor(named: "buttonBlack") ?? .black,
@@ -301,24 +301,24 @@ extension SetupProfileViewController: UITextFieldDelegate {
 
 // MARK: - SwiftUI
 
-import SwiftUI
-
-struct SetupProfileVCProvider: PreviewProvider {
-    static var previews: some View {
-        ConteinerView()
-            .ignoresSafeArea()
-    }
-    
-    struct ConteinerView: UIViewControllerRepresentable {
-        
-        let viewController = SetupProfileViewController(currentUser: Auth.auth().currentUser!)
-        
-        func makeUIViewController(context: UIViewControllerRepresentableContext<SetupProfileVCProvider.ConteinerView>) -> SetupProfileViewController {
-            return viewController
-        }
-        
-        func updateUIViewController(_ uiViewController: SetupProfileVCProvider.ConteinerView.UIViewControllerType, context: UIViewControllerRepresentableContext<SetupProfileVCProvider.ConteinerView>) {
-            
-        }
-    }
-}
+//import SwiftUI
+//
+//struct SetupProfileVCProvider: PreviewProvider {
+//    static var previews: some View {
+//        ConteinerView()
+//            .ignoresSafeArea()
+//    }
+//    
+//    struct ConteinerView: UIViewControllerRepresentable {
+//        
+//        let viewController = SetupProfileViewController(currentUser: Auth.auth().currentUser!)
+//        
+//        func makeUIViewController(context: UIViewControllerRepresentableContext<SetupProfileVCProvider.ConteinerView>) -> SetupProfileViewController {
+//            return viewController
+//        }
+//        
+//        func updateUIViewController(_ uiViewController: SetupProfileVCProvider.ConteinerView.UIViewControllerType, context: UIViewControllerRepresentableContext<SetupProfileVCProvider.ConteinerView>) {
+//            
+//        }
+//    }
+//}

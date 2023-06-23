@@ -8,8 +8,9 @@
 import UIKit
 import SDWebImage
 
-class ActiveChatCell: UICollectionViewCell {
+final class ActiveChatCell: UICollectionViewCell {
     
+    // MARK: - Property
     static var reuseId = "ActiveChatCell"
     
     let friendImageView = UIImageView()
@@ -20,13 +21,12 @@ class ActiveChatCell: UICollectionViewCell {
     let gradientView = GradientView(
         from: .topTrailing,
         to: .bottomLeading,
-//        startColor: UIColor(named: "firstGradientColor"),
         startColor: #colorLiteral(red: 0.7882352941, green: 0.631372549, blue: 0.9411764706, alpha: 1),
-//        endColor: UIColor(named: "secondGradientColor"),
         endColor: #colorLiteral(red: 0.4784313725, green: 0.6980392157, blue: 0.9215686275, alpha: 1),
         animate: true
     )
     
+    // MARK: - Init
     override init(frame: CGRect) {
         super.init(frame: frame)
         
@@ -43,7 +43,9 @@ class ActiveChatCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: - Methods
     private func customizeElements() {
+        
         // Configure friendImageView
         friendImageView.translatesAutoresizingMaskIntoConstraints = false
         friendImageView.contentMode = .scaleAspectFill
@@ -74,7 +76,6 @@ class ActiveChatCell: UICollectionViewCell {
 extension ActiveChatCell {
     
     private func setupConstraints() {
-        
         // Configure content hugging priority
         friendName.setContentHuggingPriority(UILayoutPriority(rawValue: 250), for: .horizontal)
         dateLabel.setContentHuggingPriority(UILayoutPriority(rawValue: 251), for: .horizontal)
@@ -168,4 +169,3 @@ extension ActiveChatCell: SelfConfiguringCell {
 //        }
 //    }
 //}
-

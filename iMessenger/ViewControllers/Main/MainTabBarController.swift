@@ -7,10 +7,12 @@
 
 import UIKit
 
-class MainTabBarController: UITabBarController {
+final class MainTabBarController: UITabBarController {
     
+    // MARK: - Properties
     private let currentUser: MUser
     
+    // MARK: - Init
     init(currentUser: MUser = MUser(
         userName: "Nick",
         email: "test999@mail.ru",
@@ -27,6 +29,7 @@ class MainTabBarController: UITabBarController {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: - Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -52,6 +55,7 @@ class MainTabBarController: UITabBarController {
         ]
     }
     
+    // MARK: - Methods
     private func generateNavigationController(rootViewController: UIViewController, title: String, image: UIImage) -> UIViewController {
         let navigationVC = UINavigationController(rootViewController: rootViewController)
         navigationVC.tabBarItem.title = title

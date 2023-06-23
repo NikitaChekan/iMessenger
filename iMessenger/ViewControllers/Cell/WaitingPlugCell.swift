@@ -8,14 +8,13 @@
 import UIKit
 
 final class WaitingPlugCell: UICollectionViewCell {
-    // MARK: Properties
     
+    // MARK: - Properties
     static var reuseId = "WaitingPlugCell"
     let imageView = UIImageView()
     let label = UILabel()
     
-    // MARK: Init
-    
+    // MARK: - Init
     override init(frame: CGRect) {
         super.init(frame: frame)
         
@@ -32,7 +31,6 @@ final class WaitingPlugCell: UICollectionViewCell {
     }
     
     // MARK: - Methods
-    
     private func customizeElements() {
         imageView.tintColor = UIColor(named: "plugGrayColor")
         
@@ -43,7 +41,6 @@ final class WaitingPlugCell: UICollectionViewCell {
 }
 
 // MARK: - Setup constraints
-
 extension WaitingPlugCell {
     private func setupConstraints() {
         // Configure imageView
@@ -74,7 +71,6 @@ extension WaitingPlugCell {
 }
 
 // MARK: - Self configuring cell
-
 extension WaitingPlugCell: SelfConfiguringCell {
     func configure<U>(with value: U) where U : Hashable {
         guard let text: String = value as? String else {

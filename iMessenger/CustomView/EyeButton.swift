@@ -9,6 +9,7 @@ import UIKit
 
 final class EyeButton: UIButton {
     
+    // MARK: - Init
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupEyeButton()
@@ -19,6 +20,7 @@ final class EyeButton: UIButton {
         fatalError("init(coder:) has not benn implement")
     }
     
+    // MARK: - Methods
     private func setupEyeButton() {
         setImage(UIImage(systemName: "eye.slash"), for: .normal)
         tintColor = .label

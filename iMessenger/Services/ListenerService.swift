@@ -10,7 +10,7 @@ import FirebaseCore
 import FirebaseAuth
 import FirebaseFirestore
 
-class ListenerService {
+final class ListenerService {
     
     static let shared = ListenerService()
     
@@ -24,6 +24,7 @@ class ListenerService {
         return Auth.auth().currentUser!.uid
     }
     
+    // MARK: - Methods
     func usersObserve(users: [MUser], completion: @escaping (Result<[MUser], Error>) -> Void) -> ListenerRegistration? {
         var users = users
         let usersListener = usersReference.addSnapshotListener { (querySnapshot, error) in

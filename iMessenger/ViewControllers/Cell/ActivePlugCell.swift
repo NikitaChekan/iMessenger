@@ -9,12 +9,12 @@ import UIKit
 
 final class ActivePlugCell: UICollectionViewCell {
     
-    // MARK: Properties
+    // MARK: - Properties
     static var reuseId = "ActivePlugCell"
     let imageView = UIImageView()
     let label = UILabel()
     
-    // MARK: Init
+    // MARK: - Init
     override init(frame: CGRect) {
         super.init(frame: frame)
         

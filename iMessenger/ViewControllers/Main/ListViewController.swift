@@ -9,8 +9,9 @@ import UIKit
 import FirebaseFirestore
 import SPAlert
 
-class ListViewController: UIViewController {
+final class ListViewController: UIViewController {
     
+    // MARK: - Enumeration
     enum Layout {
         case filled
         case empty
@@ -30,8 +31,9 @@ class ListViewController: UIViewController {
         }
     }
     
-    var waitingChats = [MChat]()
-    var activeChats = [MChat]()
+    // MARK: - Properties
+    private var waitingChats = [MChat]()
+    private var activeChats = [MChat]()
     
     private var waitingLayout: Layout = .filled
     private var isEmptyWaitingChats: Bool = false {
@@ -61,11 +63,11 @@ class ListViewController: UIViewController {
     
     
     private var dataSource: UICollectionViewDiffableDataSource<Section, MChat>?
-    
-    var collectionView: UICollectionView!
+    private var collectionView: UICollectionView!
     
     private let currentUser: MUser
     
+    // MARK: - Init
     init(currentUser: MUser) {
         self.currentUser = currentUser
         super.init(nibName: nil, bundle: nil)
@@ -82,6 +84,7 @@ class ListViewController: UIViewController {
         activeChatsListener?.remove()
     }
     
+    // MARK: - Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -99,6 +102,7 @@ class ListViewController: UIViewController {
         self.reloadData()
     }
     
+    // MARK: - Methods
     private func setupSearchBar() {
         navigationController?.navigationBar.barTintColor = UIColor(named: "backgroundAppColor")
         navigationController?.navigationBar.shadowImage = UIImage()
@@ -502,24 +506,24 @@ extension ListViewController: UISearchBarDelegate {
 
 // MARK: - SwiftUI
 
-import SwiftUI
-
-struct ListVCProvider: PreviewProvider {
-    static var previews: some View {
-        ConteinerView()
-            .ignoresSafeArea()
-    }
-    
-    struct ConteinerView: UIViewControllerRepresentable {
-        
-        let tabBarVC = MainTabBarController()
-        
-        func makeUIViewController(context: UIViewControllerRepresentableContext<ListVCProvider.ConteinerView>) -> MainTabBarController {
-            return tabBarVC
-        }
-        
-        func updateUIViewController(_ uiViewController: ListVCProvider.ConteinerView.UIViewControllerType, context: UIViewControllerRepresentableContext<ListVCProvider.ConteinerView>) {
-            
-        }
-    }
-}
+//import SwiftUI
+//
+//struct ListVCProvider: PreviewProvider {
+//    static var previews: some View {
+//        ConteinerView()
+//            .ignoresSafeArea()
+//    }
+//
+//    struct ConteinerView: UIViewControllerRepresentable {
+//
+//        let tabBarVC = MainTabBarController()
+//
+//        func makeUIViewController(context: UIViewControllerRepresentableContext<ListVCProvider.ConteinerView>) -> MainTabBarController {
+//            return tabBarVC
+//        }
+//
+//        func updateUIViewController(_ uiViewController: ListVCProvider.ConteinerView.UIViewControllerType, context: UIViewControllerRepresentableContext<ListVCProvider.ConteinerView>) {
+//
+//        }
+//    }
+//}

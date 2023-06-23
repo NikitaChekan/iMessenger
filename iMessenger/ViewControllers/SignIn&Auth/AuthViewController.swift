@@ -9,29 +9,29 @@ import UIKit
 import SPConfetti
 import SPAlert
 
-class AuthViewController: UIViewController {
+final class AuthViewController: UIViewController {
     
     // MARK: Properties
-    let logoImageView = UIImageView(image: UIImage(named: "Logo-White"), contentMode: .scaleAspectFit)
+    private let logoImageView = UIImageView(image: UIImage(named: "Logo-White"), contentMode: .scaleAspectFit)
     
-    let googleLabel = UILabel(text: "Get started with")
-    let emailLabel = UILabel(text: "Or sign up with")
-    let alreadyOnboardLabel = UILabel(text: "Already onboard?")
+    private let googleLabel = UILabel(text: "Get started with")
+    private let emailLabel = UILabel(text: "Or sign up with")
+    private let alreadyOnboardLabel = UILabel(text: "Already onboard?")
     
-    let googleButton = UIButton(
+    private let googleButton = UIButton(
         title: "Google",
         titleColor: .black,
         backgroundColor: .white,
         isShadow: true
     )
     
-    let emailButton = UIButton(
+    private let emailButton = UIButton(
         title: "Email",
         titleColor: .white,
         backgroundColor: UIColor(named: "buttonBlack") ?? .black
     )
     
-    let loginButton = UIButton(
+    private let loginButton = UIButton(
         title: "Login",
         titleColor: UIColor(named: "buttonRed") ?? .red,
         backgroundColor: .white,
@@ -204,25 +204,25 @@ extension AuthViewController: AuthNavigationDelegate {
 
 // MARK: - SwiftUI
 
-import SwiftUI
-
-struct AuthVCProvider: PreviewProvider {
-    static var previews: some View {
-        ConteinerView()
-            .ignoresSafeArea()
-    }
-    
-    struct ConteinerView: UIViewControllerRepresentable {
-        
-        let viewController = AuthViewController()
-        
-        func makeUIViewController(context: UIViewControllerRepresentableContext<AuthVCProvider.ConteinerView>) -> AuthViewController {
-            return viewController
-        }
-        
-        func updateUIViewController(_ uiViewController: AuthVCProvider.ConteinerView.UIViewControllerType, context: UIViewControllerRepresentableContext<AuthVCProvider.ConteinerView>) {
-            
-        }
-    }
-}
+//import SwiftUI
+//
+//struct AuthVCProvider: PreviewProvider {
+//    static var previews: some View {
+//        ConteinerView()
+//            .ignoresSafeArea()
+//    }
+//    
+//    struct ConteinerView: UIViewControllerRepresentable {
+//        
+//        let viewController = AuthViewController()
+//        
+//        func makeUIViewController(context: UIViewControllerRepresentableContext<AuthVCProvider.ConteinerView>) -> AuthViewController {
+//            return viewController
+//        }
+//        
+//        func updateUIViewController(_ uiViewController: AuthVCProvider.ConteinerView.UIViewControllerType, context: UIViewControllerRepresentableContext<AuthVCProvider.ConteinerView>) {
+//            
+//        }
+//    }
+//}
 

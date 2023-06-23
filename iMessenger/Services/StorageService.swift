@@ -9,8 +9,9 @@ import UIKit
 import FirebaseAuth
 import FirebaseStorage
 
-class StorageService {
+final class StorageService {
     
+    // MARK: - Properties
     static let shared = StorageService()
     
     let storageReference = Storage.storage().reference()
@@ -27,6 +28,7 @@ class StorageService {
         return Auth.auth().currentUser!.uid
     }
     
+    // MARK: - Methods
     func upload(photo: UIImage, completion: @escaping (Result<URL, Error>) -> Void) {
         
         guard let scaledImage = photo.scaledToSafeUploadSize,

@@ -8,18 +8,15 @@
 import UIKit
 import QuartzCore
 
-// MARK: - Class
-
 final class BadgeLabel: UILabel {
-    // MARK: - Enumeration
     
+    // MARK: - Enumeration
     enum IntValueResult {
         case success(Int)
         case failure(Error)
     }
     
     // MARK: - Properties
-    
     private var padding: CGFloat = 12
     
     // increase content size to account for padding

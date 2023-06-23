@@ -8,14 +8,16 @@
 import UIKit
 import SDWebImage
 
-class UserCell: UICollectionViewCell {
+final class UserCell: UICollectionViewCell {
+    
+    // MARK: - Properties
+    static var reuseId = "UserCell"
     
     let userImageView = UIImageView()
     let userName = UILabel(text: "text", font: .laoSangamMN20())
     let containerView = UIView()
-    
-    static var reuseId = "UserCell"
 
+    // MARK: - Init
     override init(frame: CGRect) {
         super.init(frame: frame)
         
@@ -30,6 +32,11 @@ class UserCell: UICollectionViewCell {
         setupConstraints()
     }
     
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    // MARK: - Life Cycle
     override func layoutSubviews() {
         super.layoutSubviews()
         self.containerView.layer.cornerRadius = 4
@@ -38,10 +45,6 @@ class UserCell: UICollectionViewCell {
     
     override func prepareForReuse() {
         userImageView.image = nil
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
     }
     
 }
@@ -57,7 +60,7 @@ extension UserCell {
         addSubview(containerView)
         containerView.addSubview(userImageView)
         containerView.addSubview(userName)
-
+        
         NSLayoutConstraint.activate([
             containerView.topAnchor.constraint(equalTo: self.topAnchor),
             containerView.leadingAnchor.constraint(equalTo: self.leadingAnchor),

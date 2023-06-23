@@ -9,6 +9,8 @@ import UIKit
 import FirebaseFirestore
 
 struct MUser: Hashable, Decodable {
+    
+    // MARK: - Properties
     var userName: String
     var email: String
     var avatarStringURL: String
@@ -69,6 +71,7 @@ struct MUser: Hashable, Decodable {
         return rep
     }
     
+    // MARK: - Methods
     func hash(into hasher: inout Hasher) {
         hasher.combine(id)
     }

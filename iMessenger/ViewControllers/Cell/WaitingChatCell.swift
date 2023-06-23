@@ -8,12 +8,13 @@
 import UIKit
 import SDWebImage
 
-class WaitingChatCell: UICollectionViewCell {
+final class WaitingChatCell: UICollectionViewCell {
     
+    // MARK: Properties
     static var reuseId = "WaitingChatCell"
-    
     let friendImageView = UIImageView()
     
+    // MARK: - Init
     override init(frame: CGRect) {
         super.init(frame: frame)
         backgroundColor = .yellow

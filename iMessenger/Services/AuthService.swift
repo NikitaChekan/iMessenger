@@ -10,11 +10,13 @@ import FirebaseCore
 import FirebaseAuth
 import GoogleSignIn
 
-class AuthService {
+final class AuthService {
     
+    // MARK: - Properties
     static let shared = AuthService()
     private let auth = Auth.auth()
     
+    // MARK: - Methods
     func login(email: String?, password: String?, completion: @escaping (Result<User, Error>) -> Void) {
         
         guard let email = email, let password = password else {

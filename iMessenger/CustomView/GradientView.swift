@@ -9,6 +9,7 @@ import UIKit
 
 class GradientView: UIView {
     
+    // MARK: - Enumeration
     enum Point {
         case topLeading
         case leading
@@ -44,6 +45,7 @@ class GradientView: UIView {
         }
     }
     
+    // MARK: - Properties
         private let gradientLayer = CAGradientLayer()
     
         private var startColor: UIColor? {
@@ -64,7 +66,6 @@ class GradientView: UIView {
         private var animatePoints: (from: Point, to: Point)!
 
         // MARK: - Life Cycle
-        
         override func layoutSubviews() {
             super.layoutSubviews()
 

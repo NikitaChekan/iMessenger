@@ -11,16 +11,16 @@ import InputBarAccessoryView
 import FirebaseFirestore
 import SPAlert
 
-class ChatsViewController: MessagesViewController {
+final class ChatsViewController: MessagesViewController {
     
-// MARK: Properties
+    // MARK: Properties
     private let user: MUser
     private let chat: MChat
     
     private var messages: [MMessage] = []
     private var messageListener: ListenerRegistration?
     
-// MARK: Init
+    // MARK: Init
     init(user: MUser, chat: MChat) {
         self.user = user
         self.chat = chat
@@ -37,12 +37,11 @@ class ChatsViewController: MessagesViewController {
         messageListener?.remove()
     }
     
-// MARK: Life Cycle
+    // MARK: Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
         navigationController?.navigationBar.tintColor = .label
-//        navigationItem.backBarButtonItem?.title = "Back"
         
         NotificationCenter.default.addObserver(
             self,
@@ -141,7 +140,6 @@ class ChatsViewController: MessagesViewController {
 
     }
     
-    
     private func sendImage(image: UIImage) {
         StorageService.shared.uploadImageMessage(photo: image, to: chat) { result in
             switch result {
@@ -167,7 +165,6 @@ class ChatsViewController: MessagesViewController {
             }
         }
     }
-    
 }
 
 // MARK: - Configure message collection view
@@ -263,10 +260,6 @@ extension ChatsViewController: MessagesDataSource {
         return MSender(senderId: user.id, displayName: user.userName)
     }
     
-//    func currentSender() -> MessageKit.SenderType {
-//        return MSender(senderId: user.id, displayName: user.userName)
-//    }
-    
     func messageForItem(at indexPath: IndexPath, in messagesCollectionView: MessageKit.MessagesCollectionView) -> MessageKit.MessageType {
         return messages[indexPath.item]
     }
@@ -295,19 +288,7 @@ extension ChatsViewController: MessagesDataSource {
         }
         
         return nil
-        
-//        if indexPath.item % 5 == 0 {
-//                return NSAttributedString(
-//                    string: MessageKitDateFormatter.shared.string(from: message.sentDate),
-//                    attributes: [
-//                    NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 10),
-//                    NSAttributedString.Key.foregroundColor: UIColor.darkGray
-//                ])
-//        } else {
-//            return nil
-//        }
     }
-    
 }
 
 // MARK: MessagesLayoutDelegate
@@ -330,12 +311,6 @@ extension ChatsViewController: MessagesLayoutDelegate {
         }
         
         return 0
-        
-//        if (indexPath.item) % 5 == 0 {
-//            return 30
-//        } else {
-//            return 0
-//        }
     }
     
 //    func cellBottomLabelHeight(for _: MessageType, at _: IndexPath, in _: MessagesCollectionView) -> CGFloat {

@@ -10,10 +10,9 @@ import FirebaseAuth
 import FirebaseFirestore
 import SPAlert
 
-class PeopleViewController: UIViewController {
+final class PeopleViewController: UIViewController {
     
-    
-
+    // MARK: - Enumeration
     enum Section: Int, CaseIterable {
         case users
         
@@ -25,17 +24,19 @@ class PeopleViewController: UIViewController {
         }
     }
     
+    // MARK: - Properties
     var users = [MUser]()
     private var usersListener: ListenerRegistration?
     
     private var isSearch: Bool = false
     private var countPerson: Int = 0
     
-    var collectionView: UICollectionView!
+    private var collectionView: UICollectionView!
     var dataSource: UICollectionViewDiffableDataSource<Section, MUser>!
 
     private let currentUser: MUser
     
+    // MARK: - Init
     init(currentUser: MUser) {
         self.currentUser = currentUser
         super.init(nibName: nil, bundle: nil)
@@ -50,6 +51,7 @@ class PeopleViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: - Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -64,6 +66,7 @@ class PeopleViewController: UIViewController {
         
     }
 
+    // MARK: - Actions
     @objc private func signOut() {
         let alertController = UIAlertController(title: nil, message: "Are you sure you want to sign out?", preferredStyle: .alert)
         alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel))
@@ -95,6 +98,7 @@ class PeopleViewController: UIViewController {
         present(alertController, animated: true)
     }
         
+    // MARK: - Override methods
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
         
@@ -114,6 +118,7 @@ class PeopleViewController: UIViewController {
         }
     }
     
+    // MARK: - Methods
     private func setupSearchBar() {
         navigationController?.navigationBar.barTintColor = UIColor(named: "backgroundAppColor")
         navigationController?.navigationBar.shadowImage = UIImage()
@@ -216,14 +221,8 @@ extension PeopleViewController {
                 withReuseIdentifier: SectionHeader.reuseId,
                 for: indexPath
             ) as? SectionHeader else { fatalError("Can not create new section header") }
-            guard let section = Section(rawValue: indexPath.section) else { fatalError("Unknown section kind")}
             
-//            let items = self.dataSource.snapshot().itemIdentifiers(inSection: .users)
-//            sectionHeader.configure(
-//                text: section.description(usersCount: items.count),
-//                font: .systemFont(ofSize: 36, weight: .light),
-//                textColor: .label
-//            )
+            guard let section = Section(rawValue: indexPath.section) else { fatalError("Unknown section kind")}
             
             if self.isSearch {
                 sectionHeader.configure(
@@ -349,13 +348,6 @@ extension PeopleViewController: UICollectionViewDelegate {
             }
         }
     }
-    
-//    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-//        guard let user = self.dataSource.itemIdentifier(for: indexPath) else { return }
-//        let profileVC = ProfileViewController(user: user)
-//        present(profileVC, animated: true)
-//    }
-
 }
 
 extension PeopleViewController: ProfileNavigation {
@@ -368,24 +360,24 @@ extension PeopleViewController: ProfileNavigation {
 
 // MARK: - SwiftUI
 
-import SwiftUI
-
-struct PeopleVCProvider: PreviewProvider {
-    static var previews: some View {
-        ConteinerView()
-            .ignoresSafeArea()
-    }
-    
-    struct ConteinerView: UIViewControllerRepresentable {
-        
-        let tabBarVC = MainTabBarController()
-        
-        func makeUIViewController(context: UIViewControllerRepresentableContext<PeopleVCProvider.ConteinerView>) -> MainTabBarController {
-            return tabBarVC
-        }
-        
-        func updateUIViewController(_ uiViewController: PeopleVCProvider.ConteinerView.UIViewControllerType, context: UIViewControllerRepresentableContext<PeopleVCProvider.ConteinerView>) {
-            
-        }
-    }
-}
+//import SwiftUI
+//
+//struct PeopleVCProvider: PreviewProvider {
+//    static var previews: some View {
+//        ConteinerView()
+//            .ignoresSafeArea()
+//    }
+//
+//    struct ConteinerView: UIViewControllerRepresentable {
+//
+//        let tabBarVC = MainTabBarController()
+//
+//        func makeUIViewController(context: UIViewControllerRepresentableContext<PeopleVCProvider.ConteinerView>) -> MainTabBarController {
+//            return tabBarVC
+//        }
+//
+//        func updateUIViewController(_ uiViewController: PeopleVCProvider.ConteinerView.UIViewControllerType, context: UIViewControllerRepresentableContext<PeopleVCProvider.ConteinerView>) {
+//
+//        }
+//    }
+//}

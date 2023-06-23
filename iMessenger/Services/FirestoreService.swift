@@ -8,8 +8,9 @@
 import Firebase
 import FirebaseFirestore
 
-class FirestoreService {
+final class FirestoreService {
     
+    // MARK: - Properties
     static let shared = FirestoreService()
 
     let db = Firestore.firestore()
@@ -28,6 +29,7 @@ class FirestoreService {
     
     var currentUser: MUser!
     
+    // MARK: - Methods
     func getUserData(user: User, completion: @escaping (Result<MUser, Error>) -> Void) {
         let docRef = usersRef.document(user.uid)
         docRef.getDocument { (document, error) in
@@ -80,8 +82,8 @@ class FirestoreService {
             case .failure(let error):
                 completion(.failure(error))
             }
-        } // StorageService
-    } // saveProfileWith
+        } /// StorageService
+    } /// saveProfileWith
     
     func createWaitingChat(message: String, receiver: MUser, completion: @escaping (Result<Void, Error>) -> Void) {
         let reference = db.collection(["users", receiver.id, "waitingChats"].joined(separator: "/"))

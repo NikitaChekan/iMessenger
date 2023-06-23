@@ -46,6 +46,7 @@
 		DA55DE3229F2B505000A739C /* GoogleSignInSwift in Frameworks */ = {isa = PBXBuildFile; productRef = DA55DE3129F2B505000A739C /* GoogleSignInSwift */; };
 		DA5A97A22A422940005F73EA /* SPAlert in Frameworks */ = {isa = PBXBuildFile; productRef = DA5A97A12A422940005F73EA /* SPAlert */; };
 		DA5A97A52A439772005F73EA /* SPIndicator in Frameworks */ = {isa = PBXBuildFile; productRef = DA5A97A42A439772005F73EA /* SPIndicator */; };
+		DA5A97AB2A44DEA3005F73EA /* ImageItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA5A97AA2A44DEA3005F73EA /* ImageItem.swift */; };
 		DA7326AA29ED6E3900D01C56 /* UserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA7326A929ED6E3900D01C56 /* UserCell.swift */; };
 		DA7326AC29ED6FED00D01C56 /* UIViewController + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA7326AB29ED6FED00D01C56 /* UIViewController + Extension.swift */; };
 		DA7326AE29EDC3F900D01C56 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA7326AD29EDC3F900D01C56 /* ProfileViewController.swift */; };
@@ -116,6 +117,7 @@
 		DA3A7C3329E21ADC00662330 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		DA3A7C3529E225FE00662330 /* SetupProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupProfileViewController.swift; sourceTree = "<group>"; };
 		DA3A7C3729E228C900662330 /* AddPhotoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPhotoView.swift; sourceTree = "<group>"; };
+		DA5A97AA2A44DEA3005F73EA /* ImageItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageItem.swift; sourceTree = "<group>"; };
 		DA7326A929ED6E3900D01C56 /* UserCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCell.swift; sourceTree = "<group>"; };
 		DA7326AB29ED6FED00D01C56 /* UIViewController + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController + Extension.swift"; sourceTree = "<group>"; };
 		DA7326AD29EDC3F900D01C56 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
@@ -187,12 +189,8 @@
 		DA0AEA2F29E34672005834F5 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				DA0AEA3029E346B0005834F5 /* MainTabBarController.swift */,
-				DA0AEA2C29E344DF005834F5 /* ListViewController.swift */,
-				DA0AEA3229E346F4005834F5 /* PeopleViewController.swift */,
-				DA7326AD29EDC3F900D01C56 /* ProfileViewController.swift */,
-				DA299DE829EF1386001F5131 /* ChatRequestViewController.swift */,
-				DAFB0D252A086A2E00D301E7 /* ChatsViewController.swift */,
+				DA0AEA2E29E34644005834F5 /* SignIn&Auth */,
+				DA5A97A62A448AA2005F73EA /* Main */,
 				DA73AB4A29E871D600E81FC3 /* Cell */,
 				DAF7853929EC753B0057712C /* Header */,
 			);
@@ -214,10 +212,8 @@
 		DA299DFC29F07719001F5131 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				DA5A97A92A44DA73005F73EA /* Error */,
 				DA299DF829F06723001F5131 /* Validators.swift */,
-				DA299DFA29F069B7001F5131 /* AuthError.swift */,
-				DA3193B929F13FC4008B03F8 /* UserError.swift */,
-				DAA43C8C2A33D1AA0011DB66 /* ChatError.swift */,
 				DAA5AAE22A3A252500258016 /* DateHelper.swift */,
 			);
 			path = Helpers;
@@ -245,10 +241,10 @@
 				DA3A7C2A29E1D1A500662330 /* App */,
 				DA299DF529F05E89001F5131 /* Services */,
 				DAF7853A29EC76DC0057712C /* Models */,
-				DA0AEA2E29E34644005834F5 /* SignIn&Auth */,
 				DA0AEA2F29E34672005834F5 /* ViewControllers */,
-				DA73AB5329E899BE00E81FC3 /* Protocols */,
+				DA5A97A72A448B07005F73EA /* CustomView */,
 				DA3A7C2929E1D17100662330 /* Extensions */,
+				DA73AB5329E899BE00E81FC3 /* Protocols */,
 				DA299DFC29F07719001F5131 /* Helpers */,
 				DADB7A0529E7399F00EAD05E /* waitingChats.json */,
 				DADB7A0429E7399E00EAD05E /* activeChats.json */,
@@ -273,7 +269,6 @@
 				DA7326B129EDD2A200D01C56 /* UIView + Extention.swift */,
 				DA2E860C29FC55E7009133F6 /* UIImage + Extension.swift */,
 				DAAC1AB42A155EC500CCC6BF /* UIScrollView + Extension.swift */,
-				DAA5AAE42A3A25D400258016 /* Date + Extension.swift */,
 			);
 			path = UIKit;
 			sourceTree = "<group>";
@@ -281,14 +276,7 @@
 		DA3A7C2929E1D17100662330 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				DA3A7C3729E228C900662330 /* AddPhotoView.swift */,
-				DA3A7C2B29E1D33000662330 /* ButtonFormView.swift */,
-				DA3A7C3129E2006D00662330 /* OneLineTextField.swift */,
-				DADB7A0829E739F700EAD05E /* Bundle-Decodable.swift */,
-				DA73AB4F29E8917400E81FC3 /* GradientView.swift */,
-				DAC1D57B2A17976500B2262E /* EyeButton.swift */,
-				DA7326AF29EDCEBE00D01C56 /* InsertableTextField.swift */,
-				DAA5AAE02A3A227100258016 /* BadgeLabel.swift */,
+				DA5A97A82A448B7D005F73EA /* Foundation */,
 				DA3A7C2829E1D15900662330 /* UIKit */,
 			);
 			path = Extensions;
@@ -303,6 +291,52 @@
 				DA299DEA29F00E30001F5131 /* GoogleService-Info.plist */,
 			);
 			path = App;
+			sourceTree = "<group>";
+		};
+		DA5A97A62A448AA2005F73EA /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				DA0AEA3029E346B0005834F5 /* MainTabBarController.swift */,
+				DA0AEA2C29E344DF005834F5 /* ListViewController.swift */,
+				DA0AEA3229E346F4005834F5 /* PeopleViewController.swift */,
+				DA7326AD29EDC3F900D01C56 /* ProfileViewController.swift */,
+				DA299DE829EF1386001F5131 /* ChatRequestViewController.swift */,
+				DAFB0D252A086A2E00D301E7 /* ChatsViewController.swift */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
+		DA5A97A72A448B07005F73EA /* CustomView */ = {
+			isa = PBXGroup;
+			children = (
+				DA3A7C3729E228C900662330 /* AddPhotoView.swift */,
+				DA3A7C2B29E1D33000662330 /* ButtonFormView.swift */,
+				DA3A7C3129E2006D00662330 /* OneLineTextField.swift */,
+				DA73AB4F29E8917400E81FC3 /* GradientView.swift */,
+				DAC1D57B2A17976500B2262E /* EyeButton.swift */,
+				DA7326AF29EDCEBE00D01C56 /* InsertableTextField.swift */,
+				DAA5AAE02A3A227100258016 /* BadgeLabel.swift */,
+			);
+			path = CustomView;
+			sourceTree = "<group>";
+		};
+		DA5A97A82A448B7D005F73EA /* Foundation */ = {
+			isa = PBXGroup;
+			children = (
+				DADB7A0829E739F700EAD05E /* Bundle-Decodable.swift */,
+				DAA5AAE42A3A25D400258016 /* Date + Extension.swift */,
+			);
+			path = Foundation;
+			sourceTree = "<group>";
+		};
+		DA5A97A92A44DA73005F73EA /* Error */ = {
+			isa = PBXGroup;
+			children = (
+				DA299DFA29F069B7001F5131 /* AuthError.swift */,
+				DA3193B929F13FC4008B03F8 /* UserError.swift */,
+				DAA43C8C2A33D1AA0011DB66 /* ChatError.swift */,
+			);
+			path = Error;
 			sourceTree = "<group>";
 		};
 		DA73AB4A29E871D600E81FC3 /* Cell */ = {
@@ -342,6 +376,7 @@
 				DAF7853D29EC76FC0057712C /* MUser.swift */,
 				DAF7853B29EC76F10057712C /* MChat.swift */,
 				DAB3DA1B29FF11B7009FF25F /* MMessage.swift */,
+				DA5A97AA2A44DEA3005F73EA /* ImageItem.swift */,
 				DAF3E38C2A09887A008A1FFB /* MSender.swift */,
 			);
 			path = Models;
@@ -492,6 +527,7 @@
 				DA299DF729F05EBB001F5131 /* AuthService.swift in Sources */,
 				DAB4654929E9DDE100DC15EE /* SectionHeader.swift in Sources */,
 				DAC1D57C2A17976500B2262E /* EyeButton.swift in Sources */,
+				DA5A97AB2A44DEA3005F73EA /* ImageItem.swift in Sources */,
 				DAF7853C29EC76F10057712C /* MChat.swift in Sources */,
 				DA3A7C1F29E1C4B300662330 /* UIButton + Extension.swift in Sources */,
 				DAF3E38D2A09887A008A1FFB /* MSender.swift in Sources */,
