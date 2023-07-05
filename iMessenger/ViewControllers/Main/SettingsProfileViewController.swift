@@ -1,25 +1,27 @@
 //
-//  SetupProfileViewController.swift
+//  SettingsProfileViewController.swift
 //  iMessenger
 //
-//  Created by jopootrivatel on 09.04.2023.
+//  Created by jopootrivatel on 26.06.2023.
 //
 
 import UIKit
 import FirebaseAuth
+import FirebaseFirestore
 import SDWebImage
 import SPAlert
 import SPIndicator
 
-final class SetupProfileViewController: UIViewController {
+final class SettingsProfileViewController: UIViewController {
     
     // MARK: Properties
+    
     private let scrollView = UIScrollView()
     private var stackView = UIStackView()
     
-    private let welcomeLabel = UILabel(text: "Set up profile!", font: .avenir26())
+    private let fullImageView = AddPhotoForSettingsView()
     
-    private let fullImageView = AddPhotoView()
+    private let mailLabel = UILabel(text: "test1@mail.ru", font: .avenir20())
     
     private let fullNameLabel = UILabel(text: "Full name")
     private let aboutMeLabel = UILabel(text: "About me")
@@ -30,27 +32,31 @@ final class SetupProfileViewController: UIViewController {
     
     private let sexSegmentedControl = UISegmentedControl(first: "Male", second: "Female")
     
-    private let goToChatsButton = UIButton(
-        title: "Go to chats",
+    private let saveSettingButton = UIButton(
+        title: "Save changes",
         titleColor: .white,
         backgroundColor: UIColor(named: "buttonBlack") ?? .black,
         cornerRadius: 4
     )
     
-    private let currentUser: User
+    private let currentUser: MUser
+    private var usersListener: ListenerRegistration?
     
-    // MARK: Init
-    init(currentUser: User) {
+    // MARK: - Init
+    init(currentUser: MUser) {
         self.currentUser = currentUser
         super.init(nibName: nil, bundle: nil)
         
-        if let userName = currentUser.displayName {
-            fullNameTextField.text = userName
-        }
-        
-        if let photoURL = currentUser.photoURL {
-            fullImageView.circleImageView.sd_setImage(with: photoURL)
-        }
+        title = currentUser.userName
+        mailLabel.text = currentUser.email
+        fullNameTextField.text = currentUser.userName
+        aboutMeTextField.text = currentUser.description
+        fullImageView.circleImageView.sd_setImage(with: URL(string: currentUser.avatarStringURL))
+
+    }
+    
+    deinit {
+        usersListener?.remove()
     }
     
     required init?(coder: NSCoder) {
@@ -64,6 +70,10 @@ final class SetupProfileViewController: UIViewController {
         configureView()
         configureElements()
         setupConstraints()
+        
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Log Out", style: .plain, target: self, action: #selector(signOut))
+        navigationItem.rightBarButtonItem?.tintColor = UIColor(named: "tabBarColor")
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -71,25 +81,54 @@ final class SetupProfileViewController: UIViewController {
         
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillAppear), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardDisappear), name: UIResponder.keyboardWillHideNotification, object: nil)
-    }
     
+    }
     
     // MARK: Actions
     @objc private func keyboardWillAppear(notification: NSNotification) {
         let userInfo: NSDictionary = notification.userInfo! as NSDictionary
         let keyboardInfo = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as! NSValue
         let keyboardSize = keyboardInfo.cgRectValue.size
-        let difference = keyboardSize.height - (self.view.frame.height - stackView.frame.origin.y - stackView.frame.size.height)
+        let difference = keyboardSize.height - (self.view.frame.height - stackView.frame.origin.y - stackView.frame.size.height) + 3
         
         let scrollPoint = CGPointMake(0, difference)
-        
         self.scrollView.setContentOffset(scrollPoint, animated: true)
     }
     
     @objc private func keyboardDisappear() {
-        scrollView.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
+        scrollView.setContentOffset(CGPoint(x: 0, y: -98), animated: true)
     }
-
+    
+    @objc private func signOut() {
+        let alertController = UIAlertController(title: nil, message: "Are you sure you want to sign out?", preferredStyle: .alert)
+        alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+        alertController.addAction(UIAlertAction(title: "Sign Out", style: .destructive, handler: { (_) in
+            do {
+                try Auth.auth().signOut()
+                
+                self.appDelegate.activeChatsListener?.remove()
+                self.appDelegate.activeChatsListener = nil
+                
+                self.appDelegate.waitingChatsListener?.remove()
+                self.appDelegate.waitingChatsListener = nil
+                
+                let keyWindow = UIApplication.shared.connectedScenes
+                    .filter({$0.activationState == .foregroundActive})
+                    .map({$0 as? UIWindowScene})
+                    .compactMap({$0})
+                    .first?.windows
+                    .filter({$0.isKeyWindow}).first
+                
+                keyWindow?.rootViewController = AuthViewController()
+                
+            } catch {
+                print("Error signing out: \(error.localizedDescription)")
+            }
+        }))
+        
+        present(alertController, animated: true)
+    }
+    
     @objc private func plusButtonTapped() {
         let imagePickerController = UIImagePickerController()
         imagePickerController.delegate = self
@@ -97,18 +136,19 @@ final class SetupProfileViewController: UIViewController {
         present(imagePickerController, animated: true)
     }
     
-    @objc private func goToChatsButtonTapped() {
+    @objc private func saveSettingButtonTapped() {
         FirestoreService.shared.saveProfileWith(
-            id: currentUser.uid,
-            email: currentUser.email!,
+            id: currentUser.id,
+            email: currentUser.email,
             userName: fullNameTextField.text,
             avatarImage: fullImageView.circleImageView.image,
             description: aboutMeTextField.text,
             sex: sexSegmentedControl.titleForSegment(at: sexSegmentedControl.selectedSegmentIndex)) { (result) in
                 switch result {
                 case .success(let mUser):
-                    let indicatorView = SPIndicatorView(title: "Successful", message: "It's nice to talk!", preset: .done)
-                    indicatorView.present(duration: 3) {
+                    let alertView = SPAlertView(title: "Successful", message: "Сhanges saved!", preset: .done)
+                    alertView.duration = 3
+                    alertView.present() {
                         let mainTabBar = MainTabBarController(currentUser: mUser)
                         mainTabBar.modalPresentationStyle = .fullScreen
                         self.present(mainTabBar, animated: true)
@@ -129,10 +169,8 @@ final class SetupProfileViewController: UIViewController {
         case .unspecified:
             break
         case .light:
-            fullImageView.circleImageView.image = UIImage(named: "avatar")
             fullImageView.plusButton.tintColor = UIColor(named: "buttonBlack")
         case .dark:
-            fullImageView.circleImageView.image = UIImage(named: "avatar-white")
             fullImageView.plusButton.tintColor = .white
         @unknown default:
             break
@@ -145,24 +183,22 @@ final class SetupProfileViewController: UIViewController {
     private func configureView() {
         view.backgroundColor = .secondarySystemBackground
         
-        let avatar = traitCollection.userInterfaceStyle == .light ? UIImage(named: "avatar") : UIImage(named: "avatar-white")
         let tintColor = traitCollection.userInterfaceStyle == .light ? UIColor(named: "buttonBlack") : UIColor.white
         
-        fullImageView.circleImageView.image = avatar
         fullImageView.plusButton.tintColor = tintColor
     }
     
     private func configureElements() {
-    
+        
         // Configure scrollView
         scrollView.alwaysBounceVertical = true
         scrollView.keyboardDismissMode = .onDrag
-    
-        // Configure welcomeLabel
-        welcomeLabel.textAlignment = .center
         
         // Configure fullImageView
         fullImageView.plusButton.addTarget(self, action: #selector(plusButtonTapped), for: .touchUpInside)
+        
+        // Configure welcomeLabel
+        mailLabel.textAlignment = .center
 
         // Configure fullImageView
         fullNameTextField.delegate = self
@@ -174,14 +210,14 @@ final class SetupProfileViewController: UIViewController {
         aboutMeTextField.tintColor = UIColor(named: "tabBarColor")
         
         // Configure goToChatsButton
-        goToChatsButton.addTarget(self, action: #selector(goToChatsButtonTapped), for: .touchUpInside)
+        saveSettingButton.addTarget(self, action: #selector(saveSettingButtonTapped), for: .touchUpInside)
     }
     
 }
         
 
 // MARK: - Setup Constraints
-extension SetupProfileViewController {
+extension SettingsProfileViewController {
     
     private func setupConstraints() {
         
@@ -211,12 +247,12 @@ extension SetupProfileViewController {
         
         // Constraint for goToChatsButton and fullImageView
         NSLayoutConstraint.activate([
-            goToChatsButton.heightAnchor.constraint(equalToConstant: 60),
-            fullImageView.widthAnchor.constraint(equalToConstant: 146)
+            saveSettingButton.heightAnchor.constraint(equalToConstant: 60),
+            fullImageView.widthAnchor.constraint(equalToConstant: 201)
         ])
         
         // Stack view for welcomeLabel and fullImageView
-        let topStackView = UIStackView(arrangedSubviews: [welcomeLabel, fullImageView], axis: .vertical, spacing: 30)
+        let topStackView = UIStackView(arrangedSubviews: [fullImageView, mailLabel], axis: .vertical, spacing: 0)
 
         // Configure topStackView
         topStackView.alignment = .center
@@ -224,7 +260,7 @@ extension SetupProfileViewController {
         
         // Stack view for fullNameStackView, aboutMeStackView, sexStackView, goToChatsButton
         let bottomStackView = UIStackView(
-            arrangedSubviews: [fullNameStackView, aboutMeStackView, sexStackView, goToChatsButton],
+            arrangedSubviews: [fullNameStackView, aboutMeStackView, sexStackView, saveSettingButton],
             axis: .vertical,
             spacing: 30
         )
@@ -236,7 +272,7 @@ extension SetupProfileViewController {
         let stackView = UIStackView(
             arrangedSubviews: [topStackView, bottomStackView],
             axis: .vertical,
-            spacing: 40
+            spacing: 0
         )
         
         // Configure stackView
@@ -260,10 +296,10 @@ extension SetupProfileViewController {
         ])
         
         NSLayoutConstraint.activate([
-            stackView.topAnchor.constraint(greaterThanOrEqualTo: scrollView.contentLayoutGuide.topAnchor, constant: 70),
+            stackView.topAnchor.constraint(greaterThanOrEqualTo: scrollView.contentLayoutGuide.topAnchor, constant: 20),
             stackView.centerXAnchor.constraint(lessThanOrEqualTo: scrollView.centerXAnchor),
             stackView.widthAnchor.constraint(equalTo: scrollView.frameLayoutGuide.widthAnchor, multiplier: 0.8),
-            stackView.heightAnchor.constraint(equalTo: scrollView.frameLayoutGuide.heightAnchor, multiplier: 0.82)
+            stackView.heightAnchor.constraint(equalTo: scrollView.frameLayoutGuide.heightAnchor, multiplier: 0.75)
         ])
         
         self.stackView = stackView
@@ -272,7 +308,7 @@ extension SetupProfileViewController {
 }
 
 // MARK: - UIImagePickerControllerDelegate
-extension SetupProfileViewController: UINavigationControllerDelegate, UIImagePickerControllerDelegate {
+extension SettingsProfileViewController: UINavigationControllerDelegate, UIImagePickerControllerDelegate {
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         
@@ -285,7 +321,7 @@ extension SetupProfileViewController: UINavigationControllerDelegate, UIImagePic
 }
 
 // MARK: - UITextFieldDelegate
-extension SetupProfileViewController: UITextFieldDelegate {
+extension SettingsProfileViewController: UITextFieldDelegate {
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         if textField == fullNameTextField {
@@ -308,17 +344,17 @@ extension SetupProfileViewController: UITextFieldDelegate {
 //        ConteinerView()
 //            .ignoresSafeArea()
 //    }
-//    
+//
 //    struct ConteinerView: UIViewControllerRepresentable {
-//        
+//
 //        let viewController = SetupProfileViewController(currentUser: Auth.auth().currentUser!)
-//        
+//
 //        func makeUIViewController(context: UIViewControllerRepresentableContext<SetupProfileVCProvider.ConteinerView>) -> SetupProfileViewController {
 //            return viewController
 //        }
-//        
+//
 //        func updateUIViewController(_ uiViewController: SetupProfileVCProvider.ConteinerView.UIViewControllerType, context: UIViewControllerRepresentableContext<SetupProfileVCProvider.ConteinerView>) {
-//            
+//
 //        }
 //    }
 //}

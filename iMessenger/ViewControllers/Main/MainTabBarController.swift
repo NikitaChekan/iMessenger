@@ -6,11 +6,13 @@
 //
 
 import UIKit
+import FirebaseAuth
 
-final class MainTabBarController: UITabBarController {
+class MainTabBarController: UITabBarController {
     
     // MARK: - Properties
     private let currentUser: MUser
+//    private let user: User
     
     // MARK: - Init
     init(currentUser: MUser = MUser(
@@ -43,15 +45,19 @@ final class MainTabBarController: UITabBarController {
         
         let listViewController = ListViewController(currentUser: currentUser)
         let peopleViewController = PeopleViewController(currentUser: currentUser)
-        
+        let settingsProfileViewController = SettingsProfileViewController(currentUser: currentUser)
+            
         tabBar.tintColor = UIColor(named: "tabBarColor")
         
         let boldConfig = UIImage.SymbolConfiguration(weight: .medium)
         let conversationImage = UIImage(systemName: "bubble.left.and.bubble.right", withConfiguration: boldConfig)!
         let peopleImage = UIImage(systemName: "person.2", withConfiguration: boldConfig)!
+        let settingsImage = UIImage(systemName: "gear")!
+        
         viewControllers = [
             generateNavigationController(rootViewController: peopleViewController, title: "People", image: peopleImage),
-            generateNavigationController(rootViewController: listViewController, title: "Conversations", image: conversationImage)
+            generateNavigationController(rootViewController: listViewController, title: "Conversations", image: conversationImage),
+            generateNavigationController(rootViewController: settingsProfileViewController, title: "Settings", image: settingsImage)
         ]
     }
     

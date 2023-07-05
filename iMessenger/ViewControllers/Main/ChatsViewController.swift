@@ -11,7 +11,7 @@ import InputBarAccessoryView
 import FirebaseFirestore
 import SPAlert
 
-final class ChatsViewController: MessagesViewController {
+class ChatsViewController: MessagesViewController {
     
     // MARK: Properties
     private let user: MUser

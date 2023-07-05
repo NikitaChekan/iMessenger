@@ -9,7 +9,7 @@ import UIKit
 import FirebaseFirestore
 import SPAlert
 
-final class ListViewController: UIViewController {
+class ListViewController: UIViewController {
     
     // MARK: - Enumeration
     enum Layout {

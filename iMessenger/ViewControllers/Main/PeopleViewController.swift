@@ -10,7 +10,7 @@ import FirebaseAuth
 import FirebaseFirestore
 import SPAlert
 
-final class PeopleViewController: UIViewController {
+class PeopleViewController: UIViewController {
     
     // MARK: - Enumeration
     enum Section: Int, CaseIterable {
@@ -61,41 +61,6 @@ final class PeopleViewController: UIViewController {
         
         addListeners()
         
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Log Out", style: .plain, target: self, action: #selector(signOut))
-        navigationItem.rightBarButtonItem?.tintColor = UIColor(named: "tabBarColor")
-        
-    }
-
-    // MARK: - Actions
-    @objc private func signOut() {
-        let alertController = UIAlertController(title: nil, message: "Are you sure you want to sign out?", preferredStyle: .alert)
-        alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel))
-        alertController.addAction(UIAlertAction(title: "Sign Out", style: .destructive, handler: { (_) in
-            do {
-                try Auth.auth().signOut()
-                
-                self.appDelegate.activeChatsListener?.remove()
-                self.appDelegate.activeChatsListener = nil
-                
-                self.appDelegate.waitingChatsListener?.remove()
-                self.appDelegate.waitingChatsListener = nil
-                
-                let keyWindow = UIApplication.shared.connectedScenes
-                    .filter({$0.activationState == .foregroundActive})
-                    .map({$0 as? UIWindowScene})
-                    .compactMap({$0})
-                    .first?.windows
-                    .filter({$0.isKeyWindow}).first
-                
-                keyWindow?.rootViewController = AuthViewController()
-                
-            } catch {
-                print("Error signing out: \(error.localizedDescription)")
-            }
-        }))
-        
-        
-        present(alertController, animated: true)
     }
         
     // MARK: - Override methods

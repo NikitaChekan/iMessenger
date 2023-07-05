@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class ChatRequestViewController: UIViewController {
+class ChatRequestViewController: UIViewController {
     
     weak var delegate: WaitingChatNavigation?
     
@@ -32,7 +32,7 @@ final class ChatRequestViewController: UIViewController {
     let denyButton = UIButton(
         title: "Deny",
         titleColor: UIColor(named: "buttonRed") ?? .red,
-        backgroundColor: UIColor(named: "backgroundAppColor") ?? .white,
+        backgroundColor: UIColor(named: "backgroundAppColor") ?? .secondarySystemBackground,
         font: .laoSangamMN20(),
         isShadow: false,
         cornerRadius: 10

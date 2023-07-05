@@ -9,7 +9,7 @@ import UIKit
 import SDWebImage
 import SPAlert
 
-final class ProfileViewController: UIViewController {
+class ProfileViewController: UIViewController {
     
     // MARK: - Enumeration
     enum State {
@@ -113,7 +113,7 @@ final class ProfileViewController: UIViewController {
                     self.delegate?.show(chat)
                 case .failure(let error):
                     let scene = UIApplication.shared.connectedScenes.first as? UIWindowScene
-                    let viewController = scene!.windows[0].rootViewController
+                    let _ = scene!.windows[0].rootViewController
                     let alertView = SPAlertView(title: "Error!", message: error.localizedDescription, preset: .error)
                     alertView.duration = 4
                     alertView.present()
