@@ -51,6 +51,7 @@ class PeopleViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
+    
     // MARK: - Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -61,6 +62,12 @@ class PeopleViewController: UIViewController {
         
         addListeners()
         
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        self.reloadData(with: nil)
     }
         
     // MARK: - Override methods

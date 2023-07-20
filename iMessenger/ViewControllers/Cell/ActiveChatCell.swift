@@ -8,7 +8,7 @@
 import UIKit
 import SDWebImage
 
-final class ActiveChatCell: UICollectionViewCell {
+class ActiveChatCell: UICollectionViewCell {
     
     // MARK: - Property
     static var reuseId = "ActiveChatCell"
@@ -36,7 +36,6 @@ final class ActiveChatCell: UICollectionViewCell {
         
         customizeElements()
         setupConstraints()
-        
     }
     
     required init?(coder: NSCoder) {

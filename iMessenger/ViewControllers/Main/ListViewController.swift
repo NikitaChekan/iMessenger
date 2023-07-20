@@ -32,8 +32,10 @@ class ListViewController: UIViewController {
     }
     
     // MARK: - Properties
-    private var waitingChats = [MChat]()
-    private var activeChats = [MChat]()
+//    var users = [MUser]()
+    
+    var waitingChats = [MChat]()
+    var activeChats = [MChat]()
     
     private var waitingLayout: Layout = .filled
     private var isEmptyWaitingChats: Bool = false {
@@ -58,12 +60,14 @@ class ListViewController: UIViewController {
         }
     }
     
+//    private var usersListener: ListenerRegistration?
+    
     private var waitingChatsListener: ListenerRegistration?
     private var activeChatsListener: ListenerRegistration?
     
     
-    private var dataSource: UICollectionViewDiffableDataSource<Section, MChat>?
     private var collectionView: UICollectionView!
+    var dataSource: UICollectionViewDiffableDataSource<Section, MChat>?
     
     private let currentUser: MUser
     
@@ -74,12 +78,13 @@ class ListViewController: UIViewController {
         title = currentUser.userName
     }
     
-    
+    @available(*, unavailable)
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
     deinit {
+//        usersListener?.remove()
         waitingChatsListener?.remove()
         activeChatsListener?.remove()
     }
@@ -100,6 +105,7 @@ class ListViewController: UIViewController {
         super.viewWillAppear(animated)
         
         self.reloadData()
+//        self.reloadData(with: nil)
     }
     
     // MARK: - Methods
@@ -127,6 +133,7 @@ class ListViewController: UIViewController {
         )
         collectionView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         collectionView.backgroundColor = UIColor(named: "backgroundAppColor")
+        
         view.addSubview(collectionView)
         
         collectionView.register(
@@ -143,7 +150,7 @@ class ListViewController: UIViewController {
         collectionView.delegate = self
     }
     
-    private func addListeners() {
+    private func addWaitingChatsListeners() {
         
         waitingChatsListener = ListenerService.shared.waitingChatsObserve(chats: waitingChats, completion: { result in
             switch result {
@@ -157,13 +164,17 @@ class ListViewController: UIViewController {
                 self.isEmptyWaitingChats = self.waitingChats.isEmpty
                 
                 self.reloadData()
+                
             case .failure(let error):
                 let alertView = SPAlertView(title: "Error!", message: error.localizedDescription, preset: .error)
                 alertView.duration = 4
                 alertView.present()
             }
         })
+    }
         
+    private func addActiveChatsListeners() {
+
         activeChatsListener = ListenerService.shared.activeChatsObserve(chats: activeChats, completion: { result in
             switch result {
             case .success(let chats):
@@ -180,6 +191,26 @@ class ListViewController: UIViewController {
             }
         })
     }
+    
+//    private func addUsersListeners() {
+//        usersListener = ListenerService.shared.usersObserve(users: users, completion: { result in
+//            switch result {
+//            case .success(let users):
+//                self.users = users
+//                self.reloadData(with: nil)
+//            case .failure(let error):
+//                let alertView = SPAlertView(title: "Error!", message: error.localizedDescription, preset: .error)
+//                alertView.duration = 4
+//                alertView.present()
+//            }
+//        })
+//    }
+    
+    private func addListeners() {
+           addWaitingChatsListeners()
+           addActiveChatsListeners()
+//           addUsersListeners()
+       }
     
     private func reloadData() {
         var snapshot = NSDiffableDataSourceSnapshot<Section, MChat>()
@@ -202,7 +233,7 @@ class ListViewController: UIViewController {
         
         snapshot.reloadItems(waitingChats)
         snapshot.reloadItems(activeChats)
-        
+            
         dataSource?.apply(snapshot, animatingDifferences: true)
     }
     
@@ -451,6 +482,7 @@ extension ListViewController: UICollectionViewDelegate {
             chatRequestVC.delegate = self
             
             self.present(chatRequestVC, animated: true)
+            
         case .activeChats:
             guard !isEmptyActiveChats else { return }
 

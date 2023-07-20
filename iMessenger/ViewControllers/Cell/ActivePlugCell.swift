@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class ActivePlugCell: UICollectionViewCell {
+class ActivePlugCell: UICollectionViewCell {
     
     // MARK: - Properties
     static var reuseId = "ActivePlugCell"

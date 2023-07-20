@@ -12,7 +12,6 @@ class MainTabBarController: UITabBarController {
     
     // MARK: - Properties
     private let currentUser: MUser
-//    private let user: User
     
     // MARK: - Init
     init(currentUser: MUser = MUser(
